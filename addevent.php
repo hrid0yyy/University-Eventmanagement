@@ -79,7 +79,7 @@ if(!isset($_SESSION['username'])){
         <ul class="nav-menu">
           <li><a href="welcomeorganizer.php">Organizer Home</a></li>
           <li class="menu-active"><a href="addevent.php">Add Event</a></li>
-          <li><a href="viewall.php">Available slot</a></li>
+          <li><a href="viewslot.php">Available slot</a></li>
 		  <li><a href="logout2.php">Logout</a></li>
         </ul>
       </nav>
