@@ -195,7 +195,7 @@ if(isset($_SESSION['username']))
 			<div class="login-box">
 		<img src="img/Organizer.png" class="avatar" alt="Image Not Found">
         <h2><b>Organizer</b></h2>
-        <form action="/project/organizerlogin.php" method="POST">
+        <form action="#" method="POST">
 			<br>
       <p> Email</p> 
             <input type="text" id="user" placeholder="Enter Email" name="user" autocomplete="off" >

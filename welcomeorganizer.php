@@ -1,7 +1,7 @@
 <?php
 	session_start();
 	if(!isset($_SESSION['username'])){
-		header("location:organizerlogin.php");
+		header("location:welcomeorganizer.php");
 	}
 ?>
 <!doctype html>
