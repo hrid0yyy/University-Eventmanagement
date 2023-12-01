@@ -74,7 +74,7 @@
               <div class="carousel-content">
                 <h2>United International University</h2>
                 <p>United International University (UIU) is the outcome of the initiative taken by a couple of renowned academicians.</p>
-                <a href="employeelogin.php" class="btn-get-started scrollto">Get Started</a>
+                <a href="organizerlogin.php" class="btn-get-started scrollto">Get Started</a>
               </div>
             </div>
           </div>
@@ -85,7 +85,7 @@
               <div class="carousel-content">
                 <h2>Classroom</h2>
                 <p></p>
-                <a href="employeelogin.php" class="btn-get-started scrollto">Get Started</a>
+                <a href="organizerlogin.php" class="btn-get-started scrollto">Get Started</a>
               </div>
             </div>
           </div>
@@ -96,7 +96,7 @@
               <div class="carousel-content">
                 <h2>Field</h2>
                 <p></p>
-                <a href="employeelogin.php" class="btn-get-started scrollto" >Get Started</a>
+                <a href="organizerlogin.php" class="btn-get-started scrollto" >Get Started</a>
               </div>
             </div>
           </div>
@@ -107,7 +107,7 @@
               <div class="carousel-content">
                 <h2>UIU Multipurpose Hall</h2>
                 <p></p>
-                <a href="employeelogin.php" class="btn-get-started scrollto">Get Started</a>
+                <a href="organizerlogin.php" class="btn-get-started scrollto">Get Started</a>
               </div>
             </div>
           </div>
@@ -118,7 +118,7 @@
               <div class="carousel-content">
                 <h2>Computer Lab</h2>
                 <p>Here you can host many competitive contests or any workshop</p>
-                <a href="employeelogin.php" class="btn-get-started scrollto">Get Started</a>
+                <a href="organizerlogin.php" class="btn-get-started scrollto">Get Started</a>
               </div>
             </div>
           </div>
@@ -273,18 +273,15 @@
         <div class="row">
 
           <div class="col-lg-3 footer-info">
-            <h3>Employee Management System</h3>
-            <p>This Is A Website to manage Employees database of a Company. This Website is developed by Studens Of National Institute Of Technology Jamshedpur(NITian's).</p>
+            <h3>Event Administration System</h3>
+            <p>This Is A Website to manage Events of United International University(UIU).</p>
           </div>
 			&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <div class="col-lg-3 footer-links">
             <h4>Useful Links</h4>
             <ul>
               <li><i class="ion-ios-arrow-right"></i> <a href="#">Home</a></li>
-              <li><i class="ion-ios-arrow-right"></i> <a href="#">About us</a></li>
-              <li><i class="ion-ios-arrow-right"></i> <a href="#">Services</a></li>
-              <li><i class="ion-ios-arrow-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="ion-ios-arrow-right"></i> <a href="#">Privacy policy</a></li>
+              
             </ul>
           </div>
   

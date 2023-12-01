@@ -63,6 +63,25 @@
    
 </head>
 <body>
+<div class="modal" id="myModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 <br><br><br><br><br>
 	<header id="header">
     <div class="container-fluid">
@@ -91,6 +110,7 @@
       <th scope="col">Venue</th>
       <th scope="col">Date</th>
       <th scope="col">Time</th>
+      <th scope="col">Option</th>
     </tr>
     <?php
   $que = "SELECT * FROM venues";
@@ -102,6 +122,8 @@
     <td>". $row['VenueName'] . "</td>
     <td>". $row['Location'] . "</td>
     <td>". $row['Capacity'] . "</td>
+    <td> <button class='book btn btn-sm btn-secondary' id=d".$row['VenueID']." >  Book</button></td>
+
   </tr>";
 
   }
