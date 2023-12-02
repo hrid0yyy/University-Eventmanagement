@@ -1,0 +1,290 @@
+<?php
+     $reg = false;
+     ?>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Event details</title>
+	 <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  
+  <link href="img/favicon.png" rel="icon">
+  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+	 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+
+  
+  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  
+  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="lib/animate/animate.min.css" rel="stylesheet">
+  <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/bootstrap-v3/css/bootstrap.css">
+  <link rel="stylesheet" href="assets/bootstrap-v3/css/bootstrap.css">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons" />
+  <link href="css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link href="css/style.css" rel="stylesheet">
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	
+ <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+
+    <header id="header">
+    <div class="container-fluid">
+
+      <div id="logo" class="pull-left">
+        <h1><a href="#intro" class="scrollto">Event Details</a></h1>
+      </div>
+		
+      <nav id="nav-menu-container">
+        <ul class="nav-menu">
+          <li><a href="home.php">Home</a></li>
+      
+        </ul>
+      </nav>
+    </div>
+	</header>
+	<br><br><br><br><br><br><br><br><br>
+	
+    <style>
+        #photo{height:200px;width:190px;}
+        #back{
+            background-image:url("img/black.jpg");
+            background-size:cover;
+        }
+        h3,h4,h1
+		{
+            color:white;
+        }
+		h4{
+			text-align: center;
+		}
+        .label {
+            color:black;
+}
+    
+		
+		span,label
+		{
+			color: white;
+			font-weight: bold;
+			font-size: 18px;
+		}
+       
+		
+		
+		
+		.pic{
+	width:250px;
+	height:250px;
+}
+.picbig{
+	position: absolute;
+	width:0px;
+	-webkit-transition:width 0.3s linear 0s;
+	transition:width 0.3s linear 0s;
+	z-index:10;
+}
+.pic:hover + .picbig{
+	width:500px;
+	height: 500px;
+
+ 
+}
+input[type=text], select {
+  color: black;
+}
+		
+		
+    </style>
+</head>
+
+ 
+      <!-- Modal content-->
+<div class="modal fade" id="exampleModal" role="dialog">
+		
+    <div class="modal-dialog">
+   
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-titel">Fill up your information</h4>
+        </div>
+        <div class="modal-body" align="center">
+          <form action="#" method="POST">
+			<input type="text" name="id" id="id" placeholder="Enter ID" style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
+			  <br>
+			  <br>
+        <input type="text" name="name" id="name" placeholder="Enter your name" style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
+			  <br>
+			  <br>
+        <input type="email" name="email" id="email" placeholder="Enter your email" style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
+			 <br>
+             <br>
+       
+				<button type="submit" name="submit" class="btn btn-success" name="btn">Enter</button>
+			</form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Registration form</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <form action="#" method="post">
+  <div class="form-group">
+    <label class="label" for="id">ID</label>
+    <input type="text" class="form-control" id="id" name="id" placeholder="Enter ID" >
+ 
+  </div>
+  <div class="form-group">
+  <label class="label" for="name">Name</label>
+    <input type="text"  class="form-control" id="name" name="name" placeholder="Enter name">
+  </div>
+  <div class="form-group">
+  <label class="label" for="email">Email</label>
+    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <button class="btn btn-primary" id="submit" name="submit" >Register</button>
+</form>
+      </div>
+    </div>
+  </div>
+</div> -->
+<?php
+ if($reg)
+ {
+    echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
+    <strong>Successfully, </strong>Updated
+    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+      <span aria-hidden='true'>&times;</span>
+    </button>
+  </div>";
+ }
+
+
+ ?>
+<body id="back">
+
+    <?php
+       $servername = "localhost";
+       $username = "root";
+       $password = "";
+       $database = "eventmanagement";
+       $name = $_GET['name'];
+       $conn = mysqli_connect($servername,$username,$password,$database);
+
+   
+       //checking if connection is working or not
+       //Output Form Entries from the Database
+       $query = "SELECT EventID,EventName,Description,filename,EventDate FROM aevents where EventName= '$name' ";
+       $result = $conn->query($query);
+       if ($result->num_rows > 0) {
+           
+           $row = mysqli_fetch_assoc($result);
+           
+           $eid=$row['EventID'];
+           $ename=$row['EventName'];
+           $edesc=$row['Description'];
+           $efile=$row['filename'];
+           $edate=$row['EventDate'];
+     
+        }
+
+
+
+    ?>
+
+<?php
+   echo'<div class="container">
+   <div class="col-md-12">
+   
+   </div>
+   </div> 
+     <div class="row"><!--event content-->
+      <section>
+          <div class="container">
+              <div class="date col-md-1">
+             
+                  <span class="day"><h3>'. $edate .'</h3></span>
+              </div>
+              <div class="col-md-5"><!--image holder with 5 grid column-->
+              <img src="./image/'. $row["filename"] .'" width="350px" height="250px">
+              </div>
+              &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+              <div class="subcontent col-md-6">
+                  <h1 class="title">'. $ename .'</h1>
+                  <p class="location">
+                 
+                  </p>
+                  <h3 class="definition">'. $edesc .'</h3>
+                  <br>';
+                  ?>                
+                  <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModal">Registration</button>                
+                 
+              </div>
+          </div>
+      </section>
+  </div> 
+
+  <?php
+
+if(isset($_POST['submit']))
+{
+    $id= $_POST['id'];
+    $name= $_POST['name'];
+    $email= $_POST['email'];
+
+
+    $conn = mysqli_connect("localhost","root","","eventmanagement") or die($conn);
+
+	
+  
+    $sql = mysqli_query($conn,"INSERT INTO `attendees` (`AttendeeID`, `Name`, `Email`, `RegistrationDate`) VALUES ('$id', '$name', '$email', NULL);") or die("Query Failed".mysqli_error($conn));
+    $sql2 = mysqli_query($conn,"INSERT INTO `eventattendees` (`EventID`, `AttendeeID`, `RegistrationDate`) VALUES ('$eid', '$id', NULL);") or die("Query Failed".mysqli_error($conn));
+    $reg = true;
+	
+	
+}
+?>
+    
+
+	<script src="lib/jquery/jquery.min.js"></script>
+  <script src="lib/jquery/jquery-migrate.min.js"></script>
+  <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="lib/easing/easing.min.js"></script>
+  <script src="lib/superfish/hoverIntent.js"></script>
+  <script src="lib/superfish/superfish.min.js"></script>
+  <script src="lib/wow/wow.min.js"></script>
+  <script src="lib/waypoints/waypoints.min.js"></script>
+  <script src="lib/counterup/counterup.min.js"></script>
+  <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+  <script src="lib/isotope/isotope.pkgd.min.js"></script>
+  <script src="lib/lightbox/js/lightbox.min.js"></script>
+  <script src="lib/touchSwipe/jquery.touchSwipe.min.js"></script>
+  <script src="contactform/contactform.js"></script>
+
+  <!-- Template Main Javascript File -->
+  <script src="js/main.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

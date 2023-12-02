@@ -186,10 +186,8 @@
                       
                        </p>
                        <h3 class="definition">'. $row["Description"] .'</h3>
-                       <hr class="customline2">
-                        <button type="button" class="btn btn-default btn-lg" data-bs-toggle="modal" data-bs-target="#view_modal">
-                        View Details  
-                        </button>
+                       
+                       <a href="details.php?name='. $row['EventName'] .'">View Details</a>
                     
                       
                    </div>

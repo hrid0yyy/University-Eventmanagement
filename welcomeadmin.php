@@ -4,6 +4,11 @@
 		header("location:welcomeadmin.php");
 	}
 ?>
+<?php
+  $conn = mysqli_connect("localhost","root","","eventmanagement") or die($conn);
+
+
+?>
 <!doctype html>
 <html>
 <head>
@@ -62,6 +67,11 @@
       </nav>
     </div>
 	</header>	
+  <br> <br> <br> <br>
+
+  
+  
+
 	
   <script src="lib/jquery/jquery.min.js"></script>
   <script src="lib/jquery/jquery-migrate.min.js"></script>

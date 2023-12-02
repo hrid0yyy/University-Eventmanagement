@@ -55,6 +55,38 @@
 		{
 			color: blue;
 		}
+    #myInput {
+  background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+  background-position: 10px 12px; /* Position the search icon */
+  background-repeat: no-repeat; /* Do not repeat the icon image */
+  width: 100%; /* Full-width */
+  font-size: 16px; /* Increase font-size */
+  padding: 12px 20px 12px 40px; /* Add some padding */
+  border: 1px solid #ddd; /* Add a grey border */
+  margin-bottom: 12px; /* Add some space below the input */
+}
+
+#myTable {
+  border-collapse: collapse; /* Collapse borders */
+  width: 100%; /* Full-width */
+  border: 1px solid #ddd; /* Add a grey border */
+  font-size: 18px; /* Increase font-size */
+}
+
+#myTable th, #myTable td {
+  text-align: left; /* Left-align text */
+  padding: 12px; /* Add padding */
+}
+
+#myTable tr {
+  /* Add a bottom border to all table rows */
+  border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+  /* Add a grey background color to the table header and on hover */
+  background-color: black;
+}
 		
 		
         .box{border:1px solid lightgrey;padding:20px;border-radius:5px;}
@@ -63,25 +95,9 @@
    
 </head>
 <body>
-<div class="modal" id="myModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save changes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+
+
+
 <br><br><br><br><br>
 	<header id="header">
     <div class="container-fluid">
@@ -103,16 +119,36 @@
 	
 	<br><br>
 
-    <table class="table table-bordered table-dark">
-  <thead>
-    <tr>
-      <th scope="col">Slot id</th>
-      <th scope="col">Venue</th>
-      <th scope="col">Date</th>
-      <th scope="col">Time</th>
-      <th scope="col">Option</th>
-    </tr>
-    <?php
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search date">
+
+<table id="myTable">
+  <tr class="header">
+  <th style="width:60%;">Slot ID</th>
+    <th style="width:60%;">Date</th>
+    <th style="width:60%;">Venue</th>
+    <th style="width:60%;">Capacity</th>
+  </tr>
+  <?php
   $que = "SELECT * FROM venues";
   $res = mysqli_query($conn,$que);
   while($row = mysqli_fetch_assoc($res))
@@ -122,18 +158,38 @@
     <td>". $row['VenueName'] . "</td>
     <td>". $row['Location'] . "</td>
     <td>". $row['Capacity'] . "</td>
-    <td> <button class='book btn btn-sm btn-secondary' id=d".$row['VenueID']." >  Book</button></td>
-
+   
   </tr>";
 
   }
 
       ?>
-  </thead>
-  <tbody>
-      
-  </tbody>
+ 
 </table>
-    
+
+
+<script>
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[0];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
 </body>
 </html>
