@@ -276,11 +276,11 @@ if(isset($_POST['submit']))
 $password= $_POST['pass'];
 
 
-$link=mysqli_connect("localhost","root","","eventmanagement") or die($link); 
+$link=mysqli_connect("localhost","root","","eventadministration") or die($link); 
  $username =mysqli_real_escape_string($link,$username);
  $password =mysqli_real_escape_string($link,$password);
 
-$result=mysqli_query($link,"select * from organizers where OrganizerID='$username' and password='$password'") or die("failed to query database".mysqli_error($link));
+$result=mysqli_query($link,"select * from admin where adminEmail='$username' and adminPass='$password'") or die("failed to query database".mysqli_error($link));
  
  if(mysqli_num_rows($result)>0)
  {

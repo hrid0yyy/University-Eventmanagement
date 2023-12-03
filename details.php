@@ -78,7 +78,9 @@
 			font-size: 18px;
 		}
        
-		
+		a {
+  color: white;
+}
 		
 		
 		.pic{
@@ -121,10 +123,22 @@ input[type=text], select {
 			<input type="text" name="id" id="id" placeholder="Enter ID" style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
 			  <br>
 			  <br>
-        <input type="text" name="name" id="name" placeholder="Enter your name" style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
+        <input type="text" name="fname" id="fname" placeholder="Enter your first name" style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
+			  <br>
+			  <br>
+        <input type="text" name="lname" id="lname" placeholder="Enter your last name" style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
+			  <br>
+			  <br>
+        <input type="text" name="bg" id="bg" placeholder="Enter your blood group" style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
+			  <br>
+			  <br>
+        <input type="text" name="number" id="number" placeholder="Enter your phone number" style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
 			  <br>
 			  <br>
         <input type="email" name="email" id="email" placeholder="Enter your email" style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
+        <br>
+			  <br>
+        <input type="text" name="role" id="role" placeholder="Enter your role" style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
 			 <br>
              <br>
        
@@ -189,14 +203,14 @@ input[type=text], select {
        $servername = "localhost";
        $username = "root";
        $password = "";
-       $database = "eventmanagement";
+       $database = "eventadministration";
        $eid = $_GET['eid'];
        $conn = mysqli_connect($servername,$username,$password,$database);
 
    
        //checking if connection is working or not
        //Output Form Entries from the Database
-       $query = "SELECT EventID,EventName,Description,filename,EventDate FROM aevents where EventID= '$eid' ";
+       $query = "SELECT events.EventID,EventName,EventDescription,EventFileBanner,EventDate FROM events join slot on events.EventID=slot.EventID where events.EventID= '$eid' ";
        $result = $conn->query($query);
        if ($result->num_rows > 0) {
            
@@ -204,8 +218,8 @@ input[type=text], select {
            
            $eid=$row['EventID'];
            $ename=$row['EventName'];
-           $edesc=$row['Description'];
-           $efile=$row['filename'];
+           $edesc=$row['EventDescription'];
+           $efile=$row['EventFileBanner'];
            $edate=$row['EventDate'];
      
         }
@@ -228,7 +242,7 @@ input[type=text], select {
                   <span class="day"><h3>'. $edate .'</h3></span>
               </div>
               <div class="col-md-5"><!--image holder with 5 grid column-->
-              <img src="./image/'. $row["filename"] .'" width="350px" height="250px">
+              <img src="./image/'.  $efile .'" width="350px" height="250px">
               </div>
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
               <div class="subcontent col-md-6">
@@ -239,7 +253,9 @@ input[type=text], select {
                   <h3 class="definition">'. $edesc .'</h3>
                   <br>';
                   ?>                
-                  <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModal">Registration</button>                
+                  <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModal">Registration</button>
+                  <button type="button" class="btn btn-secondary btn-sm" ><a href="qna.php">QNA</a></button>                
+                                 
                  
               </div>
           </div>
@@ -251,17 +267,22 @@ input[type=text], select {
 if(isset($_POST['submit']))
 {
     $id= $_POST['id'];
-    $name= $_POST['name'];
+    $fname= $_POST['fname'];
+    $lname= $_POST['lname'];
+    $bg= $_POST['bg'];
+    $number= $_POST['number'];
     $email= $_POST['email'];
+    $role= $_POST['role'];
 
-    $conn = mysqli_connect("localhost","root","","eventmanagement") or die($conn);
+    $conn = mysqli_connect("localhost","root","","eventadministration") or die($conn);
 
 	
 
-    $sql = "INSERT INTO `eventattendees` (`eid`, `aid`, `aname`, `aemail`, `eregdate`) VALUES ('$eid', '$id', '$name', '$email', NULL)";
+    $sql = "INSERT INTO `participants` (`ParticipantID`, `ParticipantFirstName`, `ParticipantlastName`, `ParticipantEmail`, `ParticipantContactNumber`,`ParticipantBloodGroup`,`ParticipantRole`) VALUES ('$id', '$fname', '$lname', '$email','$number','$bg','$role'); ";
         
     $res = mysqli_query($conn,$sql);
-
+    $sql2 = " INSERT INTO registration_ (`EventID`,`ParticipantID`) VALUES ('$eid','$id');";
+    $res2 = mysqli_query($conn,$sql2);
 
     $reg = true;
 	

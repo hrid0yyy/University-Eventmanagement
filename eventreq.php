@@ -7,17 +7,16 @@ if(!isset($_SESSION['username'])){
 
 ?>
 <?php
-    //storing database details in variables.
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $database = "eventmanagement";
+    $database = "eventadministration";
     
     $conn = mysqli_connect($servername,$username,$password,$database);
 
     if(isset($_GET['delete']))
     {$EventID = $_GET['delete'];
-      $sql = "DELETE FROM `events` WHERE `EventID` = $EventID";
+      $sql = "UPDATE `request_` SET `accept` = '0' WHERE `request_`.`EventID` = '$EventID';";
       
       $res = mysqli_query($conn,$sql);
       
@@ -27,20 +26,8 @@ if(!isset($_SESSION['username'])){
     if(isset($_GET['accept']))
     {
         $EventID = $_GET['accept'];
-        $sql2 = "INSERT into aevents select EventID,EventName,Description,filename,EventDate    
-        from  events 
-        where EventID= $EventID
-         ;
-        ";
+        $sql2 = "UPDATE `request_` SET `accept` = '1' WHERE `request_`.`EventID` = '$EventID';";
          $res2 = mysqli_query($conn,$sql2);
-         $sql4 = "UPDATE venues JOIN events ON events.VenueID=venues.VenueID
-         set availability = 0
-         where EventID = $EventID";
-          $res4 = mysqli_query($conn,$sql4);
-  
-        $sql3 = "DELETE FROM `events` WHERE `EventID` = $EventID";
-        
-        $res3 = mysqli_query($conn,$sql3);
         
     }
     ?>
@@ -159,7 +146,8 @@ if(!isset($_SESSION['username'])){
   <thead>
     <tr>
       <th scope="col">SL</th>
-      <th scope="col">Title</th>
+      <th scope="col">Slot</th>
+      <th scope="col">Event Name</th>
       <th scope="col">Description</th>
       <th scope="col">Action</th>
     </tr>
@@ -168,7 +156,8 @@ if(!isset($_SESSION['username'])){
     
   <?php
        
-       $que = "SELECT * FROM events";
+       $que = "SELECT events.EventID as eid,EventName,EventDescription,SlotID
+       FROM request_ join events on request_.EventID=events.EventID where accept is NULL ";
        $sl = 0;
        $res = mysqli_query($conn,$que);
        while($row = mysqli_fetch_assoc($res))
@@ -176,9 +165,10 @@ if(!isset($_SESSION['username'])){
         $sl = $sl + 1;
           echo "<tr>
           <th scope='row'>". $sl . "</th>
+          <td>". $row['SlotID'] . "</td>
           <td>". $row['EventName'] . "</td>
-          <td>". $row['Description'] . "</td>
-          <td> <button class='accept btn btn-sm btn-primary' id=d".$row['EventID'].">Accept</button>  <button class='delete btn btn-sm btn-primary' id=d".$row['EventID'].">Delete</button></td>
+          <td>". $row['EventDescription'] . "</td>
+          <td> <button class='accept btn btn-sm btn-primary' id=d".$row['eid'].">Accept</button>  <button class='delete btn btn-sm btn-primary' id=d".$row['eid'].">Delete</button></td>
         </tr>";
          
        }
@@ -235,7 +225,7 @@ if(!isset($_SESSION['username'])){
     if(confirm("Press yes to accept!"))
     {
       console.log("yes");
-      window.location=`/university/eventreq.php?accept=${EventID}`;
+      window.location=`/temp/eventreq.php?accept=${EventID}`;
     }
     else
     {
@@ -258,7 +248,7 @@ if(!isset($_SESSION['username'])){
     if(confirm("Press yes to delete!"))
     {
       console.log("yes");
-      window.location=`/university/eventreq.php?delete=${EventID}`;
+      window.location=`/temp/eventreq.php?delete=${EventID}`;
     }
     else
     {

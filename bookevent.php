@@ -1,10 +1,8 @@
-
 <!DOCTYPE html>
 <html>
-    <?php
+<?php
          $slotid = $_GET['id'];
-    ?>
-	
+    ?>	
 <head>
 	
  
@@ -108,14 +106,27 @@
                         <div class="col-md-3"><p id="errlname"></p></div>
                   </div>
             </div>
-
             <div class="form-group">
+            <div class="row">
+                    <div class="col-md-1"><label for="eid">Event ID<span>&#42;</span></label></div>
+                    <div class="col-md-5">
+                    <input type="text" class="form-control has-success" id="eid" placeholder="Enter Event ID" name="eid" onblur="checkUName()" onkeyup="checkUserName()" required></div> 
+                    <div class="col-md-2 text-right"><label for="photo">&nbsp;&nbsp;Photo</label></div>
+                    <div class="col-md-3"><input type="file" class="form-control" id="uploadfile" name="uploadfile" style="height:45px" /></div>
+                </div>
+                <br><br>
+                <div class="row">
+                    <div class="col-md-1"><label for="oid">Organizer ID<span>&#42;</span></label></div>
+                    <div class="col-md-5">
+                    <input type="text" class="form-control has-success" id="oid" placeholder="Enter Organizer ID" name="oid" onblur="checkUName()" onkeyup="checkUserName()" required></div> 
+                    
+                </div>
+                <br><br>
                 <div class="row">
                     <div class="col-md-1"><label for="ename">Event Name<span>&#42;</span></label></div>
                     <div class="col-md-5">
                     <input type="text" class="form-control has-success" id="ename" placeholder="Enter Event Name" name="ename" onblur="checkUName()" onkeyup="checkUserName()" required></div> 
-                    <div class="col-md-2 text-right"><label for="photo">&nbsp;&nbsp;Photo</label></div>
-                    <div class="col-md-3"><input type="file" class="form-control" id="uploadfile" name="uploadfile" style="height:45px" /></div>
+                    
                 </div>
                 <div class="row">
                     <div class="col-md-1"></div>
@@ -137,32 +148,18 @@
                     
                 </div>
                 <br> <br>
-                <div class="row">
-                   <div class="col-md-1"><label for="edate">Date<span>&#42;</span></label></div>
-                    <div class="col-md-5"><input type="date" class="form-control" id="edate" placeholder="YYYY-MM-DD" name="edate" required></div> 
-                    <div class="col-md-1"></div>
-                    
-                </div>
-
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-5"><p id="erremail"></p></div>
-                    <div class="col-md-2"></div>
-                    <div class="col-md-2"><p id="errnationality"></p></div>
-                </div>
-            </div>
-            <?php
-            
-            echo "<div class='form-group'>
+                <?php echo"
                 <div class='row'>
-                   <div class='col-md-1'><label for='address'>Slot ID&nbsp;</label></div>
-                    <div class='col-md-5'>
-                    <div class='col-md-5'><input type='text' class='form-control' id='eslot' placeholder='".  $slotid  ."' name='eslot' disabled></div> 
+                   <div class='col-md-1'><label for='sid'>Slot ID<span>&#42;</span></label></div>
+                    <div class='col-md-5'><input type='text' class='form-control' id='sid' placeholder='". $slotid ."' name='sid' disabled ></div> 
                     <div class='col-md-1'></div>
                     
-                 </div>
-            </div>";
-            ?>
+                </div>";
+                ?>
+               
+            </div>
+
+             
         </div>
         
        
@@ -210,25 +207,26 @@
 
 <?php
 
-
-
 if(isset($_POST['submit']))
 {
+    $eid= $_POST['eid'];
+    $oid= $_POST['oid'];
     $ename= $_POST['ename'];
     $edesc= $_POST['edesc'];
-    $edate= $_POST['edate'];
+    $sid= $_POST['sid'];
     $filename = $_FILES["uploadfile"]["name"];
 	$tempname = $_FILES["uploadfile"]["tmp_name"];
 	$folder = "./image/" . $filename;
 
-    $conn = mysqli_connect("localhost","root","","eventmanagement") or die($conn);
+    $conn = mysqli_connect("localhost","root","","eventadministration") or die($conn);
 
 	
 	
   
-    $sql = mysqli_query($conn,"INSERT INTO `events` (`EventID`, `EventName`, `EventDate`, `VenueID`, `OrganizerID`, `Description`,`filename`) VALUES (NULL, '$ename', '$edate', '$slotid', NULL, '$edesc','$filename')") or die("Query Failed".mysqli_error($conn));
+    $sql = mysqli_query($conn,"INSERT INTO `events` (`EventID`, `EventName`, `OrganizerID`, `EventDescription`,`EventFileBanner`) VALUES ('$eid', '$ename', '$oid','$edesc','$filename')") or die("Query Failed".mysqli_error($conn));
+    $sql2 = mysqli_query($conn,"INSERT INTO `request_` (`EventID`, `SlotID`) VALUES ('$eid', '$slotid')") or die("Query Failed".mysqli_error($conn));
 
-    if($sql)
+    if($sql2)
 	{
 	
 		echo "<script>alert('Registration Successfull')</script>";
@@ -239,3 +237,4 @@ if(isset($_POST['submit']))
 	
 }
 ?>
+

@@ -10,18 +10,18 @@ if(isset($_SESSION['username']))
       $servername = "localhost";
       $username = "root";
       $password = "";
-      $database = "eventmanagement";
+      $database = "eventadministration";
       
       $conn = mysqli_connect($servername,$username,$password,$database);
-      if(isset($_POST['submit']))
+      if(isset($_POST['signup']))
     {
       // update
       $id = $_POST['id'];
       $organization = $_POST['organization'];
-      $name = $_POST['name'];
       $email = $_POST['email'];
+      $number = $_POST['number'];
       $password = $_POST['password'];
-      $sql = "INSERT INTO `organizers` (`OrganizerID`, `OrganizerName`, `ContactPerson`, `ContactEmail`, `password`)  VALUES ('$id', '$organization', '$name', '$email', '$password')";
+      $sql = "INSERT INTO `organizer` (`OrganizerID`, `OrganizerName`, `OrganizerEmail`, `OrganizerPass`,`OrganizerContactNumber`)  VALUES ('$id', '$organization', '$email', '$password','$number')";
 
       $res = mysqli_query($conn,$sql);
      
@@ -242,8 +242,11 @@ if(isset($_SESSION['username']))
           <h4 class="modal-titel">Fill up your information</h4>
         </div>
         <div class="modal-body" align="center">
-          <form action="/project/organizerlogin.php" method="POST">
+          <form action="#" method="POST">
 			<input type="text" name="id" id="id" placeholder="Enter unique ID for your organization" style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
+			  <br>
+			  <br>
+        <input type="text" name="email" id="email" placeholder="Enter Your email" style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
 			  <br>
 			  <br>
         <input type="text" name="password" id="password" placeholder="Enter your password" style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
@@ -252,13 +255,11 @@ if(isset($_SESSION['username']))
         <input type="text" name="organization" id="organization" placeholder="Enter your organization name" style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
 			  <br>
 			  <br>
-        <input type="text" name="name" id="name" placeholder="Enter Your name" style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
+        <input type="text" name="number" id="number" placeholder="Enter Your number name" style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
 			  <br>
 			  <br>
-        <input type="text" name="email" id="email" placeholder="Enter Your email" style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
-			  <br>
-			  <br>
-				<button type="submit" name="submit" class="btn btn-success" name="btn">Enter</button>
+        
+				<button type="submit" name="signup" class="btn btn-success" name="btn">Enter</button>
 			</form>
         </div>
         <div class="modal-footer">
@@ -342,11 +343,11 @@ if(isset($_POST['submit']))
 $password= $_POST['pass'];
 
 
-$link=mysqli_connect("localhost","root","","eventmanagement") or die($link); 
+$link=mysqli_connect("localhost","root","","eventadministration") or die($link); 
  $username =mysqli_real_escape_string($link,$username);
  $password =mysqli_real_escape_string($link,$password);
 
-$result=mysqli_query($link,"select * from organizers where OrganizerID='$username' and password='$password'") or die("failed to query database".mysqli_error($link));
+$result=mysqli_query($link,"select * from organizer where OrganizerEmail='$username' and OrganizerPass='$password'") or die("failed to query database".mysqli_error($link));
  
  if(mysqli_num_rows($result)>0)
  {

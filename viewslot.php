@@ -1,5 +1,5 @@
 <?php
-  $conn = mysqli_connect("localhost","root","","eventmanagement") or die($conn);
+  $conn = mysqli_connect("localhost","root","","eventadministration") or die($conn);
 
 
 ?>
@@ -149,16 +149,18 @@
     <th style="width:60%;">Capacity</th>
   </tr>
   <?php
-  $que = "SELECT * FROM venues where availability=1";
+  $que = "SELECT SlotID,VenueName,VenueLocation,VenueCapacity
+  FROM slot join venue_ on slot.VenueID=venue_.VenueID
+  WHERE available = 1";
   $res = mysqli_query($conn,$que);
   while($row = mysqli_fetch_assoc($res))
   {
     echo "<tr>
-    <th scope='row'>". $row['VenueID'] . "</th>
+    <th scope='row'>". $row['SlotID'] . "</th>
     <td>". $row['VenueName'] . "</td>
-    <td>". $row['Location'] . "</td>
-    <td>". $row['Capacity'] . "</td>
-    <td>  <a href='bookevent.php?id=". $row['VenueID'] . "'>Book</a> </td>
+    <td>". $row['VenueLocation'] . "</td>
+    <td>". $row['VenueCapacity'] . "</td>
+    <td>  <a href='bookevent.php?id=". $row['SlotID'] . "'>Book</a> </td>
   </tr>";
 
   }

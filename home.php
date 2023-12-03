@@ -46,7 +46,12 @@
       <nav id="nav-menu-container">
         <ul class="nav-menu">
         <li class="menu-active"><a href="#intro">Home</a></li>
-          <li><a href="#events">Upcoming Events</a></li>
+        <li class="menu-has-`children"><a href="organizerlogin.php">Events</a>
+            <ul>
+              <li><a href="#events">Upcoming Events</a></li>
+              <li><a href="prevevents.php">Previous Events</a></li>
+            </ul>
+          </li>
           <!-- <li><a href="#about">About Us</a></li> -->
           <li class="menu-has-`children"><a href="organizerlogin.php">Login</a>
             <ul>
@@ -153,12 +158,12 @@
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $database = "eventmanagement";
+    $database = "eventadministration";
     
     $conn = mysqli_connect($servername,$username,$password,$database);
     //checking if connection is working or not
     //Output Form Entries from the Database
-    $sql = "SELECT EventID,EventName,Description,filename,EventDate FROM aevents ";
+    $sql = "SELECT events.EventID,EventName,ShortDescription,EventFileBanner,EventDate FROM events join request_ on events.EventID=request_.EventID join slot on request_.SlotID=slot.SlotID where accept=1";
     //fire query
     $result = mysqli_query($conn, $sql);
     if(mysqli_num_rows($result) > 0)
@@ -172,20 +177,20 @@
           <div class="row"><!--event content-->
            <section>
                <div class="container">
-                   <div class="date col-md-1">
+                   <div class="column">
                   
                        <span class="day"><h3>'. $row["EventDate"] .'</h3></span>
                    </div>
                    <div class="col-md-5"><!--image holder with 5 grid column-->
-                   <img src="./image/'. $row["filename"] .'" width="350px" height="250px">
+                   <img src="./image/'. $row["EventFileBanner"] .'" width="350px" height="250px">
                    </div>
                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
-                   <div class="subcontent col-md-6">
+                   <div class="col-md-6">
                        <h1 class="title">'. $row["EventName"] .'</h1>
                        <p class="location">
                       
                        </p>
-                       <h3 class="definition">'. $row["Description"] .'</h3>
+                       <h5 class="definition">'. $row["ShortDescription"] .'</h5>
                        
                        <a href="details.php?eid='. $row['EventID'] .'">View Details</a>
                     
@@ -296,11 +301,11 @@
             </p>
 
             <div class="social-links">
-              <a href="https://www.twitter.com" class="twitter"><i class="fa fa-twitter"></i></a>
-              <a href="https://www.facebook.com/scanitjsr/" class="facebook"><i class="fa fa-facebook"></i></a>
-              <a href="https://www.facebook.com/scanitjsr/" class="instagram"><i class="fa fa-instagram"></i></a>
+              <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+              <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+              <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
               <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
-              <a href="https://www.linkedin.com" class="linkedin"><i class="fa fa-linkedin"></i></a>
+              <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
             </div>
 
           </div>
