@@ -210,7 +210,7 @@ input[type=text], select {
    
        //checking if connection is working or not
        //Output Form Entries from the Database
-       $query = "SELECT events.EventID,EventName,EventDescription,EventFileBanner,EventDate FROM events join slot on events.EventID=slot.EventID where events.EventID= '$eid' ";
+       $query = "SELECT events.EventID,EventName,EventDescription,EventFileBanner,EventDate FROM events join request_ on events.EventID=request_.EventID join slot on slot.SlotID=request_.SlotID where events.EventID= '$eid' ";
        $result = $conn->query($query);
        if ($result->num_rows > 0) {
            
