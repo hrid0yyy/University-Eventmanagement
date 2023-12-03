@@ -1,6 +1,9 @@
 
 <!DOCTYPE html>
 <html>
+    <?php
+         $slotid = $_GET['id'];
+    ?>
 	
 <head>
 	
@@ -148,16 +151,18 @@
                     <div class="col-md-2"><p id="errnationality"></p></div>
                 </div>
             </div>
-
-             <div class="form-group">
-                <div class="row">
-                   <div class="col-md-1"><label for="address">Venue&nbsp;</label></div>
-                    <div class="col-md-5">
-                    <textarea class="form-control" id="p_address" name="p_address" row="4" placeholder="Enter permanent address"></textarea></div> 
-                    <div class="col-md-1"></div>
+            <?php
+            
+            echo "<div class='form-group'>
+                <div class='row'>
+                   <div class='col-md-1'><label for='address'>Slot ID&nbsp;</label></div>
+                    <div class='col-md-5'>
+                    <div class='col-md-5'><input type='text' class='form-control' id='eslot' placeholder='".  $slotid  ."' name='eslot' disabled></div> 
+                    <div class='col-md-1'></div>
                     
                  </div>
-            </div>
+            </div>";
+            ?>
         </div>
         
        
@@ -205,6 +210,8 @@
 
 <?php
 
+
+
 if(isset($_POST['submit']))
 {
     $ename= $_POST['ename'];
@@ -219,7 +226,7 @@ if(isset($_POST['submit']))
 	
 	
   
-    $sql = mysqli_query($conn,"INSERT INTO `events` (`EventID`, `EventName`, `EventDate`, `VenueID`, `OrganizerID`, `Description`,`filename`) VALUES (NULL, '$ename', '$edate', NULL, NULL, '$edesc','$filename')") or die("Query Failed".mysqli_error($conn));
+    $sql = mysqli_query($conn,"INSERT INTO `events` (`EventID`, `EventName`, `EventDate`, `VenueID`, `OrganizerID`, `Description`,`filename`) VALUES (NULL, '$ename', '$edate', '$slotid', NULL, '$edesc','$filename')") or die("Query Failed".mysqli_error($conn));
 
     if($sql)
 	{
@@ -232,44 +239,3 @@ if(isset($_POST['submit']))
 	
 }
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

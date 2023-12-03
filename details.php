@@ -190,13 +190,13 @@ input[type=text], select {
        $username = "root";
        $password = "";
        $database = "eventmanagement";
-       $name = $_GET['name'];
+       $eid = $_GET['eid'];
        $conn = mysqli_connect($servername,$username,$password,$database);
 
    
        //checking if connection is working or not
        //Output Form Entries from the Database
-       $query = "SELECT EventID,EventName,Description,filename,EventDate FROM aevents where EventName= '$name' ";
+       $query = "SELECT EventID,EventName,Description,filename,EventDate FROM aevents where EventID= '$eid' ";
        $result = $conn->query($query);
        if ($result->num_rows > 0) {
            
@@ -254,13 +254,15 @@ if(isset($_POST['submit']))
     $name= $_POST['name'];
     $email= $_POST['email'];
 
-
     $conn = mysqli_connect("localhost","root","","eventmanagement") or die($conn);
 
 	
-  
-    $sql = mysqli_query($conn,"INSERT INTO `attendees` (`AttendeeID`, `Name`, `Email`, `RegistrationDate`) VALUES ('$id', '$name', '$email', NULL);") or die("Query Failed".mysqli_error($conn));
-    $sql2 = mysqli_query($conn,"INSERT INTO `eventattendees` (`EventID`, `AttendeeID`, `RegistrationDate`) VALUES ('$eid', '$id', NULL);") or die("Query Failed".mysqli_error($conn));
+
+    $sql = "INSERT INTO `eventattendees` (`eid`, `aid`, `aname`, `aemail`, `eregdate`) VALUES ('$eid', '$id', '$name', '$email', NULL)";
+        
+    $res = mysqli_query($conn,$sql);
+
+
     $reg = true;
 	
 	

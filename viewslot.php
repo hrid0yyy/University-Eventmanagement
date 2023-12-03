@@ -139,17 +139,17 @@
   </div>
 </div>
 
-  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search date">
+  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search Venue">
 
 <table id="myTable">
   <tr class="header">
   <th style="width:60%;">Slot ID</th>
-    <th style="width:60%;">Date</th>
     <th style="width:60%;">Venue</th>
+    <th style="width:60%;">Location</th>
     <th style="width:60%;">Capacity</th>
   </tr>
   <?php
-  $que = "SELECT * FROM venues";
+  $que = "SELECT * FROM venues where availability=1";
   $res = mysqli_query($conn,$que);
   while($row = mysqli_fetch_assoc($res))
   {
@@ -158,7 +158,7 @@
     <td>". $row['VenueName'] . "</td>
     <td>". $row['Location'] . "</td>
     <td>". $row['Capacity'] . "</td>
-   
+    <td>  <a href='bookevent.php?id=". $row['VenueID'] . "'>Book</a> </td>
   </tr>";
 
   }

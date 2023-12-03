@@ -29,8 +29,14 @@ if(!isset($_SESSION['username'])){
         $EventID = $_GET['accept'];
         $sql2 = "INSERT into aevents select EventID,EventName,Description,filename,EventDate    
         from  events 
-        where EventID= $EventID";
+        where EventID= $EventID
+         ;
+        ";
          $res2 = mysqli_query($conn,$sql2);
+         $sql4 = "UPDATE venues JOIN events ON events.VenueID=venues.VenueID
+         set availability = 0
+         where EventID = $EventID";
+          $res4 = mysqli_query($conn,$sql4);
   
         $sql3 = "DELETE FROM `events` WHERE `EventID` = $EventID";
         
@@ -229,7 +235,7 @@ if(!isset($_SESSION['username'])){
     if(confirm("Press yes to accept!"))
     {
       console.log("yes");
-      window.location=`/project/eventreq.php?accept=${EventID}`;
+      window.location=`/university/eventreq.php?accept=${EventID}`;
     }
     else
     {
@@ -252,7 +258,7 @@ if(!isset($_SESSION['username'])){
     if(confirm("Press yes to delete!"))
     {
       console.log("yes");
-      window.location=`/project/eventreq.php?delete=${EventID}`;
+      window.location=`/university/eventreq.php?delete=${EventID}`;
     }
     else
     {

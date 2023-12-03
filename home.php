@@ -158,7 +158,7 @@
     $conn = mysqli_connect($servername,$username,$password,$database);
     //checking if connection is working or not
     //Output Form Entries from the Database
-    $sql = "SELECT EventName,Description,filename,EventDate FROM aevents ";
+    $sql = "SELECT EventID,EventName,Description,filename,EventDate FROM aevents ";
     //fire query
     $result = mysqli_query($conn, $sql);
     if(mysqli_num_rows($result) > 0)
@@ -187,7 +187,7 @@
                        </p>
                        <h3 class="definition">'. $row["Description"] .'</h3>
                        
-                       <a href="details.php?name='. $row['EventName'] .'">View Details</a>
+                       <a href="details.php?eid='. $row['EventID'] .'">View Details</a>
                     
                       
                    </div>
