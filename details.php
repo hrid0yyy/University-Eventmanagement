@@ -251,12 +251,12 @@ input[type=text], select {
                  
                   </p>
                   <h3 class="definition">'. $edesc .'</h3>
-                  <br>';
-                  ?>                
+                  <br>
+                                
                   <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModal">Registration</button>
-                  <button type="button" class="btn btn-secondary btn-sm" ><a href="qna.php">QNA</a></button>                
+                  <button type="button" class="btn btn-secondary btn-sm" ><a href="Faqs.php?eid='. $eid .'">QNA</a></button>';                
                                  
-                 
+                  ?> 
               </div>
           </div>
       </section>

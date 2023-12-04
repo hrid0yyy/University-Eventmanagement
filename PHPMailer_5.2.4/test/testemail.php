@@ -16,24 +16,24 @@ try {
 	$mail->IsSMTP();                           // tell the class to use SMTP
 	$mail->SMTPAuth   = true;                  // enable SMTP authentication
 	$mail->Port       = 25;                    // set the SMTP server port
-	$mail->Host       = "mail.yourdomain.com"; // SMTP server
-	$mail->Username   = "name@domain.com";     // SMTP server username
-	$mail->Password   = "password";            // SMTP server password
+	$mail->Host       = 'mail.yourdomain.com'; // SMTP server
+	$mail->Username   = 'name@domain.com';     // SMTP server username
+	$mail->Password   = 'password';            // SMTP server password
 
 	$mail->IsSendmail();  // tell the class to use Sendmail
 
-	$mail->AddReplyTo("name@domain.com","First Last");
+	$mail->AddReplyTo('name@domain.com','First Last');
 
-	$mail->From       = "name@domain.com";
-	$mail->FromName   = "First Last";
+	$mail->From       = 'name@domain.com';
+	$mail->FromName   = 'First Last';
 
-	$to = "someone@example...com";
+	$to = 'someone@example...com';
 
 	$mail->AddAddress($to);
 
-	$mail->Subject  = "First PHPMailer Message";
+	$mail->Subject  = 'First PHPMailer Message';
 
-	$mail->AltBody    = "To view the message, please use an HTML compatible email viewer!"; // optional, comment out and test
+	$mail->AltBody    = 'To view the message, please use an HTML compatible email viewer!'; // optional, comment out and test
 	$mail->WordWrap   = 80; // set word wrap
 
 	$mail->MsgHTML($body);

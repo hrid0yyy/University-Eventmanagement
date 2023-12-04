@@ -95,37 +95,37 @@ var ieTransforms = {
         '0': {
             marginLeft: 0,
             marginTop: 0,
-            filter: 'progid:DXImageTransform.Microsoft.Matrix(M11=1, M12=0, M21=0, M22=1, SizingMethod="auto expand")'
+            filter: 'progid:DXImageTransform.Microsoft.Matrix(M11=1, M12=0, M21=0, M22=1, SizingMethod='auto expand')'
         },
 
         '90': {
             marginLeft: -1,
             marginTop: 1,
-            filter: 'progid:DXImageTransform.Microsoft.Matrix(M11=0, M12=-1, M21=1, M22=0, SizingMethod="auto expand")'
+            filter: 'progid:DXImageTransform.Microsoft.Matrix(M11=0, M12=-1, M21=1, M22=0, SizingMethod='auto expand')'
         },
 
         '180': {
             marginLeft: 0,
             marginTop: 0,
-            filter: 'progid:DXImageTransform.Microsoft.Matrix(M11=-1, M12=0, M21=0, M22=-1, SizingMethod="auto expand")'
+            filter: 'progid:DXImageTransform.Microsoft.Matrix(M11=-1, M12=0, M21=0, M22=-1, SizingMethod='auto expand')'
         },
 
         '270': {
             marginLeft: -1,
             marginTop: 1,
-            filter: 'progid:DXImageTransform.Microsoft.Matrix(M11=0, M12=1, M21=-1, M22=0, SizingMethod="auto expand")'
+            filter: 'progid:DXImageTransform.Microsoft.Matrix(M11=0, M12=1, M21=-1, M22=0, SizingMethod='auto expand')'
         }
     },
     useIeTransforms = (jQuery.browser.msie && parseInt(jQuery.browser.version, 10) <= 8);
 
-$.widget( "ui.iviewer", $.ui.mouse, {
-    widgetEventPrefix: "iviewer",
+$.widget( 'ui.iviewer', $.ui.mouse, {
+    widgetEventPrefix: 'iviewer',
     options : {
         /**
         * start zoom value for image, not used now
-        * may be equal to "fit" to fit image into container or scale in %
+        * may be equal to 'fit' to fit image into container or scale in %
         **/
-        zoom: "fit",
+        zoom: 'fit',
         /**
         * base value to scale image
         **/
@@ -233,7 +233,7 @@ $.widget( "ui.iviewer", $.ui.mouse, {
         this._updateContainerInfo();
 
         //init container
-        this.container.css("overflow","hidden");
+        this.container.css('overflow','hidden');
 
         if(this.options.update_on_resize == true)
         {
@@ -289,9 +289,9 @@ $.widget( "ui.iviewer", $.ui.mouse, {
         this._trigger('onStartLoad', 0, src);
 
         this.img_object.load(src, function() {
-                me.container.addClass("iviewer_cursor");
+                me.container.addClass('iviewer_cursor');
 
-                if(me.options.zoom == "fit"){
+                if(me.options.zoom == 'fit'){
                     me.fit(true);
                 }
                 else {
@@ -475,7 +475,7 @@ $.widget( "ui.iviewer", $.ui.mouse, {
         }
 
         /* we fake these values to make fit zoom properly work */
-        if(this.current_zoom == "fit")
+        if(this.current_zoom == 'fit')
         {
             var old_x = Math.round(this.options.width/2 + this.img_object.orig_width()/2);
             var old_y = Math.round(this.options.height/2 + this.img_object.orig_height()/2);
@@ -597,7 +597,7 @@ $.widget( "ui.iviewer", $.ui.mouse, {
             var percent = Math.round(100*this.img_object.display_height()/this.img_object.orig_height());
             if(percent)
             {
-                this.zoom_object.html(percent + "%");
+                this.zoom_object.html(percent + '%');
             }
         }
     },
@@ -646,7 +646,7 @@ $.widget( "ui.iviewer", $.ui.mouse, {
         }
 
         /* start drag event*/
-        this.container.addClass("iviewer_drag_cursor");
+        this.container.addClass('iviewer_drag_cursor');
 
         this.dx = e.pageX - this.img_object.x();
         this.dy = e.pageY - this.img_object.y();
@@ -686,7 +686,7 @@ $.widget( "ui.iviewer", $.ui.mouse, {
     _mouseStop: function(e)
     {
         $.ui.mouse.prototype._mouseStop.call(this, e);
-        this.container.removeClass("iviewer_drag_cursor");
+        this.container.removeClass('iviewer_drag_cursor');
         this._trigger('onStopDrag', 0, this._getMouseCoords(e));
     },
 
@@ -702,30 +702,30 @@ $.widget( "ui.iviewer", $.ui.mouse, {
     {
         var me=this;
 
-        $("<div>", { 'class': "iviewer_zoom_in iviewer_common iviewer_button"})
+        $('<div>', { 'class': 'iviewer_zoom_in iviewer_common iviewer_button'})
                     .bind('mousedown touchstart',function(){me.zoom_by(1); return false;})
                     .appendTo(this.container);
 
-        $("<div>", { 'class': "iviewer_zoom_out iviewer_common iviewer_button"})
+        $('<div>', { 'class': 'iviewer_zoom_out iviewer_common iviewer_button'})
                     .bind('mousedown touchstart',function(){me.zoom_by(- 1); return false;})
                     .appendTo(this.container);
 
-        $("<div>", { 'class': "iviewer_zoom_zero iviewer_common iviewer_button"})
+        $('<div>', { 'class': 'iviewer_zoom_zero iviewer_common iviewer_button'})
                     .bind('mousedown touchstart',function(){me.set_zoom(100); return false;})
                     .appendTo(this.container);
 
-        $("<div>", { 'class': "iviewer_zoom_fit iviewer_common iviewer_button"})
+        $('<div>', { 'class': 'iviewer_zoom_fit iviewer_common iviewer_button'})
                     .bind('mousedown touchstart',function(){me.fit(this); return false;})
                     .appendTo(this.container);
 
-        this.zoom_object = $("<div>").addClass("iviewer_zoom_status iviewer_common")
+        this.zoom_object = $('<div>').addClass('iviewer_zoom_status iviewer_common')
                                     .appendTo(this.container);
 
-        $("<div>", { 'class': "iviewer_rotate_left iviewer_common iviewer_button"})
+        $('<div>', { 'class': 'iviewer_rotate_left iviewer_common iviewer_button'})
                     .bind('mousedown touchstart',function(){me.angle(-90); return false;})
                     .appendTo(this.container);
 
-        $("<div>", { 'class': "iviewer_rotate_right iviewer_common iviewer_button" })
+        $('<div>', { 'class': 'iviewer_rotate_right iviewer_common iviewer_button' })
                     .bind('mousedown touchstart',function(){me.angle(90); return false;})
                     .appendTo(this.container);
 
@@ -741,9 +741,9 @@ $.widget( "ui.iviewer", $.ui.mouse, {
  * @param {boolean} do_anim Do we want to animate image on dimension changes?
  */
 $.ui.iviewer.ImageObject = function(do_anim) {
-    this._img = $("<img>")
+    this._img = $('<img>')
             //this is needed, because chromium sets them auto otherwise
-            .css({ position: "absolute", top :"0px", left: "0px"});
+            .css({ position: 'absolute', top :'0px', left: '0px'});
 
     this._loaded = false;
     this._swapDimensions = false;
@@ -806,11 +806,11 @@ $.ui.iviewer.ImageObject = function(do_anim) {
         img.src = src;
 
         this._img
-            .removeAttr("src")
-            .removeAttr("width")
-            .removeAttr("height")
-            .removeAttr("style")
-            .css({ position: "absolute", top :"0px", left: "0px"})
+            .removeAttr('src')
+            .removeAttr('width')
+            .removeAttr('height')
+            .removeAttr('style')
+            .css({ position: 'absolute', top :'0px', left: '0px'})
 
         this.angle(0);
     };
@@ -849,7 +849,7 @@ $.ui.iviewer.ImageObject = function(do_anim) {
     this.x = setter(function(val, skipCss) { 
             this._x = val;
             if (!skipCss) {
-                this._img.css("left",this._x + (this._swapDimensions ? this.display_diff() / 2 : 0) + "px");
+                this._img.css('left',this._x + (this._swapDimensions ? this.display_diff() / 2 : 0) + 'px');
             }
         },
         function() {
@@ -866,7 +866,7 @@ $.ui.iviewer.ImageObject = function(do_anim) {
     this.y = setter(function(val, skipCss) {
             this._y = val;
             if (!skipCss) {
-                this._img.css("top",this._y - (this._swapDimensions ? this.display_diff() / 2 : 0) + "px");
+                this._img.css('top',this._y - (this._swapDimensions ? this.display_diff() / 2 : 0) + 'px');
             }
         },
        function() {
@@ -978,8 +978,8 @@ $.ui.iviewer.ImageObject = function(do_anim) {
         var params = {
             width: w,
             height: h,
-            top: y - (this._swapDimensions ? this.display_diff() / 2 : 0) + "px",
-            left: x + (this._swapDimensions ? this.display_diff() / 2 : 0) + "px" 
+            top: y - (this._swapDimensions ? this.display_diff() / 2 : 0) + 'px',
+            left: x + (this._swapDimensions ? this.display_diff() / 2 : 0) + 'px' 
         };
 
         if (useIeTransforms) {

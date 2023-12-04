@@ -42,7 +42,7 @@ SyntaxHighlighter.brushes.Xml = function()
 			var attributes,
 				regex = new XRegExp('(?<name> [\\w:\\-\\.]+)' +
 									'\\s*=\\s*' +
-									'(?<value> ".*?"|\'.*?\'|\\w+)',
+									'(?<value> '.*?'|\'.*?\'|\\w+)',
 									'xg');
 
 			while ((attributes = regex.exec(code)) != null) 

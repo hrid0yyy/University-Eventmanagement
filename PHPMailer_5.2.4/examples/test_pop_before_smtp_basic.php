@@ -22,25 +22,25 @@ $mail->Host     = 'pop3.yourdomain.com';
 
 $mail->SetFrom('name@yourdomain.com', 'First Last');
 
-$mail->AddReplyTo("name@yourdomain.com","First Last");
+$mail->AddReplyTo('name@yourdomain.com','First Last');
 
-$mail->Subject    = "PHPMailer Test Subject via POP before SMTP, basic";
+$mail->Subject    = 'PHPMailer Test Subject via POP before SMTP, basic';
 
-$mail->AltBody    = "To view the message, please use an HTML compatible email viewer!"; // optional, comment out and test
+$mail->AltBody    = 'To view the message, please use an HTML compatible email viewer!'; // optional, comment out and test
 
 $mail->MsgHTML($body);
 
-$address = "whoto@otherdomain.com";
-$mail->AddAddress($address, "John Doe");
+$address = 'whoto@otherdomain.com';
+$mail->AddAddress($address, 'John Doe');
 
-$mail->AddAttachment("images/phpmailer.gif");      // attachment
-$mail->AddAttachment("images/phpmailer_mini.gif"); // attachment
+$mail->AddAttachment('images/phpmailer.gif');      // attachment
+$mail->AddAttachment('images/phpmailer_mini.gif'); // attachment
 
 
 if(!$mail->Send()) {
-  echo "Mailer Error: " . $mail->ErrorInfo;
+  echo 'Mailer Error: ' . $mail->ErrorInfo;
 } else {
-  echo "Message sent!";
+  echo 'Message sent!';
 }
 
 ?>

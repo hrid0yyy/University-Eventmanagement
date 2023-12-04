@@ -222,7 +222,7 @@ background:#eee;
 <form class="form" name="enq" method="post" action="#" >
 <div class="row">
 <div class="form-group col-md-6">
-<input type="text" name="name" class="form-control" placeholder="Name" required="required">
+<input type="text" name="pid" class="form-control" placeholder="Enter your Participant ID" required="required">
 </div>
 <div class="form-group col-md-12">
 <label for="rating">Your Rattings</label>
@@ -250,9 +250,37 @@ if(isset($_POST['submit']))
 {
     $eid= $_GET['eid'];
     $rating= $_POST['rating'];
-    $name= $_POST['name'];
+    $pid= $_POST['pid'];
     $comments= $_POST['comments'];
-   $sql = "INSERT INTO `feedback_` (`Rating`, `Comments`, `EventID`, `Fid`, `name`) VALUES ('$rating', '$comments', '$eid', NULL, '$name');";
+
+
+
+    $sql2 = "SELECT *
+    FROM registration_
+    WHERE ParticipantID = $pid and EventID = $eid";
+    $r = mysqli_query($conn, $sql2);
+    if(mysqli_num_rows($r) == 0)
+    {
+        echo "<script>alert('Sorry we cant take your feedback')</script>";
+		echo "<script>location.href='home.php'</script>";
+    
+     }
+     
+
+
+    $sql1 = "SELECT * 
+    FROM feedback_ JOIN participants
+         on feedback_.Pid=participants.ParticipantID
+    where feedback_.EventID=$eid and feedback_.Pid=$pid";
+    $result = mysqli_query($conn, $sql1);
+    if(mysqli_num_rows($result) > 0)
+    {
+        echo "<script>alert('You already gave your feedback')</script>";
+		echo "<script>location.href='home.php'</script>";
+    
+     }
+    
+   $sql = "INSERT INTO `feedback_` (`Rating`, `Comments`, `EventID`, `Fid`, `Pid`) VALUES ('$rating', '$comments', '$eid', NULL, '$pid');";
    $res = mysqli_query($conn,$sql);
    if($sql)
 	{
@@ -261,6 +289,7 @@ if(isset($_POST['submit']))
 		echo "<script>location.href='home.php'</script>";
 
 	}
+
 }
 ?>
 <div class="col-lg-5">

@@ -54,7 +54,7 @@ SyntaxHighlighter.brushes.Groovy = function()
 		{ regex: SyntaxHighlighter.regexLib.multiLineCComments,					css: 'comments' },		// multiline comments
 		{ regex: SyntaxHighlighter.regexLib.doubleQuotedString,					css: 'string' },		// strings
 		{ regex: SyntaxHighlighter.regexLib.singleQuotedString,					css: 'string' },		// strings
-		{ regex: /""".*"""/g,													css: 'string' },		// GStrings
+		{ regex: /'''.*'''/g,													css: 'string' },		// GStrings
 		{ regex: new RegExp('\\b([\\d]+(\\.[\\d]+)?|0x[a-f0-9]+)\\b', 'gi'),	css: 'value' },			// numbers
 		{ regex: new RegExp(this.getKeywords(keywords), 'gm'),					css: 'keyword' },		// goovy keyword
 		{ regex: new RegExp(this.getKeywords(types), 'gm'),						css: 'color1' },		// goovy/java type

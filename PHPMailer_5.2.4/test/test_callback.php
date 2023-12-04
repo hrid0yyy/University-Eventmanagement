@@ -26,7 +26,7 @@ function callbackAction ($result, $to, $cc, $bcc, $subject, $body) {
   $to  = cleanEmails($to,'to');
   $cc  = cleanEmails($cc[0],'cc');
   $bcc = cleanEmails($bcc[0],'cc');
-  echo $result . "\tTo: "  . $to['Name'] . "\tTo: "  . $to['Email'] . "\tCc: "  . $cc['Name'] . "\tCc: "  . $cc['Email'] . "\tBcc: "  . $bcc['Name'] . "\tBcc: "  . $bcc['Email'] . "\t"  . $subject . "<br />\n";
+  echo $result . '\tTo: '  . $to['Name'] . '\tTo: '  . $to['Email'] . '\tCc: '  . $cc['Name'] . '\tCc: '  . $cc['Email'] . '\tBcc: '  . $bcc['Name'] . '\tBcc: '  . $bcc['Email'] . '\t'  . $subject . '<br />\n';
   return true;
 }
 
@@ -51,7 +51,7 @@ try {
   $mail->AddAttachment('images/phpmailer_mini.gif'); // attachment
   $mail->action_function = 'callbackAction';
   $mail->Send();
-  echo "Message Sent OK</p>\n";
+  echo 'Message Sent OK</p>\n';
 } catch (phpmailerException $e) {
   echo $e->errorMessage(); //Pretty error messages from PHPMailer
 } catch (Exception $e) {

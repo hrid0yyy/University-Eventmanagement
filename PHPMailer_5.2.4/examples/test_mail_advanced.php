@@ -7,7 +7,7 @@
 <?php
 require_once '../class.phpmailer.php';
 
-$mail = new PHPMailer(true); //defaults to using php "mail()"; the true param means it will throw exceptions on errors, which we need to catch
+$mail = new PHPMailer(true); //defaults to using php 'mail()'; the true param means it will throw exceptions on errors, which we need to catch
 
 try {
   $mail->AddAddress('whoto@otherdomain.com', 'John Doe');
@@ -19,7 +19,7 @@ try {
   $mail->AddAttachment('images/phpmailer.gif');      // attachment
   $mail->AddAttachment('images/phpmailer_mini.gif'); // attachment
   $mail->Send();
-  echo "Message Sent OK</p>\n";
+  echo 'Message Sent OK</p>\n';
 } catch (phpmailerException $e) {
   echo $e->errorMessage(); //Pretty error messages from PHPMailer
 } catch (Exception $e) {

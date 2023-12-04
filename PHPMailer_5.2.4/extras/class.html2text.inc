@@ -53,7 +53,7 @@
  *
  *  Thanks to Mathieu Collas (http://www.myefarm.com/) for finding a
  *  display/formatting bug in the _build_link_list() function: email
- *  readers would show the left bracket and number ("[1") as part of the
+ *  readers would show the left bracket and number ('[1') as part of the
  *  rendered email address.
  *  Updated 12/16/04.
  *
@@ -64,7 +64,7 @@
  *  Updated 03/02/05.
  *
  *  Thanks to Jacob Chandler for pointing out another link condition
- *  for the _build_link_list() function: "https".
+ *  for the _build_link_list() function: 'https'.
  *  Updated 04/06/05.
  *
  *  Thanks to Marc Bertrand (http://www.dresdensky.com/) for
@@ -143,8 +143,8 @@ class html2text
      *  @see $replace
      */
     var $search = array(
-        "/\r/",                                  // Non-legal carriage return
-        "/[\n\t]+/",                             // Newlines and tabs
+        '/\r/',                                  // Non-legal carriage return
+        '/[\n\t]+/',                             // Newlines and tabs
         '/[ ]{2,}/',                             // Runs of spaces, pre-handling
         '/<script[^>]*>.*?<\/script>/i',         // <script>s -- which strip_tags supposedly has problems with
         '/<style[^>]*>.*?<\/style>/i',           // <style>s -- which strip_tags supposedly has problems with
@@ -161,8 +161,8 @@ class html2text
         '/(<ol[^>]*>|<\/ol>)/i',                 // <ol> and </ol>
         '/<li[^>]*>(.*?)<\/li>/i',               // <li> and </li>
         '/<li[^>]*>/i',                          // <li>
-        '/<a [^>]*href="([^"]+)"[^>]*>(.*?)<\/a>/ie',
-                                                 // <a href="">
+        '/<a [^>]*href='([^']+)'[^>]*>(.*?)<\/a>/ie',
+                                                 // <a href=''>
         '/<hr[^>]*>/i',                          // <hr>
         '/(<table[^>]*>|<\/table>)/i',           // <table> and </table>
         '/(<tr[^>]*>|<\/tr>)/i',                 // <tr> and </tr>
@@ -201,28 +201,28 @@ class html2text
         '',                                     // <script>s -- which strip_tags supposedly has problems with
         '',                                     // <style>s -- which strip_tags supposedly has problems with
         //'',                                     // Comments -- which strip_tags might have problem a with
-        "strtoupper(\"\n\n\\1\n\n\")",          // H1 - H3
-        "ucwords(\"\n\n\\1\n\n\")",             // H4 - H6
-        "\n\n\t",                               // <P>
-        "\n",                                   // <br>
-        'strtoupper("\\1")',                    // <b>
-        'strtoupper("\\1")',                    // <strong>
+        'strtoupper(\'\n\n\\1\n\n\')',          // H1 - H3
+        'ucwords(\'\n\n\\1\n\n\')',             // H4 - H6
+        '\n\n\t',                               // <P>
+        '\n',                                   // <br>
+        'strtoupper('\\1')',                    // <b>
+        'strtoupper('\\1')',                    // <strong>
         '_\\1_',                                // <i>
         '_\\1_',                                // <em>
-        "\n\n",                                 // <ul> and </ul>
-        "\n\n",                                 // <ol> and </ol>
-        "\t* \\1\n",                            // <li> and </li>
-        "\n\t* ",                               // <li>
-        '$this->_build_link_list("\\1", "\\2")',
-                                                // <a href="">
-        "\n-------------------------\n",        // <hr>
-        "\n\n",                                 // <table> and </table>
-        "\n",                                   // <tr> and </tr>
-        "\t\t\\1\n",                            // <td> and </td>
-        "strtoupper(\"\t\t\\1\n\")",            // <th> and </th>
+        '\n\n',                                 // <ul> and </ul>
+        '\n\n',                                 // <ol> and </ol>
+        '\t* \\1\n',                            // <li> and </li>
+        '\n\t* ',                               // <li>
+        '$this->_build_link_list('\\1', '\\2')',
+                                                // <a href=''>
+        '\n-------------------------\n',        // <hr>
+        '\n\n',                                 // <table> and </table>
+        '\n',                                   // <tr> and </tr>
+        '\t\t\\1\n',                            // <td> and </td>
+        'strtoupper(\'\t\t\\1\n\')',            // <th> and </th>
         ' ',                                    // Non-breaking space
-        '"',                                    // Double quotes
-        "'",                                    // Single quotes
+        ''',                                    // Double quotes
+        ''',                                    // Single quotes
         '>',
         '<',
         '&',
@@ -232,8 +232,8 @@ class html2text
         '--',
         '-',
         '*',
-        '£',
-        'EUR',                                  // Euro sign. € ?
+        'ï¿½',
+        'EUR',                                  // Euro sign. ï¿½ ?
         '',                                     // Unknown/unhandled entities
         ' '                                     // Runs of spaces, post-handling
     );
@@ -365,7 +365,7 @@ class html2text
     /**
      *  Sets the allowed HTML tags to pass through to the resulting text.
      *
-     *  Tags should be in the form "<p>", with no corresponding closing tag.
+     *  Tags should be in the form '<p>', with no corresponding closing tag.
      *
      *  @access public
      *  @return void
@@ -393,7 +393,7 @@ class html2text
 	        }
         } else {
             // Strip any trailing slashes for consistency (relative
-            // URLs may already start with a slash like "/file.html")
+            // URLs may already start with a slash like '/file.html')
             if ( substr($url, -1) == '/' ) {
                 $url = substr($url, 0, -1);
             }
@@ -427,12 +427,12 @@ class html2text
         $text = strip_tags($text, $this->allowed_tags);
 
         // Bring down number of empty lines to 2 max
-        $text = preg_replace("/\n\s+\n/", "\n\n", $text);
-        $text = preg_replace("/[\n]{3,}/", "\n\n", $text);
+        $text = preg_replace('/\n\s+\n/', '\n\n', $text);
+        $text = preg_replace('/[\n]{3,}/', '\n\n', $text);
 
         // Add link list
         if ( !empty($this->_link_list) ) {
-            $text .= "\n\nLinks:\n------\n" . $this->_link_list;
+            $text .= '\n\nLinks:\n------\n' . $this->_link_list;
         }
 
         // Wrap the text to a readable format
@@ -465,19 +465,19 @@ class html2text
 		if ( substr($link, 0, 7) == 'http://' || substr($link, 0, 8) == 'https://' ||
              substr($link, 0, 7) == 'mailto:' ) {
             $this->_link_count++;
-            $this->_link_list .= "[" . $this->_link_count . "] $link\n";
+            $this->_link_list .= '[' . $this->_link_count . '] $link\n';
             $additional = ' [' . $this->_link_count . ']';
 		} elseif ( substr($link, 0, 11) == 'javascript:' ) {
 			// Don't count the link; ignore it
 			$additional = '';
-		// what about href="#anchor" ?
+		// what about href='#anchor' ?
         } else {
             $this->_link_count++;
-            $this->_link_list .= "[" . $this->_link_count . "] " . $this->url;
+            $this->_link_list .= '[' . $this->_link_count . '] ' . $this->url;
             if ( substr($link, 0, 1) != '/' ) {
                 $this->_link_list .= '/';
             }
-            $this->_link_list .= "$link\n";
+            $this->_link_list .= '$link\n';
             $additional = ' [' . $this->_link_count . ']';
         }
 

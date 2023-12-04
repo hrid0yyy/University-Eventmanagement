@@ -7,9 +7,9 @@ $.browser.ipad   = /ipad/.test(navigator.userAgent.toLowerCase());
 function initializeContents()
 {
     // hide all more buttons because they are not needed with JS
-    $(".element a.more").hide();
+    $('.element a.more').hide();
 
-    $(".clickable.class,.clickable.interface").click(function() {
+    $('.clickable.class,.clickable.interface').click(function() {
         document.location = $(this).attr('href');
     });
 
@@ -17,8 +17,8 @@ function initializeContents()
     // do a background color change on hover to emphasize the clickability eveb more
     // we do not use CSS for this because when JS is disabled this behaviour does not
     // apply and we do not want the hover
-    $(".element.method,.element.function,.element.class.clickable,.element.interface.clickable")
-        .css("cursor", "pointer")
+    $('.element.method,.element.function,.element.class.clickable,.element.interface.clickable')
+        .css('cursor', 'pointer')
         .hover(function() {
             $(this).css('backgroundColor', '#F8FDF6')
         }, function(){
@@ -84,15 +84,15 @@ $(document).ready(function() {
 
     // do not show tooltips on iPad; it will cause the user having to click twice
     if(!$.browser.ipad) {
-        $(".side-nav a").tooltip({'placement': 'top'});
+        $('.side-nav a').tooltip({'placement': 'top'});
     }
 
     // chrome cannot deal with certain situations; warn the user about reduced features
     if ($.browser.chrome && (window.location.protocol == 'file:')) {
-        $("body > .container").prepend(
-            '<div class="alert alert-error"><a class="close" data-dismiss="alert">×</a>' +
+        $('body > .container').prepend(
+            '<div class='alert alert-error'><a class='close' data-dismiss='alert'>×</a>' +
             'You are using Google Chrome in a local environment; AJAX interaction has been ' +
-            'disabled because Chrome cannot <a href="http://code.google.com/p/chromium/issues/detail?id=40787">' +
+            'disabled because Chrome cannot <a href='http://code.google.com/p/chromium/issues/detail?id=40787'>' +
             'retrieve files using Ajax</a>.</div>'
         );
     }
@@ -159,7 +159,7 @@ $(document).ready(function() {
         });
     }
 
-    // use the first element that is "scrollable"
+    // use the first element that is 'scrollable'
     function scrollableElement(els)
     {
         for (var i = 0, argLength = arguments.length; i < argLength; i++)

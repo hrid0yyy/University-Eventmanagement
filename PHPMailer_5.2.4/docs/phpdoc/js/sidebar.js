@@ -3,11 +3,11 @@ jQuery.expr[':'].Contains = function(a, i, m) {
 };
 
 $(function() {
-    $("#sidebar-nav").accordion({
+    $('#sidebar-nav').accordion({
         autoHeight: false,
         navigation: true,
         collapsible: true
-    }).accordion("activate", false)
+    }).accordion('activate', false)
             .find('a.link').unbind('click').click(
             function(ev) {
                 ev.cancelBubble = true; // IE
@@ -18,12 +18,12 @@ $(function() {
                 return true;
             }).prev().prev().remove();
 
-    $("#sidebar-nav>h3").click(function() {
+    $('#sidebar-nav>h3').click(function() {
         if ($(this).attr('initialized') == 'true') return;
 
-        $(this).next().find(".sidebar-nav-tree").treeview({
+        $(this).next().find('.sidebar-nav-tree').treeview({
             collapsed: true,
-            persist: "cookie"
+            persist: 'cookie'
         });
         $(this).attr('initialized', true);
     });

@@ -39,7 +39,7 @@ SyntaxHighlighter.brushes.CSharp = function()
 
 	function fixComments(match, regexInfo)
 	{
-		var css = (match[0].indexOf("///") == 0)
+		var css = (match[0].indexOf('///') == 0)
 			? 'color1'
 			: 'comments'
 			;

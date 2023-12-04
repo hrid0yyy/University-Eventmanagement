@@ -8,7 +8,7 @@ function is_logged_in() {
 
 function start_session() {
     $id = session_id();
-    if ($id === "") {
+    if ($id === '') {
         session_start();
     }
 }

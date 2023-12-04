@@ -2,7 +2,7 @@
  *  SVGPan library 1.2 - phpDocumentor1
  * ====================
  *
- * Given an unique existing element with id "viewport", including the
+ * Given an unique existing element with id 'viewport', including the
  * the library into any SVG adds the following capabilities:
  *
  *  - Mouse panning
@@ -68,11 +68,11 @@ setupHandlers(root);
  */
 function setupHandlers(root){
 	setAttributes(root, {
-		"onmouseup" : "add(evt)",
-		"onmousedown" : "handleMouseDown(evt)",
-		"onmousemove" : "handleMouseMove(evt)",
-		"onmouseup" : "handleMouseUp(evt)",
-//		"onmouseout" : "handleMouseUp(evt)" // Decomment this to stop the pan functionality when dragging out of the SVG element
+		'onmouseup' : 'add(evt)',
+		'onmousedown' : 'handleMouseDown(evt)',
+		'onmousemove' : 'handleMouseMove(evt)',
+		'onmouseup' : 'handleMouseUp(evt)',
+//		'onmouseout' : 'handleMouseUp(evt)' // Decomment this to stop the pan functionality when dragging out of the SVG element
 	});
 
 	if(navigator.userAgent.toLowerCase().indexOf('webkit') >= 0)
@@ -97,16 +97,16 @@ function getEventPoint(evt) {
  * Sets the current transform matrix of an element.
  */
 function setCTM(element, matrix) {
-	var s = "matrix(" + matrix.a + "," + matrix.b + "," + matrix.c + "," + matrix.d + "," + matrix.e + "," + matrix.f + ")";
+	var s = 'matrix(' + matrix.a + ',' + matrix.b + ',' + matrix.c + ',' + matrix.d + ',' + matrix.e + ',' + matrix.f + ')';
 
-	element.setAttribute("transform", s);
+	element.setAttribute('transform', s);
 }
 
 /**
  * Dumps a matrix to a string (useful for debug).
  */
 function dumpMatrix(matrix) {
-	var s = "[ " + matrix.a + ", " + matrix.c + ", " + matrix.e + "\n  " + matrix.b + ", " + matrix.d + ", " + matrix.f + "\n  0, 0, 1 ]";
+	var s = '[ ' + matrix.a + ', ' + matrix.c + ', ' + matrix.e + '\n  ' + matrix.b + ', ' + matrix.d + ', ' + matrix.f + '\n  0, 0, 1 ]';
 
 	return s;
 }
@@ -139,7 +139,7 @@ function handleMouseWheel(evt) {
 
 	var z = 1 + (delta * 1.2); // Zoom factor: 0.9/1.1
 
-	var g = svgDoc.getElementById("viewport");
+	var g = svgDoc.getElementById('viewport');
 
 	var p = getEventPoint(evt);
 
@@ -164,7 +164,7 @@ function handleMouseMove(evt) {
 
 	var svgDoc = evt.target.ownerDocument;
 
-	var g = svgDoc.getElementById("viewport");
+	var g = svgDoc.getElementById('viewport');
 
 	if(state == 'pan') {
 		// Pan mode
@@ -192,9 +192,9 @@ function handleMouseDown(evt) {
 
 	var svgDoc = evt.target.ownerDocument;
 
-	var g = svgDoc.getElementById("viewport");
+	var g = svgDoc.getElementById('viewport');
 
-//	if(evt.target.tagName == "svg") {
+//	if(evt.target.tagName == 'svg') {
 		// Pan mode
 		state = 'pan';
 

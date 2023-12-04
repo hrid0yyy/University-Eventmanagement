@@ -102,7 +102,7 @@ var sh = {
 			brushNotHtmlScript : 'Brush wasn\'t configured for html-script option: ',
 			
 			// this is populated by the build script
-			aboutDialog : '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>About SyntaxHighlighter</title></head><body style="font-family:Georgia,\'Times New Roman\',Times,serif;background-color:#fff;color:#000;font-size:1em;text-align:center;"><div style="text-align:center;margin-top:3em;"><div style="font-family:Geneva,Arial,Helvetica,sans-serif;font-size:xx-large;">SyntaxHighlighter</div><div style="font-size:.75em;margin-bottom:4em;"><div>version 2.0.296 (March 01 2009)</div><div><a href="http://alexgorbatchev.com" target="_blank" style="color:#0099FF;text-decoration:none;">http://alexgorbatchev.com</a></div></div><div>JavaScript code syntax highlighter.</div><div>Copyright 2004-2009 Alex Gorbatchev.</div></div></body></html>'
+			aboutDialog : '<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'><html xmlns='http://www.w3.org/1999/xhtml'><head><meta http-equiv='Content-Type' content='text/html; charset=utf-8' /><title>About SyntaxHighlighter</title></head><body style='font-family:Georgia,\'Times New Roman\',Times,serif;background-color:#fff;color:#000;font-size:1em;text-align:center;'><div style='text-align:center;margin-top:3em;'><div style='font-family:Geneva,Arial,Helvetica,sans-serif;font-size:xx-large;'>SyntaxHighlighter</div><div style='font-size:.75em;margin-bottom:4em;'><div>version 2.0.296 (March 01 2009)</div><div><a href='http://alexgorbatchev.com' target='_blank' style='color:#0099FF;text-decoration:none;'>http://alexgorbatchev.com</a></div></div><div>JavaScript code syntax highlighter.</div><div>Copyright 2004-2009 Alex Gorbatchev.</div></div></body></html>'
 		},
 
 		/** If true, output will show HTML produces instead. */
@@ -125,9 +125,9 @@ var sh = {
 		multiLineCComments			: /\/\*[\s\S]*?\*\//gm,
 		singleLineCComments			: /\/\/.*$/gm,
 		singleLinePerlComments		: /#.*$/gm,
-		doubleQuotedString			: /"(?:\.|(\\\")|[^\""\n])*"/g,
+		doubleQuotedString			: /'(?:\.|(\\\')|[^\''\n])*'/g,
 		singleQuotedString			: /'(?:\.|(\\\')|[^\''\n])*'/g,
-		multiLineDoubleQuotedString	: /"(?:\.|(\\\")|[^\""])*"/g,
+		multiLineDoubleQuotedString	: /'(?:\.|(\\\')|[^\''])*'/g,
 		multiLineSingleQuotedString	: /'(?:\.|(\\\')|[^\''])*'/g,
 		url							: /\w+:\/\/[\w-.\/?%&=]*/g,
 		
@@ -313,7 +313,7 @@ var sh = {
 						var result = '';
 						
 						for (var name in list)
-							result += "<param name='" + name + "' value='" + list[name] + "'/>";
+							result += '<param name='' + name + '' value='' + list[name] + ''/>';
 							
 						return result;
 					};
@@ -323,7 +323,7 @@ var sh = {
 						var result = '';
 						
 						for (var name in list)
-							result += " " + name + "='" + list[name] + "'";
+							result += ' ' + name + '='' + list[name] + ''';
 							
 						return result;
 					};
@@ -435,7 +435,7 @@ var sh = {
 					doc = iframe.contentWindow.document;
 					
 					copyStyles(doc, window.document);
-					doc.write('<div class="' + highlighter.div.className.replace('collapsed', '') + ' printing">' + highlighter.div.innerHTML + '</div>');
+					doc.write('<div class='' + highlighter.div.className.replace('collapsed', '') + ' printing'>' + highlighter.div.innerHTML + '</div>');
 					doc.close();
 					
 					iframe.contentWindow.focus();
@@ -447,7 +447,7 @@ var sh = {
 					
 						for(var i = 0; i < links.length; i++)
 							if(links[i].rel.toLowerCase() == 'stylesheet' && /shCore\.css$/.test(links[i].href))
-								destDoc.write('<link type="text/css" rel="stylesheet" href="' + links[i].href + '"></link>');
+								destDoc.write('<link type='text/css' rel='stylesheet' href='' + links[i].href + ''></link>');
 					};
 				};
 			},
@@ -503,16 +503,16 @@ var sh = {
 		/**
 		 * Attempts to convert string to boolean.
 		 * @param {String} value Input string.
-		 * @return {Boolean} Returns true if input was "true", false if input was "false" and value otherwise.
+		 * @return {Boolean} Returns true if input was 'true', false if input was 'false' and value otherwise.
 		 */
 		toBoolean: function(value)
 		{
 			switch (value)
 			{
-				case "true":
+				case 'true':
 					return true;
 					
-				case "false":
+				case 'false':
 					return false;
 			}
 			
@@ -682,7 +682,7 @@ var sh = {
 		 * Understands the following formats:
 		 * - name: word;
 		 * - name: [word, word];
-		 * - name: "string";
+		 * - name: 'string';
 		 * - name: 'string';
 		 * 
 		 * For example:
@@ -695,24 +695,24 @@ var sh = {
 		{
 			var match, 
 				result = {},
-				arrayRegex = new XRegExp("^\\[(?<values>(.*?))\\]$"),
+				arrayRegex = new XRegExp('^\\[(?<values>(.*?))\\]$'),
 				regex = new XRegExp(
-					"(?<name>[\\w-]+)" +
-					"\\s*:\\s*" +
-					"(?<value>" +
-						"[\\w-%#]+|" +		// word
-						"\\[.*?\\]|" +		// [] array
-						'".*?"|' +			// "" string
-						"'.*?'" +			// '' string
-					")\\s*;?",
-					"g"
+					'(?<name>[\\w-]+)' +
+					'\\s*:\\s*' +
+					'(?<value>' +
+						'[\\w-%#]+|' +		// word
+						'\\[.*?\\]|' +		// [] array
+						''.*?'|' +			// '' string
+						''.*?'' +			// '' string
+					')\\s*;?',
+					'g'
 				)
 				;
 
 			while ((match = regex.exec(str)) != null) 
 			{
 				var value = match.value
-					.replace(/^['"]|['"]$/g, '') // strip quotes from end of strings
+					.replace(/^['']|['']$/g, '') // strip quotes from end of strings
 					;
 				
 				// try to parse array value
@@ -753,7 +753,7 @@ var sh = {
 				return spaces + ' ';
 			});
 
-			// Split each line and apply <span class="...">...</span> to them so that
+			// Split each line and apply <span class='...'>...</span> to them so that
 			// leading spaces aren't included.
 			if (css != null) 
 				str = sh.utils.eachLine(str, function(line)
@@ -772,7 +772,7 @@ var sh = {
 					if (line.length == 0) 
 						return spaces;
 					
-					return spaces + '<code class="' + css + '">' + line + '</code>';
+					return spaces + '<code class='' + css + ''>' + line + '</code>';
 				});
 
 			return str;
@@ -808,18 +808,18 @@ var sh = {
 				id = sh.utils.guid('measureSpace'),
 				
 				// variable names will be compressed, so it's better than a plain string
-				divOpen = '<div class="',
+				divOpen = '<div class='',
 				closeDiv = '</div>',
 				closeSpan = '</span>'
 				;
 
 			// we have to duplicate highlighter nested structure in order to get an acurate space measurment
 			container.innerHTML = 
-				divOpen + 'syntaxhighlighter">' 
-					+ divOpen + 'lines">' 
-						+ divOpen + 'line">' 
+				divOpen + 'syntaxhighlighter'>' 
+					+ divOpen + 'lines'>' 
+						+ divOpen + 'line'>' 
 							+ divOpen + 'content'
-								+ '"><span class="block"><span id="' + id + '">&nbsp;' + closeSpan + closeSpan
+								+ ''><span class='block'><span id='' + id + ''>&nbsp;' + closeSpan + closeSpan
 							+ closeDiv 
 						+ closeDiv 
 					+ closeDiv 
@@ -832,7 +832,7 @@ var sh = {
 			if (/opera/i.test(navigator.userAgent))
 			{
 				var style = window.getComputedStyle(span, null);
-				result = parseInt(style.getPropertyValue("width"));
+				result = parseInt(style.getPropertyValue('width'));
 			}
 			else
 			{
@@ -1026,7 +1026,7 @@ var sh = {
 		{
 			return code.replace(sh.regexLib.url, function(m)
 			{
-				return '<a href="' + m + '">' + m + '</a>';
+				return '<a href='' + m + ''>' + m + '</a>';
 			});
 		}
 	}, // end of utils
@@ -1341,11 +1341,11 @@ sh.Highlighter.prototype = {
 				lineClass += ' highlighted';
 				
 			code += 
-				'<div class="' + lineClass + '">'
-					+ '<code class="number">' + lineNumber + '.</code>'
-					+ '<span class="content">'
-						+ (spaces != null ? '<code class="spaces">' + spaces.replace(/\s/g, '&nbsp;') + '</code>' : '')
-						+ '<span class="block" style="margin-left: ' + indent + 'px !important;">' + line + '</span>'
+				'<div class='' + lineClass + ''>'
+					+ '<code class='number'>' + lineNumber + '.</code>'
+					+ '<span class='content'>'
+						+ (spaces != null ? '<code class='spaces'>' + spaces.replace(/\s/g, '&nbsp;') + '</code>' : '')
+						+ '<span class='block' style='margin-left: ' + indent + 'px !important;'>' + line + '</span>'
 					+ '</span>'
 				+ '</div>'
 			;
@@ -1513,10 +1513,10 @@ sh.Highlighter.prototype = {
 			left : { regex: regexGroup.left, css: 'script' },
 			right : { regex: regexGroup.right, css: 'script' },
 			code : new XRegExp(
-				"(?<left>" + regexGroup.left.source + ")" +
-				"(?<code>.*?)" +
-				"(?<right>" + regexGroup.right.source + ")",
-				"sgi"
+				'(?<left>' + regexGroup.left.source + ')' +
+				'(?<code>.*?)' +
+				'(?<right>' + regexGroup.right.source + ')',
+				'sgi'
 				)
 		};
 	}
@@ -1582,7 +1582,7 @@ var real = {
             if (array[i] === item) return i;
         return -1;
     },
-    brokenExecUndef = /()??/.exec("")[1] !== undefined,
+    brokenExecUndef = /()??/.exec('')[1] !== undefined,
     plugins = {};
 
 /**
@@ -1594,13 +1594,13 @@ var real = {
 XRegExp = function (pattern, flags) {
     if (pattern instanceof RegExp) {
         if (flags !== undefined)
-            throw TypeError("can't supply flags when constructing one RegExp from another");
+            throw TypeError('can't supply flags when constructing one RegExp from another');
         return pattern.addFlags(); // new copy
     }
 
-    var flags           = flags || "",
-        singleline      = flags.indexOf("s") > -1,
-        extended        = flags.indexOf("x") > -1,
+    var flags           = flags || '',
+        singleline      = flags.indexOf('s') > -1,
+        extended        = flags.indexOf('x') > -1,
         hasNamedCapture = false,
         captureNames    = [],
         output          = [],
@@ -1615,52 +1615,52 @@ XRegExp = function (pattern, flags) {
         if (match[2]) {
             // keep tokens separated unless the following token is a quantifier
             if (!lib.quantifier.test(pattern.slice(part.lastIndex)))
-                output.push("(?:)");
+                output.push('(?:)');
         // capturing group
         } else if (match[1]) {
             captureNames.push(match[3] || null);
             if (match[3])
                 hasNamedCapture = true;
-            output.push("(");
+            output.push('(');
         // named backreference
         } else if (match[4]) {
             index = indexOf(captureNames, match[4]);
             // keep backreferences separate from subsequent literal numbers
             // preserve backreferences to named groups that are undefined at this point as literal strings
             output.push(index > -1 ?
-                "\\" + (index + 1) + (isNaN(pattern.charAt(part.lastIndex)) ? "" : "(?:)") :
+                '\\' + (index + 1) + (isNaN(pattern.charAt(part.lastIndex)) ? '' : '(?:)') :
                 match[0]
             );
         // unicode element (requires plugin)
         } else if (match[5]) {
             output.push(plugins.unicode ?
-                plugins.unicode.get(match[5], match[0].charAt(1) === "P") :
+                plugins.unicode.get(match[5], match[0].charAt(1) === 'P') :
                 match[0]
             );
-        // character class opening delimiter ("[" or "[^")
+        // character class opening delimiter ('[' or '[^')
         // (non-native unicode elements are not supported within character classes)
         } else if (match[6]) {
-            if (pattern.charAt(part.lastIndex) === "]") {
+            if (pattern.charAt(part.lastIndex) === ']') {
                 // for cross-browser compatibility with ECMA-262 v3 behavior,
                 // convert [] to (?!) and [^] to [\S\s].
-                output.push(match[6] === "[" ? "(?!)" : "[\\S\\s]");
+                output.push(match[6] === '[' ? '(?!)' : '[\\S\\s]');
                 part.lastIndex++;
             } else {
                 // parse the character class with support for inner escapes and
                 // ES4's infinitely nesting intersection syntax ([&&[^&&[]]]).
-                cc = XRegExp.matchRecursive("&&" + pattern.slice(match.index), lib.classLeft, lib.classRight, "", {escapeChar: "\\"})[0];
-                output.push(match[6] + cc + "]");
+                cc = XRegExp.matchRecursive('&&' + pattern.slice(match.index), lib.classLeft, lib.classRight, '', {escapeChar: '\\'})[0];
+                output.push(match[6] + cc + ']');
                 part.lastIndex += cc.length + 1;
             }
-        // dot ("."), pound sign ("#"), or whitespace character
+        // dot ('.'), pound sign ('#'), or whitespace character
         } else if (match[7]) {
-            if (singleline && match[7] === ".") {
-                output.push("[\\S\\s]");
+            if (singleline && match[7] === '.') {
+                output.push('[\\S\\s]');
             } else if (extended && lib.extended.test(match[7])) {
                 len = real.exec.call(lib.extended, pattern.slice(part.lastIndex - 1))[0].length;
                 // keep tokens separated unless the following token is a quantifier
                 if (!lib.quantifier.test(pattern.slice(part.lastIndex - 1 + len)))
-                    output.push("(?:)");
+                    output.push('(?:)');
                 part.lastIndex += len - 1;
             } else {
                 output.push(match[7]);
@@ -1670,7 +1670,7 @@ XRegExp = function (pattern, flags) {
         }
     }
 
-    regex = RegExp(output.join(""), real.replace.call(flags, /[sx]+/g, ""));
+    regex = RegExp(output.join(''), real.replace.call(flags, /[sx]+/g, ''));
     regex._x = {
         source:       pattern,
         captureNames: hasNamedCapture ? captureNames : null
@@ -1706,7 +1706,7 @@ RegExp.prototype.exec = function (str) {
         // undefined for non-participating capturing groups
         if (brokenExecUndef && match.length > 1) {
             // r2 doesn't need /g or /y, but they shouldn't hurt
-            r2 = new RegExp("^" + this.source + "$(?!\\s)", this.getNativeFlags());
+            r2 = new RegExp('^' + this.source + '$(?!\\s)', this.getNativeFlags());
             real.replace.call(match[0], r2, function () {
                 for (i = 1; i < arguments.length - 2; i++) {
                     if (arguments[i] === undefined) match[i] = undefined;
@@ -1734,11 +1734,11 @@ RegExp.prototype.exec = function (str) {
  * @ignore
  */
 RegExp.prototype.getNativeFlags = function () {
-    return (this.global     ? "g" : "") +
-           (this.ignoreCase ? "i" : "") +
-           (this.multiline  ? "m" : "") +
-           (this.extended   ? "x" : "") +
-           (this.sticky     ? "y" : "");
+    return (this.global     ? 'g' : '') +
+           (this.ignoreCase ? 'i' : '') +
+           (this.multiline  ? 'm' : '') +
+           (this.extended   ? 'x' : '') +
+           (this.sticky     ? 'y' : '');
 };
 
 /**
@@ -1748,7 +1748,7 @@ RegExp.prototype.getNativeFlags = function () {
  * @ignore
  */
 RegExp.prototype.addFlags = function (flags) {
-    var regex = new XRegExp(this.source, (flags || "") + this.getNativeFlags());
+    var regex = new XRegExp(this.source, (flags || '') + this.getNativeFlags());
     if (this._x) {
         regex._x = {
             source:       this._x.source,
@@ -1785,7 +1785,7 @@ RegExp.prototype.apply = function (context, args) {
  * @ignore
  */
 XRegExp.cache = function (pattern, flags) {
-    var key = "/" + pattern + "/" + (flags || "");
+    var key = '/' + pattern + '/' + (flags || '');
     return XRegExp.cache[key] || (XRegExp.cache[key] = new XRegExp(pattern, flags));
 };
 
@@ -1797,7 +1797,7 @@ XRegExp.cache = function (pattern, flags) {
  * @ignore
  */
 XRegExp.escape = function (str) {
-    return str.replace(/[-[\]{}()*+?.\\^$|,#\s]/g, "\\$&");
+    return str.replace(/[-[\]{}()*+?.\\^$|,#\s]/g, '\\$&');
 };
 
 /**
@@ -1812,7 +1812,7 @@ XRegExp.escape = function (str) {
  * is thrown.
  * 
  * This function admittedly pushes the boundaries of what can be accomplished
- * sensibly without a "real" parser. however, by doing so it provides flexible
+ * sensibly without a 'real' parser. however, by doing so it provides flexible
  * and powerful recursive parsing capabilities with minimal code weight.
  * 
  * Warning: the ``escapeChar`` option is considered experimental and might be
@@ -1831,16 +1831,16 @@ XRegExp.matchRecursive = function (str, left, right, flags, options) {
     var options      = options || {},
         escapeChar   = options.escapeChar,
         vN           = options.valueNames,
-        flags        = flags || "",
-        global       = flags.indexOf("g") > -1,
-        ignoreCase   = flags.indexOf("i") > -1,
-        multiline    = flags.indexOf("m") > -1,
-        sticky       = flags.indexOf("y") > -1,
+        flags        = flags || '',
+        global       = flags.indexOf('g') > -1,
+        ignoreCase   = flags.indexOf('i') > -1,
+        multiline    = flags.indexOf('m') > -1,
+        sticky       = flags.indexOf('y') > -1,
         /* sticky mode has its own handling in this function, which means you
-           can use flag "y" even in browsers which don't support it natively */
-        flags        = flags.replace(/y/g, ""),
-        left         = left  instanceof RegExp ? (left.global  ? left  : left.addFlags("g"))  : new XRegExp(left,  "g" + flags),
-        right        = right instanceof RegExp ? (right.global ? right : right.addFlags("g")) : new XRegExp(right, "g" + flags),
+           can use flag 'y' even in browsers which don't support it natively */
+        flags        = flags.replace(/y/g, ''),
+        left         = left  instanceof RegExp ? (left.global  ? left  : left.addFlags('g'))  : new XRegExp(left,  'g' + flags),
+        right        = right instanceof RegExp ? (right.global ? right : right.addFlags('g')) : new XRegExp(right, 'g' + flags),
         output       = [],
         openTokens   = 0,
         delimStart   = 0,
@@ -1849,8 +1849,8 @@ XRegExp.matchRecursive = function (str, left, right, flags, options) {
         outerStart, innerStart, leftMatch, rightMatch, escaped, esc;
 
     if (escapeChar) {
-        if (escapeChar.length > 1) throw SyntaxError("can't supply more than one escape character");
-        if (multiline)             throw TypeError("can't supply escape character when using the multiline flag");
+        if (escapeChar.length > 1) throw SyntaxError('can't supply more than one escape character');
+        if (multiline)             throw TypeError('can't supply escape character when using the multiline flag');
         escaped = XRegExp.escape(escapeChar);
         /* Escape pattern modifiers:
             /g - not needed here
@@ -1861,8 +1861,8 @@ XRegExp.matchRecursive = function (str, left, right, flags, options) {
             /y - not needed here; supported by other handling in this function
         */
         esc = new RegExp(
-            "^(?:" + escaped + "[\\S\\s]|(?:(?!" + left.source + "|" + right.source + ")[^" + escaped + "])+)+",
-            ignoreCase ? "i" : ""
+            '^(?:' + escaped + '[\\S\\s]|(?:(?!' + left.source + '|' + right.source + ')[^' + escaped + '])+)+',
+            ignoreCase ? 'i' : ''
         );
     }
 
@@ -1874,7 +1874,7 @@ XRegExp.matchRecursive = function (str, left, right, flags, options) {
             - first time through, reset lastIndex in case delimiters were provided as regexes
         */
         left.lastIndex = right.lastIndex = delimEnd +
-            (escapeChar ? (esc.exec(str.slice(delimEnd)) || [""])[0].length : 0);
+            (escapeChar ? (esc.exec(str.slice(delimEnd)) || [''])[0].length : 0);
 
         leftMatch  = left.exec(str);
         rightMatch = right.exec(str);
@@ -1931,7 +1931,7 @@ XRegExp.matchRecursive = function (str, left, right, flags, options) {
         } else {
             // reset lastIndex in case delimiters were provided as regexes
             left.lastIndex = right.lastIndex = 0;
-            throw Error("subject data contains unbalanced delimiters");
+            throw Error('subject data contains unbalanced delimiters');
         }
 
         // if the delimiter matched an empty string, advance delimEnd to avoid an infinite loop

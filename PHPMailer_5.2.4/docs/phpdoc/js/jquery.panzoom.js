@@ -456,7 +456,7 @@
 		var data = this.data('panZoom');
 		var img = document.createElement('img');
     img.src = this.attr('src');
-    img.id = "jqpz-temp";
+    img.id = 'jqpz-temp';
     $('body').append(img);
     data.target_dimensions.x = $('#jqpz-temp').width();
 		data.target_dimensions.y = $('#jqpz-temp').height();
