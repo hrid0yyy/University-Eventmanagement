@@ -1,11 +1,16 @@
 <?php
+    $date = date('Y-m-d');
     $servername = "localhost";
     $username = "root";
     $password = "";
     $database = "eventadministration";
     
     $conn = mysqli_connect($servername,$username,$password,$database);
-
+    $query="INSERT INTO events_status
+    SELECT 'Previous',EventID
+    FROM request_ JOIN slot on request_.SlotID=slot.SlotID
+    WHERE EventDate < '$date'";
+    $res= mysqli_query($conn, $query);
  ?>
 
 

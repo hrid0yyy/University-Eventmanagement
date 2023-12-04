@@ -1,3 +1,10 @@
+<?php
+$date = date('Y-m-d');
+
+
+?>
+
+
 <!doctype html>
 <html lang="en">
 <head>
