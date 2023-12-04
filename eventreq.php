@@ -27,8 +27,11 @@ if(!isset($_SESSION['username'])){
     {
         $EventID = $_GET['accept'];
         $sql2 = "UPDATE `request_` SET `accept` = '1' WHERE `request_`.`EventID` = '$EventID';";
-         $res2 = mysqli_query($conn,$sql2);
         
+         $res2 = mysqli_query($conn,$sql2);
+         $sql3 = "UPDATE `slot` JOIN `request_` on slot.SlotID=request_.SlotID SET `available` = '0' WHERE `request_`.`EventID` = '$EventID';";
+
+        $res3 = mysqli_query($conn,$sql3);
     }
     ?>
 <!DOCTYPE html>
@@ -225,7 +228,7 @@ if(!isset($_SESSION['username'])){
     if(confirm("Press yes to accept!"))
     {
       console.log("yes");
-      window.location=`/temp/eventreq.php?accept=${EventID}`;
+      window.location=`/university/eventreq.php?accept=${EventID}`;
     }
     else
     {
@@ -248,7 +251,7 @@ if(!isset($_SESSION['username'])){
     if(confirm("Press yes to delete!"))
     {
       console.log("yes");
-      window.location=`/temp/eventreq.php?delete=${EventID}`;
+      window.location=`/university/eventreq.php?delete=${EventID}`;
     }
     else
     {

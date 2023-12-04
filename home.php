@@ -46,14 +46,14 @@
       <nav id="nav-menu-container">
         <ul class="nav-menu">
         <li class="menu-active"><a href="#intro">Home</a></li>
-        <li class="menu-has-`children"><a href="organizerlogin.php">Events</a>
+        <li class="menu-has-`children"><a href="#">Events</a>
             <ul>
               <li><a href="#events">Upcoming Events</a></li>
               <li><a href="prevevents.php">Previous Events</a></li>
             </ul>
           </li>
           <!-- <li><a href="#about">About Us</a></li> -->
-          <li class="menu-has-`children"><a href="organizerlogin.php">Login</a>
+          <li class="menu-has-`children"><a href="#">Login</a>
             <ul>
               <li><a href="adminlogin.php">Admin</a></li>
               <li><a href="organizerlogin.php">Organizer</a></li>
