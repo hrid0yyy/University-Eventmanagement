@@ -1,10 +1,22 @@
+<?php
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $database = "eventadministration";
+    
+    $conn = mysqli_connect($servername,$username,$password,$database);
+
+ ?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 
 
-<title>events card widget - Bootdey.com</title>
+<title>Previous Events</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta content="" name="keywords">
   <meta content="" name="description">
@@ -358,12 +370,18 @@
 
 <br><br> <br>
 <body>
-<div class="container">
+<?php
+ $sql = "SELECT events.EventID as eid,EventName,ShortDescription,EventGuest FROM events join events_status on events.EventID=events_status.EventID where EventStatus='Previous';";
+ $result = mysqli_query($conn, $sql);
+ if(mysqli_num_rows($result) > 0)
+ {
+   while($row = mysqli_fetch_assoc($result)){
+ echo '<div class="container">
 <div class="row">
 <div class="col-lg-4">
 <div class="card card-margin">
 <div class="card-header no-border">
-<h5 class="card-title">MOM</h5>
+<h5 class="card-title">'. $row["EventName"] .'</h5>
 </div>
 <div class="card-body pt-0">
 <div class="widget-49">
@@ -373,22 +391,25 @@
 <span class="widget-49-date-month">apr</span>
 </div>
 <div class="widget-49-meeting-info">
-<span class="widget-49-pro-title">PRO-08235 DeskOpe. Website</span>
-<span class="widget-49-meeting-time">12:00 to 13.30 Hrs</span>
+<span class="widget-49-pro-title">'. $row["EventName"] .'</span>
+<span class="widget-49-meeting-time">'. $row["EventGuest"] .'</span>
 </div>
 </div>
 <ol class="widget-49-meeting-points">
-<li class="widget-49-meeting-item"><span>Expand module is removed</span></li>
-<li class="widget-49-meeting-item"><span>Data migration is in scope</span></li>
-<li class="widget-49-meeting-item"><span>Session timeout increase to 30 minutes</span></li>
+<li class="widget-49-meeting-item"><span>'. $row["ShortDescription"] .'</span></li>
 </ol>
 <div class="widget-49-meeting-action">
-<a href="feedback.php" class="btn btn-sm btn-flash-border-primary">Feedback</a>
+<a href="feedback.php?eid='. $row['eid'] .'" class="btn btn-sm btn-flash-border-primary">Feedback</a>
 </div>
 </div>
 </div>
 </div>
-</div>
+</div>';
+   }
+  }
+
+
+?>
 
 
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>

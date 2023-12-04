@@ -1,11 +1,45 @@
+<?php
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $database = "eventadministration";
+    
+    $conn = mysqli_connect($servername,$username,$password,$database);
+
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 
 
-<title>Get in Touch form - Bootdey.com</title>
+<title>Get your feedback</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta content="" name="keywords">
+  <meta content="" name="description">
+
+  
+  <link href="img/favicon.png" rel="icon">
+  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+
+  
+  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  
+  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="lib/animate/animate.min.css" rel="stylesheet">
+  <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+  <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+  
+  <link href="css/style.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
+<style type="text/css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <style type="text/css">
     	body{margin-top:20px;
@@ -180,53 +214,90 @@ background:#eee;
 <div id="contact" class="contact-area section-padding">
 <div class="container">
 <div class="section-title text-center">
-<h1>Get in Touch</h1>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vitae risus nec dui venenatis dignissim. Aenean vitae metus in augue pretium ultrices.</p>
+<h1>Help the organizers with your opinion</h1>
 </div>
 <div class="row">
 <div class="col-lg-7">
 <div class="contact">
-<form class="form" name="enq" method="post" action="contact.php" onsubmit="return validation();">
+<form class="form" name="enq" method="post" action="#" >
 <div class="row">
 <div class="form-group col-md-6">
 <input type="text" name="name" class="form-control" placeholder="Name" required="required">
 </div>
-<div class="form-group col-md-6">
-<input type="email" name="email" class="form-control" placeholder="Email" required="required">
+<div class="form-group col-md-12">
+<label for="rating">Your Rattings</label>
+  <select name="rating" id="rating">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+  </select>
 </div>
 <div class="form-group col-md-12">
-<input type="text" name="subject" class="form-control" placeholder="Subject" required="required">
-</div>
-<div class="form-group col-md-12">
-<textarea rows="6" name="message" class="form-control" placeholder="Your Message" required="required"></textarea>
+<textarea rows="6" name="comments" class="form-control" placeholder="Your opinion" required="required"></textarea>
 </div>
 <div class="col-md-12 text-center">
-<button type="submit" value="Send message" name="submit" id="submitButton" class="btn btn-contact-bg" title="Submit Your Message!">Send Message</button>
+<button type="submit" value="Send message" name="submit" id="submitButton" class="btn btn-contact-bg" title="Submit!">Send Feedback</button>
 </div>
 </div>
 </form>
 </div>
 </div>
+
+<?php
+if(isset($_POST['submit']))
+{
+    $eid= $_GET['eid'];
+    $rating= $_POST['rating'];
+    $name= $_POST['name'];
+    $comments= $_POST['comments'];
+   $sql = "INSERT INTO `feedback_` (`Rating`, `Comments`, `EventID`, `Fid`, `name`) VALUES ('$rating', '$comments', '$eid', NULL, '$name');";
+   $res = mysqli_query($conn,$sql);
+   if($sql)
+	{
+	
+		echo "<script>alert('Successfull')</script>";
+		echo "<script>location.href='home.php'</script>";
+
+	}
+}
+?>
 <div class="col-lg-5">
 <div class="single_address">
 <i class="fa fa-map-marker"></i>
 <h4>Our Address</h4>
-<p>3481 Melrose Place, Beverly Hills</p>
+<p>United City, Madani Avenue, Badda, Dhaka 1212</p>
 </div>
 <div class="single_address">
 <i class="fa fa-envelope"></i>
 <h4>Send your message</h4>
-<p><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e7ae898188a7829f868a978b82c984888a">[email&#160;protected]</a></p>
+<?php
+  $eid= $_GET['eid'];
+ $sql = "SELECT OrganizerContactNumber,OrganizerEmail FROM organizer join events on events.OrganizerID=organizer.OrganizerID where EventID=$eid";
+ $result = mysqli_query($conn, $sql);
+ if(mysqli_num_rows($result) > 0)
+ {
+    while($row = mysqli_fetch_assoc($result)){ 
+   echo '
+<p><a href="#" class="__cf_email__" data-cfemail="e7ae898188a7829f868a978b82c984888a">'. $row["OrganizerEmail"] .'</a></p>
 </div>
 <div class="single_address">
 <i class="fa fa-phone"></i>
 <h4>Call us on</h4>
-<p>(+1) 517 397 7100</p>
+
+
+    <p>'. $row["OrganizerContactNumber"] .'</p>';
+
+    }
+}
+
+?>
 </div>
 <div class="single_address">
 <i class="fa fa-clock-o"></i>
 <h4>Work Time</h4>
-<p>Mon - Fri: 08.00 - 16.00. <br>Sat: 10.00 - 14.00</p>
+<p>Sat - Wed: 08.00 - 16.00. </p>
 </div>
 </div>
 </div>
