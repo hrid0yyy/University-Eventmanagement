@@ -16,7 +16,7 @@
 <html>
 <head>
 <meta charset='utf-8'>
-  <title>Organizer Home</title>
+  <title>Organizer Panel</title>
   <meta content='width=device-width, initial-scale=1.0' name='viewport'>
   <meta content='' name='keywords'>
   <meta content='' name='description'>
@@ -96,6 +96,34 @@
   /* Add a grey background color to the table header and on hover */
   background-color: black;
 }
+
+
+
+
+
+
+
+#myTable2 {
+  border-collapse: collapse; /* Collapse borders */
+  width: 100%; /* Full-width */
+  border: 1px solid #ddd; /* Add a grey border */
+  font-size: 18px; /* Increase font-size */
+}
+
+#myTable2 th, #myTable2 td {
+  text-align: left; /* Left-align text */
+  padding: 12px; /* Add padding */
+}
+
+#myTable2 tr {
+  /* Add a bottom border to all table rows */
+  border-bottom: 1px solid #ddd;
+}
+
+#myTable2 tr.header, #myTable2 tr:hover {
+  /* Add a grey background color to the table header and on hover */
+  background-color: black;
+}
 		
 		
         .box{border:1px solid lightgrey;padding:20px;border-radius:5px;}
@@ -112,7 +140,7 @@
     <div class='container-fluid'>
 
       <div id='logo' class='pull-left'>
-        <h1><a href='#intro' class='scrollto'>Organizer Home</a></h1>
+        <h1><a href='#intro' class='scrollto'>Organizer Panel</a></h1>
       </div>
 <?php	
   $oid = $_GET["oid"];
@@ -131,8 +159,8 @@
 
   <br><br> <br> <br> <br>
 
-  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search Venue">
-
+  <!-- <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search Venue"> -->
+  <h1 style="text-align: center;">Inquiry</h1>
 <table id="myTable">
   <tr class="header">
   <th style="width:20%;">Event Name</th>
@@ -185,15 +213,58 @@ else{
     set ans = '$ans'
     where qus = '$qus' and EventID = '$id'";
      $r = mysqli_query($conn,$sql);
+     echo"<script>location.href='welcomeorganizer.php?oid=". $oid. "'</script>";
   }
   if(isset($_POST['delete']))
   {
       $ans = $_POST['ans'];
     $sql2 = "DELETE FROM `qa` WHERE `qus` = '$qus' AND `EventID` = '$id'";
      $r2 = mysqli_query($conn,$sql2);
+     echo"<script>location.href='welcomeorganizer.php?oid=". $oid. "'</script>";
   }
 
       ?>
+ 
+</table>
+
+<br> <br> <br> <br> <br> <br>
+<h1 style="text-align: center;">Feedbacks</h1>
+  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search Event Name">
+
+<table id="myTable2">
+  <tr class="header">
+  <th style="width:20%;">Participants Name</th>
+    <th style="width:50%;">Event Name</th>
+    <th style="width:60%;">Comments</th>
+    <th style="width:60%;">Rating</th>
+  </tr>
+<?php
+  $que = "SELECT concat(ParticipantFirstName,' ',ParticipantlastName) as pname,EventName,Comments,Rating
+  FROM feedback_ JOIN participants on feedback_.Pid=participants.ParticipantID
+                 JOIN events on feedback_.EventID=events.EventID
+                 JOIN organizer on organizer.OrganizerID=events.OrganizerID
+  Where organizer.OrganizerID=$oid";
+  $res = mysqli_query($conn,$que);
+  if(mysqli_num_rows($res) > 0)
+ {
+  while($row = mysqli_fetch_assoc($res))
+  {
+  
+    echo "<tr>
+    <th scope='row'>". $row['pname'] . "</th>
+    <td>". $row['EventName'] . "</td>
+    <td>". $row['Comments'] . "</td>
+    <td>". $row['Rating'] . "</td>
+    
+     </tr>";
+
+
+    
+  
+
+  }
+}
+?>
  
 </table>
 
@@ -204,7 +275,7 @@ function myFunction() {
   var input, filter, table, tr, td, i, txtValue;
   input = document.getElementById("myInput");
   filter = input.value.toUpperCase();
-  table = document.getElementById("myTable");
+  table = document.getElementById("myTable2");
   tr = table.getElementsByTagName("tr");
 
   // Loop through all table rows, and hide those who don't match the search query
