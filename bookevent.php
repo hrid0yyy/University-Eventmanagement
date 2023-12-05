@@ -70,14 +70,20 @@
         <h1><a href="#intro" class="scrollto">New Event Registration</a></h1>
       </div>
 		
-      <nav id="nav-menu-container">
-        <ul class="nav-menu">
-          <li><a href="welcomeorganizer.php">Organizer Home</a></li>
-          <li class="menu-active"><a href="addevent.php">Add Event</a></li>
-          <li><a href="viewslot.php">Available slot</a></li>
-		  <li><a href="logout2.php">Logout</a></li>
+      
+      <?php	
+  $oid = $_GET["oid"];
+    echo" <nav id='nav-menu-container'>
+        <ul class='nav-menu'>
+          
+          <li class='menu-active'><a href='welcomeorganizer.php?oid=". $oid . "'>Organizer Home</a></li>   
+          <li class='menu-active'><a href='addevent.php?oid=". $oid . "'>Add Event</a></li>
+          <li><a href='viewslot.php?oid=". $oid . "'>Available slot</a></li>
+		  <li><a href='logout2.php'>Logout</a></li>
         </ul>
-      </nav>
+      </nav>";
+
+      ?>
     </div>
 	</header>	
 	
@@ -113,13 +119,6 @@
                     <input type="text" class="form-control has-success" id="eid" placeholder="Enter Event ID" name="eid" onblur="checkUName()" onkeyup="checkUserName()" required></div> 
                     <div class="col-md-2 text-right"><label for="photo">&nbsp;&nbsp;Photo</label></div>
                     <div class="col-md-3"><input type="file" class="form-control" id="uploadfile" name="uploadfile" style="height:45px" /></div>
-                </div>
-                <br><br>
-                <div class="row">
-                    <div class="col-md-1"><label for="oid">Organizer ID<span>&#42;</span></label></div>
-                    <div class="col-md-5">
-                    <input type="text" class="form-control has-success" id="oid" placeholder="Enter Organizer ID" name="oid" onblur="checkUName()" onkeyup="checkUserName()" required></div> 
-                    
                 </div>
                 <br><br>
                 <div class="row">
@@ -210,7 +209,6 @@
 if(isset($_POST['submit']))
 {
     $eid= $_POST['eid'];
-    $oid= $_POST['oid'];
     $ename= $_POST['ename'];
     $edesc= $_POST['edesc'];
     $sid= $_POST['sid'];
@@ -230,7 +228,7 @@ if(isset($_POST['submit']))
 	{
 	
 		echo "<script>alert('Registration Successfull')</script>";
-		echo "<script>location.href='welcomeorganizer.php'</script>";
+		echo "<script>location.href='welcomeorganizer.php?oid=". $oid . "'</script>";
 
 	}
 	

@@ -351,6 +351,7 @@ $result=mysqli_query($link,"select * from organizer where OrganizerEmail='$usern
  
  if(mysqli_num_rows($result)>0)
  {
+  $row = mysqli_fetch_assoc($result);
    session_start();
    $_SESSION["username"] = $username;
    if(!isset($_SESSION['username']))
@@ -359,7 +360,7 @@ $result=mysqli_query($link,"select * from organizer where OrganizerEmail='$usern
    }
    else
    {
-     echo"<script>location.href='welcomeorganizer.php'</script>";
+     echo"<script>location.href='welcomeorganizer.php?oid=". $row['OrganizerID'] . "'</script>";
    }
  }
 

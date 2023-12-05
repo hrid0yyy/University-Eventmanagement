@@ -5,7 +5,7 @@
     $database = "eventadministration";
     
     $conn = mysqli_connect($servername,$username,$password,$database);
-
+    $eid= $_GET['eid'];
  ?>
 
 <!DOCTYPE html>
@@ -218,6 +218,7 @@ background:#eee;
 </div>
 <div class="row">
 <div class="col-lg-7">
+    
 <div class="contact">
 <form class="form" name="enq" method="post" action="#" >
 <div class="row">
@@ -279,6 +280,7 @@ if(isset($_POST['submit']))
 		echo "<script>location.href='home.php'</script>";
     
      }
+    else{
     
    $sql = "INSERT INTO `feedback_` (`Rating`, `Comments`, `EventID`, `Fid`, `Pid`) VALUES ('$rating', '$comments', '$eid', NULL, '$pid');";
    $res = mysqli_query($conn,$sql);
@@ -289,20 +291,39 @@ if(isset($_POST['submit']))
 		echo "<script>location.href='home.php'</script>";
 
 	}
+}
 
 }
 ?>
+
+
 <div class="col-lg-5">
 <div class="single_address">
-<i class="fa fa-map-marker"></i>
+<i class="fa fa-map-marker" ></i>
+
 <h4>Our Address</h4>
 <p>United City, Madani Avenue, Badda, Dhaka 1212</p>
 </div>
+<?php
+
+    $address = 'UIU united city';
+    $address= str_replace(" ","+",$address);
+    ?>
+    <iframe width="100%" height="500" src="https://maps.google.com/maps?q=<?php
+    echo $address; ?>&output=embed"></iframe>
+    <?php
+    
+    
+
+
+?>
+
 <div class="single_address">
+    <br> 
 <i class="fa fa-envelope"></i>
 <h4>Send your message</h4>
 <?php
-  $eid= $_GET['eid'];
+ 
  $sql = "SELECT OrganizerContactNumber,OrganizerEmail FROM organizer join events on events.OrganizerID=organizer.OrganizerID where EventID=$eid";
  $result = mysqli_query($conn, $sql);
  if(mysqli_num_rows($result) > 0)
@@ -337,5 +358,6 @@ if(isset($_POST['submit']))
 <script type="text/javascript">
 	
 </script>
+
 </body>
 </html>

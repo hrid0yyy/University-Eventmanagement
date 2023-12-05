@@ -106,14 +106,19 @@
         <h1><a href="#intro" class="scrollto">View Available Slots</a></h1>
       </div>
 		
-      <nav id="nav-menu-container">
-        <ul class="nav-menu">
-          <li><a href="welcomeorganizer.php">Organizer Home</a></li>
-          <li class="menu-active"><a href="addevent.php">Add Event</a></li>
-          <li><a href="viewslot.php">Available slot</a></li>
-		  <li><a href="logout2.php">Logout</a></li>
+      <?php	
+  $oid = $_GET["oid"];
+    echo" <nav id='nav-menu-container'>
+        <ul class='nav-menu'>
+          
+          <li class='menu-active'><a href='welcomeorganizer.php?oid=". $oid . "'>Organizer Home</a></li>   
+          <li class='menu-active'><a href='addevent.php?oid=". $oid . "'>Add Event</a></li>
+          <li><a href='viewslot.php?oid=". $oid . "'>Available slot</a></li>
+		  <li><a href='logout2.php'>Logout</a></li>
         </ul>
-      </nav>
+      </nav>";
+
+      ?>
     </div>
 	</header>	
 	
@@ -160,7 +165,7 @@
     <td>". $row['VenueName'] . "</td>
     <td>". $row['VenueLocation'] . "</td>
     <td>". $row['VenueCapacity'] . "</td>
-    <td>  <a href='bookevent.php?id=". $row['SlotID'] . "'>Book</a> </td>
+    <td>  <a href='bookevent.php?id=". $row['SlotID'] . "&oid=".$oid."'>Book</a> </td>
   </tr>";
 
   }
