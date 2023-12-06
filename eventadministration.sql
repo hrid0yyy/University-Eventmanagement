@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2023 at 07:17 PM
+-- Generation Time: Dec 06, 2023 at 12:46 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -73,13 +73,14 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`EventID`, `EventName`, `EventDescription`, `EventGuest`, `EventBudget`, `EventFileBanner`, `EventFileBadge`, `ShortDescription`, `OrganizerID`) VALUES
-(123, 'C clinic', 'here we learn c', 'uiui ,gigi ,kiki', '500000', 'banner.jpeg', 'banner.jpeg', 'c sikhi', NULL),
-(5678, 'uefaa champions', 'sdadas', '', '', '', NULL, NULL, 1),
-(45546, 'web dev', 'sdfgdfgsdf', '', '', '', NULL, NULL, 1),
-(99999, 'marketing', 'kisuna', '', '', '', NULL, NULL, 1),
-(777777, 'gggg', 'bal halay ehane', '', '', '', NULL, NULL, 1),
-(56546456, 'hjkhjkh', 'hjkjhkhjk', '', '', '', NULL, NULL, 1),
-(2147483647, 'ure ure ', 'dsfsdfsdf', '', '', '', NULL, NULL, 1);
+(1, 'learn java', 'Java is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible. It is a general-purpose programming language intended to let programmers write once, run anywhere (WORA),[16] meaning that compiled Java code can run on all platforms that support Java without the need to recompile.[17] Java applications are typically compiled to bytecode that can run on any Java virtual machine (JVM) regardless of the underlying comput', 'kuddus mia, delulu mia', '500000', NULL, NULL, 'here we learn about java', 1),
+(2, 'learn machine learning', 'As a scientific endeavor, machine learning grew out of the quest for artificial intelligence (AI). In the early days of AI as an academic discipline, some researchers were interested in having machines learn from data. They attempted to approach the problem with various symbolic methods, ', 'abul , babul', '78987', NULL, NULL, 'here we learn about machine learning', 1),
+(69, 'you know', 'uiui', '', '', '', NULL, NULL, 1),
+(89, 'bidesh', 'bidesh jabi kemne ta nia koibo', '', '', '', NULL, NULL, 1),
+(123, 'C clinic', 'here we learn c', 'uiui ,gigi ,kiki', '500000', 'banner.jpeg', 'banner.jpeg', 'c sikhi', 1),
+(5987, 'canada visa', 'canaday pathay dimu tore', '', '', '', NULL, NULL, 1),
+(45678, 'canada visa', 'dia dimu oihane', '', '', 'canada.jpg', NULL, NULL, 1),
+(56546456, 'bal ', 'valorant grind', '', '', '', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -103,6 +104,15 @@ CREATE TABLE `events_status` (
   `EventID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `events_status`
+--
+
+INSERT INTO `events_status` (`EventStatus`, `EventID`) VALUES
+('Previous', 1),
+('Previous', 2),
+('Previous', 56546456);
+
 -- --------------------------------------------------------
 
 --
@@ -112,8 +122,16 @@ CREATE TABLE `events_status` (
 CREATE TABLE `event_poll` (
   `EventName` varchar(100) NOT NULL,
   `Description` varchar(500) NOT NULL,
-  `PollID` int(11) NOT NULL
+  `PollID` int(11) NOT NULL,
+  `OrganizerID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `event_poll`
+--
+
+INSERT INTO `event_poll` (`EventName`, `Description`, `PollID`, `OrganizerID`) VALUES
+('web dev', 'web banano sikhabo', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -122,11 +140,21 @@ CREATE TABLE `event_poll` (
 --
 
 CREATE TABLE `feedback_` (
-  `FeedbackID` int(11) NOT NULL,
   `Rating` int(11) NOT NULL,
   `Comments` varchar(500) NOT NULL,
-  `EventID` int(11) NOT NULL
+  `EventID` int(11) NOT NULL,
+  `Fid` int(11) NOT NULL,
+  `Pid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `feedback_`
+--
+
+INSERT INTO `feedback_` (`Rating`, `Comments`, `EventID`, `Fid`, `Pid`) VALUES
+(5, 'gdfgdf', 1, 18, 11221),
+(1, 'gfhfgh', 1, 39, 5656),
+(4, 'fgdfgdf', 2, 40, 5656);
 
 -- --------------------------------------------------------
 
@@ -156,6 +184,28 @@ INSERT INTO `organizer` (`OrganizerID`, `OrganizerName`, `OrganizerEmail`, `Orga
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `outsiderequest`
+--
+
+CREATE TABLE `outsiderequest` (
+  `EventID` int(11) NOT NULL,
+  `accept` int(11) DEFAULT NULL,
+  `OutsideAddress` varchar(100) DEFAULT NULL,
+  `StartTime` time DEFAULT NULL,
+  `EndTime` time DEFAULT NULL,
+  `EventDate` time DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `outsiderequest`
+--
+
+INSERT INTO `outsiderequest` (`EventID`, `accept`, `OutsideAddress`, `StartTime`, `EndTime`, `EventDate`) VALUES
+(45678, 1, 'the westin dhaka', NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `participants`
 --
 
@@ -174,6 +224,7 @@ CREATE TABLE `participants` (
 --
 
 INSERT INTO `participants` (`ParticipantID`, `ParticipantFirstName`, `ParticipantlastName`, `ParticipantEmail`, `ParticipantContactNumber`, `ParticipantRole`, `ParticipantBloodGroup`) VALUES
+(69, 'moga', 'sala', 'redoy.khan898@gmail.com', '545456', 'student', 'o+'),
 (241, 'red', 'ahe', 'hridoyahmedddd@gmail.com', '01911360990', 'student', 'o+'),
 (5656, 'hridoy', 'ahmed', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+'),
 (11221, 'arafat', 'ahmed', 'arafat@mail.com', '01611360991', 'student', 'A+'),
@@ -186,9 +237,19 @@ INSERT INTO `participants` (`ParticipantID`, `ParticipantFirstName`, `Participan
 --
 
 CREATE TABLE `polloption` (
-  `PollID` int(11) DEFAULT NULL,
-  `PollOpt` varchar(100) DEFAULT NULL
+  `PollOpt` varchar(100) NOT NULL,
+  `PollID` int(11) NOT NULL,
+  `count` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `polloption`
+--
+
+INSERT INTO `polloption` (`PollOpt`, `PollID`, `count`) VALUES
+('I dont care', 3, 17),
+('Interested', 3, 7),
+('Not Interested', 3, 7);
 
 -- --------------------------------------------------------
 
@@ -198,8 +259,26 @@ CREATE TABLE `polloption` (
 
 CREATE TABLE `qa` (
   `EventID` int(11) NOT NULL,
-  `ParticipantID` int(11) NOT NULL
+  `qus` varchar(100) NOT NULL,
+  `ans` varchar(100) DEFAULT NULL,
+  `StudentID` int(11) NOT NULL,
+  `StudentEmail` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `qa`
+--
+
+INSERT INTO `qa` (`EventID`, `qus`, `ans`, `StudentID`, `StudentEmail`) VALUES
+(1, 'ayahy bai', 'oyehoye bai', 54456, 'redoy.khan898@gmail.com'),
+(1, 'bhai bhallage na ar', NULL, 4456, 'redoy.khan898@gmail.com'),
+(1, 'bhai kemon asen ki b', 'dasd', 5456, 'redoy.khan898@gmail.com'),
+(1, 'bhai kemon asen ki khaisen ajke ? bhabi kemon ase ki khasise? apnare bade', 'bai', 645654, 'redoy.khan898@gmail.com'),
+(1, 'bhai ki kore ekhane', 'amio janina bai', 123, 'sahmed221068@bscse.uiu.ac.bd'),
+(123, 'bhai ki koren', 'jan', 123, 'redoy.khan898@gmail.com'),
+(1, 'bhai ki koren', 'kisuna bhai', 888, 'sahmed221068@bscse.uiu.ac.bd'),
+(1, 'bhai ki koren', 'kisuna bhai', 12345, 'redoy.khan898@gmail.com'),
+(1, 'sdffsdfsdf', 'bal', 45454, 'sahmed221068@bscse.uiu.ac.bd');
 
 -- --------------------------------------------------------
 
@@ -217,9 +296,13 @@ CREATE TABLE `registration_` (
 --
 
 INSERT INTO `registration_` (`EventID`, `ParticipantID`) VALUES
+(1, 5656),
+(1, 11221),
+(2, 5656),
 (123, 241),
 (123, 5656),
-(123, 11241);
+(123, 11241),
+(45678, 69);
 
 -- --------------------------------------------------------
 
@@ -238,11 +321,10 @@ CREATE TABLE `request_` (
 --
 
 INSERT INTO `request_` (`EventID`, `accept`, `SlotID`) VALUES
+(1, 1, 123),
+(69, 1, 456),
 (123, 1, 123),
-(5678, 1, 123),
-(99999, 1, 123),
-(777777, 1, 789),
-(2147483647, 0, 789);
+(56546456, 1, 89);
 
 -- --------------------------------------------------------
 
@@ -299,8 +381,10 @@ CREATE TABLE `slot` (
 --
 
 INSERT INTO `slot` (`StartTime`, `EndTime`, `SlotID`, `EventDate`, `VenueID`, `available`) VALUES
-('20:23:08', '22:23:08', 123, '2023-12-12', 456, 1),
-('20:23:08', '22:23:08', 789, '2023-12-20', 456, 1);
+('20:23:08', '22:23:08', 89, '2023-12-01', 456, 0),
+('20:23:08', '22:23:08', 123, '2023-12-12', 456, 0),
+('20:23:08', '22:23:08', 456, '2023-12-20', 456, 0),
+('20:23:08', '22:23:08', 654645, '2023-12-20', 456, 1);
 
 -- --------------------------------------------------------
 
@@ -337,7 +421,8 @@ CREATE TABLE `venue_` (
 --
 
 INSERT INTO `venue_` (`VenueID`, `VenueName`, `VenueCapacity`, `VenueFileimg`, `VenueLocation`) VALUES
-(456, 'comp lab 1', 40, NULL, 'third floor 307 room');
+(456, 'comp lab 1', 40, NULL, 'third floor 307 room'),
+(45564, 'gdfgdf', 45, 'gdfgfd.jpg', 'sdfsdf');
 
 -- --------------------------------------------------------
 
@@ -395,20 +480,28 @@ ALTER TABLE `events_status`
 -- Indexes for table `event_poll`
 --
 ALTER TABLE `event_poll`
-  ADD PRIMARY KEY (`PollID`);
+  ADD PRIMARY KEY (`PollID`),
+  ADD KEY `OrganizerID` (`OrganizerID`);
 
 --
 -- Indexes for table `feedback_`
 --
 ALTER TABLE `feedback_`
-  ADD PRIMARY KEY (`FeedbackID`),
-  ADD KEY `EventID` (`EventID`);
+  ADD PRIMARY KEY (`Fid`),
+  ADD KEY `EventID` (`EventID`),
+  ADD KEY `Pid` (`Pid`);
 
 --
 -- Indexes for table `organizer`
 --
 ALTER TABLE `organizer`
   ADD PRIMARY KEY (`OrganizerID`);
+
+--
+-- Indexes for table `outsiderequest`
+--
+ALTER TABLE `outsiderequest`
+  ADD PRIMARY KEY (`EventID`);
 
 --
 -- Indexes for table `participants`
@@ -420,14 +513,14 @@ ALTER TABLE `participants`
 -- Indexes for table `polloption`
 --
 ALTER TABLE `polloption`
-  ADD KEY `PollID` (`PollID`);
+  ADD PRIMARY KEY (`PollID`,`PollOpt`);
 
 --
 -- Indexes for table `qa`
 --
 ALTER TABLE `qa`
-  ADD PRIMARY KEY (`EventID`,`ParticipantID`),
-  ADD KEY `ParticipantID` (`ParticipantID`);
+  ADD PRIMARY KEY (`qus`,`StudentID`),
+  ADD KEY `EventID` (`EventID`);
 
 --
 -- Indexes for table `registration_`
@@ -491,6 +584,22 @@ ALTER TABLE `volunteers_`
   ADD PRIMARY KEY (`VolunteerID`);
 
 --
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `event_poll`
+--
+ALTER TABLE `event_poll`
+  MODIFY `PollID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `feedback_`
+--
+ALTER TABLE `feedback_`
+  MODIFY `Fid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
+--
 -- Constraints for dumped tables
 --
 
@@ -523,7 +632,13 @@ ALTER TABLE `events_status`
 -- Constraints for table `feedback_`
 --
 ALTER TABLE `feedback_`
-  ADD CONSTRAINT `feedback__ibfk_1` FOREIGN KEY (`EventID`) REFERENCES `events` (`EventID`);
+  ADD CONSTRAINT `feedback__ibfk_1` FOREIGN KEY (`Pid`) REFERENCES `participants` (`ParticipantID`);
+
+--
+-- Constraints for table `outsiderequest`
+--
+ALTER TABLE `outsiderequest`
+  ADD CONSTRAINT `outsiderequest_ibfk_1` FOREIGN KEY (`EventID`) REFERENCES `events` (`EventID`);
 
 --
 -- Constraints for table `polloption`
@@ -535,8 +650,7 @@ ALTER TABLE `polloption`
 -- Constraints for table `qa`
 --
 ALTER TABLE `qa`
-  ADD CONSTRAINT `qa_ibfk_1` FOREIGN KEY (`EventID`) REFERENCES `events` (`EventID`),
-  ADD CONSTRAINT `qa_ibfk_2` FOREIGN KEY (`ParticipantID`) REFERENCES `participants` (`ParticipantID`);
+  ADD CONSTRAINT `qa_ibfk_1` FOREIGN KEY (`EventID`) REFERENCES `events` (`EventID`);
 
 --
 -- Constraints for table `registration_`
@@ -544,13 +658,6 @@ ALTER TABLE `qa`
 ALTER TABLE `registration_`
   ADD CONSTRAINT `registration__ibfk_1` FOREIGN KEY (`EventID`) REFERENCES `events` (`EventID`),
   ADD CONSTRAINT `registration__ibfk_2` FOREIGN KEY (`ParticipantID`) REFERENCES `participants` (`ParticipantID`);
-
---
--- Constraints for table `request_`
---
-ALTER TABLE `request_`
-  ADD CONSTRAINT `request__ibfk_1` FOREIGN KEY (`SlotID`) REFERENCES `slot` (`SlotID`),
-  ADD CONSTRAINT `request__ibfk_2` FOREIGN KEY (`EventID`) REFERENCES `events` (`EventID`);
 
 --
 -- Constraints for table `resources_`

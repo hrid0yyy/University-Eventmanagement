@@ -5,9 +5,8 @@
 	}
 ?>
 <?php
-  $conn = mysqli_connect('localhost','root','','eventmanagement') or die($conn);
-
-
+  $conn = mysqli_connect('localhost','root','','eventadministration') or die($conn);
+  
 ?>
 <!doctype html>
 <html>
