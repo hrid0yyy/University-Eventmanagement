@@ -233,17 +233,16 @@ else{
 
 <table id="myTable2">
   <tr class="header">
-  <th style="width:20%;">Participants Name</th>
+  <th style="width:20%;">EventID</th>
     <th style="width:50%;">Event Name</th>
-    <th style="width:60%;">Comments</th>
     <th style="width:60%;">Rating</th>
   </tr>
 <?php
-  $que = "SELECT concat(ParticipantFirstName,' ',ParticipantlastName) as pname,EventName,Comments,Rating
-  FROM feedback_ JOIN participants on feedback_.Pid=participants.ParticipantID
-                 JOIN events on feedback_.EventID=events.EventID
-                 JOIN organizer on organizer.OrganizerID=events.OrganizerID
-  Where organizer.OrganizerID=$oid";
+  $que = "SELECT feedback_.EventID as eid,EventName,avg(Rating) as Rating
+  FROM feedback_  JOIN events on feedback_.EventID=events.EventID
+                  JOIN organizer on organizer.OrganizerID=events.OrganizerID
+  Where organizer.OrganizerID=1
+  GROUP by EventName";
   $res = mysqli_query($conn,$que);
   if(mysqli_num_rows($res) > 0)
  {
@@ -251,9 +250,9 @@ else{
   {
   
     echo "<tr>
-    <th scope='row'>". $row['pname'] . "</th>
+    <th scope='row'>". $row['eid'] . "</th>
     <td>". $row['EventName'] . "</td>
-    <td>". $row['Comments'] . "</td>
+
     <td>". $row['Rating'] . "</td>
     
      </tr>";

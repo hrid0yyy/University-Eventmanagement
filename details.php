@@ -223,6 +223,22 @@ input[type=text], select {
            $edate=$row['EventDate'];
      
         }
+        else
+        {
+          $query = "SELECT events.EventID,EventName,EventDescription,EventFileBanner,EventDate,OutsideAddress FROM events join outsiderequest on events.EventID=outsiderequest.EventID  where events.EventID='$eid'";
+          $result = $conn->query($query);
+          if ($result->num_rows > 0) {
+          $row = mysqli_fetch_assoc($result);
+           
+          $eid=$row['EventID'];
+          $ename=$row['EventName'];
+          $edesc=$row['EventDescription'];
+          $efile=$row['EventFileBanner'];
+          $edate=$row['EventDate'];
+          $eaddress=$row['OutsideAddress'];
+
+        }
+      }
 
 
 
@@ -251,9 +267,25 @@ input[type=text], select {
                  
                   </p>
                   <h3 class="definition">'. $edesc .'</h3>
-                  <br>
-                                
-                  <button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModal">Registration</button>
+                  
+                  <h3 class="definition">Address: '. $eaddress .'</h3>
+                  <i class="fa fa-map-marker" ></i>';  ?>
+                  <?php
+
+$address= str_replace(" ","+",$eaddress);
+?>
+<iframe width="100%" height="300" src="https://maps.google.com/maps?q=<?php
+echo $address; ?>&output=embed"></iframe>
+<?php
+
+
+
+
+?>
+                  
+                  <br> <br>
+                    <?php            
+              echo '<button type="button" class="btn btn-secondary btn-sm" data-toggle="modal" data-target="#exampleModal">Registration</button>
                   <button type="button" class="btn btn-secondary btn-sm" ><a href="Faqs.php?eid='. $eid .'">QNA</a></button>';                
                                  
                   ?> 

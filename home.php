@@ -170,7 +170,16 @@ $date = date('Y-m-d');
     $conn = mysqli_connect($servername,$username,$password,$database);
     //checking if connection is working or not
     //Output Form Entries from the Database
-    $sql = "SELECT events.EventID,EventName,ShortDescription,EventFileBanner,EventDate FROM events join request_ on events.EventID=request_.EventID join slot on request_.SlotID=slot.SlotID where accept=1";
+    $sql = "((SELECT events.EventID,EventName,ShortDescription,EventFileBanner,EventDate 
+    FROM events join request_ on events.EventID=request_.EventID 
+    join slot on request_.SlotID=slot.SlotID 
+    where accept=1)
+     
+     UNION
+    
+    (SELECT events.EventID,EventName,ShortDescription,EventFileBanner,EventDate 
+    FROM events join outsiderequest on events.EventID=outsiderequest.EventID 
+    where accept=1))";
     //fire query
     $result = mysqli_query($conn, $sql);
     if(mysqli_num_rows($result) > 0)
@@ -216,12 +225,14 @@ $date = date('Y-m-d');
 
     else
     {
-        echo "No Upcoming Events";
+        echo "No Upcoming Events inside UIU";
     }
     // closing connection
     mysqli_close($conn);
 
 ?>
+
+
 
 	
 	

@@ -104,12 +104,7 @@
             <div class="form-group">  
                 
                 
-                  <div class="row">
-                        <div class="col-md-3"></div>
-                        <div class="col-md-3"><p id="errfname"></p> </div>
-                        <div class="col-md-2"></div>
-                        <div class="col-md-3"><p id="errlname"></p></div>
-                  </div>
+                  
             </div>
             <div class="form-group">
             <div class="row">
@@ -128,19 +123,11 @@
                     <input type="text" class="form-control has-success" id="ename" placeholder="Enter Event Name" name="ename" onblur="checkUName()" onkeyup="checkUserName()" required></div> 
                     
                 </div>
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-5"><p id="erruname"></p></div>
-                </div>
+                
             </div>
 
             <div class="form-group">
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-5"><p id="errmobile"></p></div>
-                    <div class="col-md-2"></div>
-                    <div class="col-md-3"><p id="errdob"></p></div>
-                </div>
+
                 <div class="row">
                    <div class="col-md-1"><label for="edesc">Description<span>&#42;</span></label></div>
                     <div class="col-md-5"><input type="text" class="form-control" id="edesc" placeholder="Enter Event Description" name="edesc"  required></div> 
@@ -149,17 +136,13 @@
                 </div>
                 <br> <br>
                 <div class="row">
-                   <div class="col-md-1"><label for="sid">Slot ID<span>&#42;</span></label></div>
-                    <div class="col-md-5"><input type="text" class="form-control" id="sid" placeholder="Enter Slot ID" name="sid" ></div> 
-                    <div class="col-md-1"></div>
+                   <div class="col-md-1"><label for="address">Address<span></span></label></div>
+                    <div class="col-md-5"><input type="text" class="form-control" id="address" placeholder="Address (If its outside of uiu)" name="address" ></div> 
+                    
+                    
                     
                 </div>
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-5"><p id="erremail"></p></div>
-                    <div class="col-md-2"></div>
-                    <div class="col-md-2"><p id="errnationality"></p></div>
-                </div>
+               
             </div>
 
              
@@ -215,7 +198,7 @@ if(isset($_POST['submit']))
     $eid= $_POST['eid'];
     $ename= $_POST['ename'];
     $edesc= $_POST['edesc'];
-    $sid= $_POST['sid'];
+    $address= $_POST['address'];
     $filename = $_FILES["uploadfile"]["name"];
 	$tempname = $_FILES["uploadfile"]["tmp_name"];
 	$folder = "./image/" . $filename;
@@ -226,13 +209,13 @@ if(isset($_POST['submit']))
 	
   
     $sql = mysqli_query($conn,"INSERT INTO `events` (`EventID`, `EventName`, `OrganizerID`, `EventDescription`,`EventFileBanner`) VALUES ('$eid', '$ename', '$oid','$edesc','$filename')") or die("Query Failed".mysqli_error($conn));
-    $sql2 = mysqli_query($conn,"INSERT INTO `request_` (`EventID`, `SlotID`) VALUES ('$eid', '$sid')") or die("Query Failed".mysqli_error($conn));
+    $sql2 = mysqli_query($conn,"INSERT INTO `outsiderequest` (`EventID`, `OutsideAddress`) VALUES ('$eid', '$address')") or die("Query Failed".mysqli_error($conn));
 
     if($sql2)
 	{
 	
 		echo "<script>alert('Registration Successfull')</script>";
-		echo "<script>location.href='welcomeorganizer.php'</script>";
+		echo "<script>location.href='welcomeorganizer.php?oid=". $oid . "'</script>";
 
 	}
 	

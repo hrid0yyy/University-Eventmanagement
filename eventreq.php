@@ -20,6 +20,8 @@ if(!isset($_SESSION['username'])){
       
       $res = mysqli_query($conn,$sql);
       
+      
+      
       $delete = true;
     }
     
@@ -33,6 +35,27 @@ if(!isset($_SESSION['username'])){
 
         $res3 = mysqli_query($conn,$sql3);
     }
+
+    if(isset($_GET['odelete']))
+    {$EventID = $_GET['odelete'];
+      $sql = "UPDATE `outsiderequest` SET `accept` = '0' WHERE `outsiderequest`.`EventID` = '$EventID';";
+      
+      $res = mysqli_query($conn,$sql);
+      
+      
+      
+      $delete = true;
+    }
+    
+    if(isset($_GET['oaccept']))
+    {
+        $EventID = $_GET['oaccept'];
+        $sql2 = "UPDATE `outsiderequest` SET `accept` = '1' WHERE `outsiderequest`.`EventID` = '$EventID';";
+        
+         $res2 = mysqli_query($conn,$sql2);
+    }
+
+
     ?>
 <!DOCTYPE html>
 <html>
@@ -175,6 +198,22 @@ if(!isset($_SESSION['username'])){
         </tr>";
          
        }
+       $que = "SELECT events.EventID as eid,EventName,EventDescription,OutsideAddress
+       FROM outsiderequest join events on outsiderequest.EventID=events.EventID where accept is NULL ";
+       $sl = 0;
+       $res = mysqli_query($conn,$que);
+       while($row = mysqli_fetch_assoc($res))
+       {
+        $sl = $sl + 1;
+          echo "<tr>
+          <th scope='row'>". $sl . "</th>
+          <td>". $row['OutsideAddress'] . "</td>
+          <td>". $row['EventName'] . "</td>
+          <td>". $row['EventDescription'] . "</td>
+          <td> <button class='oaccept btn btn-sm btn-primary' id=d".$row['eid'].">Accept</button>  <button class='odelete btn btn-sm btn-primary' id=d".$row['eid'].">Delete</button></td>
+        </tr>";
+         
+       }
         
  ?>
    
@@ -261,6 +300,52 @@ if(!isset($_SESSION['username'])){
       })
 
       })
+
+
+
+      accept= document.getElementsByClassName('oaccept');
+      Array.from(accept).forEach((element)=>{
+      element.addEventListener("click",(e)=>{
+    console.log("edit ", );
+    EventID = e.target.id.substr(1,);
+    console.log(EventID);
+    
+    if(confirm("Press yes to accept!"))
+    {
+      console.log("yes");
+      window.location=`/university/eventreq.php?oaccept=${EventID}`;
+    }
+    else
+    {
+      console.log("No");
+    }
+    
+      })
+
+      })
+
+
+
+         deletes = document.getElementsByClassName('odelete');
+      Array.from(deletes).forEach((element)=>{
+      element.addEventListener("click",(e)=>{
+    console.log("edit ", );
+    EventID = e.target.id.substr(1,);
+    console.log(EventID);
+    
+    if(confirm("Press yes to delete!"))
+    {
+      console.log("yes");
+      window.location=`/university/eventreq.php?odelete=${EventID}`;
+    }
+    else
+    {
+      console.log("No");
+    }
+    
+      })
+
+      }) 
       </script>	
 </body>
 </html>
