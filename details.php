@@ -1,5 +1,5 @@
 <?php
-     $reg = false;
+     $flag = 0;
      ?>
 <!DOCTYPE html>
 <html>
@@ -184,19 +184,7 @@ input[type=text], select {
     </div>
   </div>
 </div> -->
-<?php
- if($reg)
- {
-    echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>
-    <strong>Successfully, </strong>Updated
-    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
-      <span aria-hidden='true'>&times;</span>
-    </button>
-  </div>";
- }
 
-
- ?>
 <body id="back">
 
     <?php
@@ -210,7 +198,8 @@ input[type=text], select {
    
        //checking if connection is working or not
        //Output Form Entries from the Database
-       $query = "SELECT events.EventID,EventName,EventDescription,EventFileBanner,EventDate FROM events join request_ on events.EventID=request_.EventID join slot on slot.SlotID=request_.SlotID where events.EventID= '$eid' ";
+       $query = "SELECT events.EventID,EventName,EventDescription,EventFileBanner,EventDate,VenueName FROM events join request_ on events.EventID=request_.EventID join slot on slot.SlotID=request_.SlotID join venue_ on slot.VenueID=venue_.VenueID
+       where events.EventID= $eid";
        $result = $conn->query($query);
        if ($result->num_rows > 0) {
            
@@ -221,10 +210,12 @@ input[type=text], select {
            $edesc=$row['EventDescription'];
            $efile=$row['EventFileBanner'];
            $edate=$row['EventDate'];
+           $eaddress=$row['VenueName'];
      
         }
         else
         {
+          $flag = 1;
           $query = "SELECT events.EventID,EventName,EventDescription,EventFileBanner,EventDate,OutsideAddress FROM events join outsiderequest on events.EventID=outsiderequest.EventID  where events.EventID='$eid'";
           $result = $conn->query($query);
           if ($result->num_rows > 0) {
@@ -268,17 +259,19 @@ input[type=text], select {
                   </p>
                   <h3 class="definition">'. $edesc .'</h3>
                   
-                  <h3 class="definition">Address: '. $eaddress .'</h3>
-                  <i class="fa fa-map-marker" ></i>';  ?>
+                  <h3 class="definition">Venue: '. $eaddress .'</h3>';
+                   ?>
                   <?php
-
+if($flag==1){
 $address= str_replace(" ","+",$eaddress);
 ?>
+<i class="fa fa-map-marker" ></i>'; 
 <iframe width="100%" height="300" src="https://maps.google.com/maps?q=<?php
+
 echo $address; ?>&output=embed"></iframe>
 <?php
 
-
+}
 
 
 ?>
