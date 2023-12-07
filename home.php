@@ -53,7 +53,7 @@ $date = date('Y-m-d');
       <nav id="nav-menu-container">
         <ul class="nav-menu">
         <li class="menu-active"><a href="#intro">Home</a></li>     
-        <li class="menu-has-`children"><a href="pollvote.php">Polls</a>
+        <li class="menu-has-`children"><a href="viewpoll.php">Polls</a>
         <li class="menu-has-`children"><a href="#">Events</a>
             <ul>
               <li><a href="#events">Upcoming Events</a></li>

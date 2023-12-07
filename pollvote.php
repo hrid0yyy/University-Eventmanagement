@@ -6,6 +6,7 @@
     $database = "eventadministration";
     
     $conn = mysqli_connect($servername,$username,$password,$database);
+	$pid= $_GET['pid'];
 	?>
 
 <!DOCTYPE html>
@@ -33,7 +34,8 @@
 			<?php
       
 	  $sql="SELECT EventName,Sum(count) as total
-	  FROM event_poll join polloption on event_poll.PollID=polloption.PollID GROUP by EventName;";
+	  FROM event_poll join polloption on event_poll.PollID=polloption.PollID 
+      where event_poll.PollID = $pid;";
 	  $result = mysqli_query($conn, $sql);
      
 	  if(mysqli_num_rows($result) > 0)
@@ -59,7 +61,8 @@
 
 					<?php
       
-			$sql="SELECT PollOpt,count FROM event_poll join polloption on event_poll.PollID=polloption.PollID;";
+			$sql="SELECT PollOpt,count FROM event_poll join polloption on event_poll.PollID=polloption.PollID
+			where event_poll.PollID=$pid";
 			$result = mysqli_query($conn, $sql);
 	         $per = array();
              $pollopt = array();
@@ -68,7 +71,12 @@
 			{
 			  while($row = mysqli_fetch_assoc($result)){
 			  $coun =	$row["count"];
+			  if($total!=0){
                $per[$i] = ($coun/$total)*100;
+			  }
+			  else{
+				$per[$i]=0;
+			  }
              $pollopt[$i]= $row["PollOpt"];
              $i += 1;
 
@@ -133,7 +141,7 @@
     $popt= $_POST['popt'];
   $query="SELECT count
   FROM polloption
-  where PollOpt = '$popt' and PollID=3";
+  where PollOpt = '$popt' and PollID=$pid";
   
   $result = mysqli_query($conn, $query);
   if(mysqli_num_rows($result) > 0)
@@ -146,7 +154,7 @@
 $c += 1;
  $sql="Update polloption
 set count='$c'
-where PollOpt = '$popt' and PollID=3";
+where PollOpt = '$popt' and PollID= $pid ";
 $r = mysqli_query($conn, $sql);
 if($sql){
 echo "<script>location.href='home.php'</script>";
