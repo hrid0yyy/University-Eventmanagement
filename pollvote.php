@@ -157,7 +157,7 @@ set count='$c'
 where PollOpt = '$popt' and PollID= $pid ";
 $r = mysqli_query($conn, $sql);
 if($sql){
-echo "<script>location.href='home.php'</script>";
+echo "<script>location.href='viewpoll.php'</script>";
 }
   
 	

@@ -155,7 +155,7 @@ $date = date('Y-m-d');
   <br> <br>
   <div class="content"><!--body content holder-->
             <div class="container">
-                <div class="col-md-12"><!--body content title holder with 12 grid columns-->
+                <div class="col-md-12" style="text-align: center;"><!--body content title holder with 12 grid columns-->
                     <h1>What's On</h1><!--body content title-->
                 </div>
             </div>
@@ -196,7 +196,7 @@ $date = date('Y-m-d');
                <div class="container">
                    <div class="column">
                   
-                       <span class="day"><h3>'. $row["EventDate"] .'</h3></span>
+                       <span class="day"><h3>&nbsp;&nbsp;'. date('j F, y',strtotime($row['EventDate'])) .'</h3></span>
                    </div>
                    <div class="col-md-5"><!--image holder with 5 grid column-->
                    <img src="./image/'. $row["EventFileBanner"] .'" width="350px" height="250px">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2023 at 12:46 PM
+-- Generation Time: Dec 07, 2023 at 01:38 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -131,7 +131,8 @@ CREATE TABLE `event_poll` (
 --
 
 INSERT INTO `event_poll` (`EventName`, `Description`, `PollID`, `OrganizerID`) VALUES
-('web dev', 'web banano sikhabo', 3, 1);
+('web dev', 'web banano sikhabo', 3, 1),
+('gdfg', 'dfgdf', 36, 1);
 
 -- --------------------------------------------------------
 
@@ -247,9 +248,12 @@ CREATE TABLE `polloption` (
 --
 
 INSERT INTO `polloption` (`PollOpt`, `PollID`, `count`) VALUES
-('I dont care', 3, 17),
-('Interested', 3, 7),
-('Not Interested', 3, 7);
+('I dont care', 3, 19),
+('Interested', 3, 10),
+('Not Interested', 3, 7),
+('dfgdf', 36, 1),
+('uy', 36, 0),
+('uyiyu', 36, 0);
 
 -- --------------------------------------------------------
 
@@ -271,13 +275,15 @@ CREATE TABLE `qa` (
 
 INSERT INTO `qa` (`EventID`, `qus`, `ans`, `StudentID`, `StudentEmail`) VALUES
 (1, 'ayahy bai', 'oyehoye bai', 54456, 'redoy.khan898@gmail.com'),
-(1, 'bhai bhallage na ar', NULL, 4456, 'redoy.khan898@gmail.com'),
+(1, 'ballagena bai', NULL, 456456, 'sahmed221068@bscse.uiu.ac.bd'),
+(1, 'bhai bhallage na ar', 'dsfsdf', 4456, 'redoy.khan898@gmail.com'),
 (1, 'bhai kemon asen ki b', 'dasd', 5456, 'redoy.khan898@gmail.com'),
 (1, 'bhai kemon asen ki khaisen ajke ? bhabi kemon ase ki khasise? apnare bade', 'bai', 645654, 'redoy.khan898@gmail.com'),
 (1, 'bhai ki kore ekhane', 'amio janina bai', 123, 'sahmed221068@bscse.uiu.ac.bd'),
 (123, 'bhai ki koren', 'jan', 123, 'redoy.khan898@gmail.com'),
 (1, 'bhai ki koren', 'kisuna bhai', 888, 'sahmed221068@bscse.uiu.ac.bd'),
 (1, 'bhai ki koren', 'kisuna bhai', 12345, 'redoy.khan898@gmail.com'),
+(1, 'mehrin er buke osudh atkaise bai ki korum ehon', 'ayhayhayhay bai ki kon', 546465, 'sahmed221068@bscse.uiu.ac.bd'),
 (1, 'sdffsdfsdf', 'bal', 45454, 'sahmed221068@bscse.uiu.ac.bd');
 
 -- --------------------------------------------------------
@@ -591,7 +597,7 @@ ALTER TABLE `volunteers_`
 -- AUTO_INCREMENT for table `event_poll`
 --
 ALTER TABLE `event_poll`
-  MODIFY `PollID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `PollID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `feedback_`
@@ -627,6 +633,12 @@ ALTER TABLE `events_eventtype`
 --
 ALTER TABLE `events_status`
   ADD CONSTRAINT `events_status_ibfk_1` FOREIGN KEY (`EventID`) REFERENCES `events` (`EventID`);
+
+--
+-- Constraints for table `event_poll`
+--
+ALTER TABLE `event_poll`
+  ADD CONSTRAINT `event_poll_ibfk_1` FOREIGN KEY (`OrganizerID`) REFERENCES `organizer` (`OrganizerID`);
 
 --
 -- Constraints for table `feedback_`

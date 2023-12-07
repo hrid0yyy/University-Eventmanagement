@@ -6,7 +6,7 @@
     $database = "eventadministration";
     
     $conn = mysqli_connect($servername,$username,$password,$database);
-    $query="INSERT INTO events_status
+    $query="INSERT IGNORE INTO events_status
     SELECT 'Previous',EventID
     FROM request_ JOIN slot on request_.SlotID=slot.SlotID
     WHERE EventDate < '$date'";
@@ -30,26 +30,16 @@
   <link href="img/favicon.png" rel="icon">
   <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
-  
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
 
-  
-  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-  
-  <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href="lib/animate/animate.min.css" rel="stylesheet">
-  <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
-  <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-  <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-
-  
-  <link href="css/style.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
 <style type="text/css">
     	body{
         background: url("img/prev.jpg");
     margin-top:20px;
+    overflow: scroll;
+    scroll-snap-type: mandatory;
+    display: flex;
 }
 
 .card-margin {
@@ -363,27 +353,29 @@
 <header id="header">
     <div class="container-fluid">
 
-      <div id="logo" class="pull-left">
-        <h1><a href="#intro" class="scrollto">Event Administration System</a></h1>
-        
-      </div>
-<nav id="nav-menu-container">
-        <ul class="nav-menu">
-        <li class="menu-active"><a href="home.php">Home</a></li>
-       
-      </nav>
+    <nav aria-label="breadcrumb" class="main-breadcrumb">
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="home.php">Home</a></li>
+<li class="breadcrumb-item active" aria-current="page">Previous Events</li>
+</ol>
+</nav>
 
-<br><br> <br>
+
+<br>
 <body>
 <?php
- $sql = "SELECT events.EventID as eid,EventName,ShortDescription,EventGuest FROM events join events_status on events.EventID=events_status.EventID where EventStatus='Previous';";
+ $sql = "SELECT events.EventID as eid,EventName,EventDescription,EventGuest,EventDate,OrganizerName FROM events join events_status on events.EventID=events_status.EventID
+ join organizer on events.OrganizerID=organizer.OrganizerID
+            JOIN request_ on request_.EventID=events.EventID
+            join slot on slot.SlotID=request_.SlotID
+             where EventStatus='Previous';";
  $result = mysqli_query($conn, $sql);
  if(mysqli_num_rows($result) > 0)
  {
    while($row = mysqli_fetch_assoc($result)){
  echo '<div class="container">
 <div class="row">
-<div class="col-lg-4">
+<div class="col-lg-8">
 <div class="card card-margin">
 <div class="card-header no-border">
 <h5 class="card-title">'. $row["EventName"] .'</h5>
@@ -392,17 +384,15 @@
 <div class="widget-49">
 <div class="widget-49-title-wrapper">
 <div class="widget-49-date-primary">
-<span class="widget-49-date-day">09</span>
-<span class="widget-49-date-month">apr</span>
-</div>
+<span class="widget-49-date-month" style="color: navy-blue; font-size: 10px;">'. date('j F',strtotime($row['EventDate'])) .'</span>
+</div> &nbsp;&nbsp;&nbsp;
 <div class="widget-49-meeting-info">
-<span class="widget-49-pro-title">'. $row["EventName"] .'</span>
-<span class="widget-49-meeting-time">'. $row["EventGuest"] .'</span>
+<span class="widget-49-pro-title">'. $row["OrganizerName"] .'</span>
+<span class="widget-49-meeting-time" style="color: navy-blue; ">Guests: '. $row["EventGuest"] .'</span>
 </div>
 </div>
-<ol class="widget-49-meeting-points">
-<li class="widget-49-meeting-item"><span>'. $row["ShortDescription"] .'</span></li>
-</ol>
+<br>
+<span>'. $row["EventDescription"] .'</span>
 <div class="widget-49-meeting-action">
 <a href="feedback.php?eid='. $row['eid'] .'" class="btn btn-sm btn-flash-border-primary">Feedback</a>
 </div>

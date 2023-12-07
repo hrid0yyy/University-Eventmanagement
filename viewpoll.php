@@ -39,8 +39,7 @@
   <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
   <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
 
-  
-  <link href="css/style.css" rel="stylesheet">
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
 <style type="text/css">
     	body{
@@ -360,16 +359,15 @@
     <div class="container-fluid">
 
       <div id="logo" class="pull-left">
-        <h1><a href="#intro" class="scrollto">Event Administration System</a></h1>
-        
-      </div>
-<nav id="nav-menu-container">
-        <ul class="nav-menu">
-        <li class="menu-active"><a href="home.php">Home</a></li>
-       
-      </nav>
+     
+      <nav aria-label="breadcrumb" class="main-breadcrumb">
+<ol class="breadcrumb">
+<li class="breadcrumb-item"><a href="home.php">Home</a></li>
+<li class="breadcrumb-item active" aria-current="page">Polls</li>
+</ol>
+</nav>
 
-<br><br> <br>
+<br>
 <body>
 <?php
  $sql = "SELECT PollID,EventName,OrganizerName,OrganizerContactNumber,Description
@@ -381,7 +379,7 @@
    while($row = mysqli_fetch_assoc($result)){
  echo '<div class="container">
 <div class="row">
-<div class="col-lg-4">
+<div class="col-lg-6">
 <div class="card card-margin">
 <div class="card-header no-border">
 <h5 class="card-title">'. $row["EventName"] .'</h5>
@@ -390,8 +388,8 @@
 <div class="widget-49">
 <div class="widget-49-title-wrapper">
 <div class="widget-49-date-primary">
-<span class="widget-49-date-day">09</span>
-<span class="widget-49-date-month">apr</span>
+<span class="widget-49-date-day">>_<</span>
+<span class="widget-49-date-month"></span>
 </div>
 <div class="widget-49-meeting-info">
 <span class="widget-49-pro-title">'. $row["OrganizerName"] .'</span>
