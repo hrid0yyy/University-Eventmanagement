@@ -1,4 +1,7 @@
+<?php
 
+    include 'functions.php';
+ ?>
 <!DOCTYPE html>
 <html>
 	
@@ -93,9 +96,9 @@
 
     
     <div style="text-align:center">
-    <h3 class="page-header">Request for a event</h3>
+    <h3 class="page-header">Request for a event <span style = "color: red;">(IF ITS OUTSIDE UIU)</span> </h3>
     </div>
-    <br><br>
+    <br>
     
     <div class="container add_employee_form">
     <form action="" method="POST" enctype="multipart/form-data" id="add_emp_form">
@@ -111,16 +114,18 @@
                     <div class="col-md-1"><label for="eid">Event ID<span>&#42;</span></label></div>
                     <div class="col-md-5">
                     <input type="text" class="form-control has-success" id="eid" placeholder="Enter Event ID" name="eid" onblur="checkUName()" onkeyup="checkUserName()" required></div> 
-                    <div class="col-md-2 text-right"><label for="photo">&nbsp;&nbsp;Photo</label></div>
-                    <div class="col-md-3"><input type="file" class="form-control" id="uploadfile" name="uploadfile" style="height:45px" /></div>
+                    <div class="col-md-2 text-left"><label for="photo">&nbsp;&nbsp;Banner</label></div>
+                    <div class="col-md-3" style="margin-left: -112px;"><input type="file" class="form-control" id="uploadfile" name="uploadfile" style="height:45px" /></div>
                 </div>
-                <br><br>
+                <br>
                
     
                 <div class="row">
                     <div class="col-md-1"><label for="ename">Event Name<span>&#42;</span></label></div>
                     <div class="col-md-5">
                     <input type="text" class="form-control has-success" id="ename" placeholder="Enter Event Name" name="ename" onblur="checkUName()" onkeyup="checkUserName()" required></div> 
+                    <div class="col-md-2 text-left" ><label for="uploadBadgefile">&nbsp;&nbsp;Badge</label></div>
+                    <div class="col-md-3"style="margin-left: -112px;" ><input type="file" class="form-control" id="uploadBadgefile" name="uploadBadgefile" style="height:45px" /></div>
                     
                 </div>
                 
@@ -129,15 +134,56 @@
             <div class="form-group">
 
                 <div class="row">
-                   <div class="col-md-1"><label for="edesc">Description<span>&#42;</span></label></div>
-                    <div class="col-md-5"><input type="text" class="form-control" id="edesc" placeholder="Enter Event Description" name="edesc"  required></div> 
+                <div > <label for="edesc">Description<span>&#42;</span></label></div>
+                <div class="col-md-5" style="margin-left: 0px;"><textarea name="edesc" rows="5" cols="50" id="edesc" placeholder="Event Description" required></textarea></div>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                 <div class="col-md-4" style="margin-left: 0px;"><textarea name="esdesc" rows="3" cols="50" id="esdesc" placeholder="Headline(Short Description)" required></textarea></div>  
                     <div class="col-md-1"></div>
                     
                 </div>
-                <br> <br>
+                <br> 
                 <div class="row">
-                   <div class="col-md-1"><label for="address">Address<span></span></label></div>
-                    <div class="col-md-5"><input type="text" class="form-control" id="address" placeholder="Address (If its outside of uiu)" name="address" ></div> 
+                   <div class="col-md-1"><label for="eguest">Event Guests<span>&#42;</span></label></div>
+                   <div class="col-md-5" style="margin-left: 00px;"><textarea name="eguest" rows="2" cols="50" id="eguest" placeholder="guests" required></textarea></div> 
+                   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                 <div class="col-md-4" style="margin-left: 0px;"><textarea name="ebudget" rows="1" cols="50" id="ebudget" placeholder="Budget" required></textarea></div>
+                    
+                </div>
+                <br> 
+                <div > <label for="types">Event Type Per Line<span>&#42;</span></label></div>
+                <div class="col-md-5" style="margin-left: 70px;"><textarea name="types" rows="5" cols="50" id="types" placeholder="Event Types" ></textarea></div> 
+                   <br> 
+                   <div > <label for="sponsers">Sponsers Per Line<span>&#42;</span></label></div>
+                <div class="col-md-5" style="margin-left: 70px;"><textarea name="sponsers" rows="5" cols="50" id="sponsers" placeholder="Event Sponsers" ></textarea></div> 
+                   <br> 
+                <div class="row">
+                   <div class="col-md-1"><label for="address">Address<span>&#42;</span></label></div>
+                    <div class="col-md-5"><input type="text" class="form-control" id="address" placeholder="Address" name="address" required ></div> 
+                    
+                    
+                    
+                </div>
+               
+            </div>
+            <div class="row">
+                   <div class="col-md-1"><label for="edate">Date<span>&#42;</span></label></div>
+                    <div class="col-md-5"><input type="date" class="form-control" id="edate" placeholder="Date" name="edate" required ></div> 
+                    
+                    
+                    
+                </div>
+                <br>
+                <div class="row">
+                   <div class="col-md-1"><label for="estime">Start Time<span>&#42;</span></label></div>
+                    <div class="col-md-5"><input type="time" class="form-control" id="estime" placeholder="Event Start Time" name="estime" required ></div> 
+                    
+                    
+                    
+                </div>
+                <br>
+                <div class="row">
+                   <div class="col-md-1"><label for="edtime">End Time<span>&#42;</span></label></div>
+                    <div class="col-md-5"><input type="time" class="form-control" id="edtime" placeholder="Event End Time" name="edtime" required ></div> 
                     
                     
                     
@@ -152,7 +198,7 @@
         
        
         
-        <br><br>
+        <br>
         
         <div class="form-group">
             <div class="row">
@@ -192,24 +238,58 @@
 
 
 <?php
-
+  $pdo = pdo_connect_mysql();
 if(isset($_POST['submit']))
 {
     $eid= $_POST['eid'];
     $ename= $_POST['ename'];
     $edesc= $_POST['edesc'];
+    $esdesc= $_POST['esdesc'];
     $address= $_POST['address'];
+    $eguest= $_POST['eguest'];
+    $ebudget= $_POST['ebudget'];
+    $edate= $_POST['edate'];
+    $estime= $_POST['estime'];
+    $edtime= $_POST['edtime'];
+
+
     $filename = $_FILES["uploadfile"]["name"];
 	$tempname = $_FILES["uploadfile"]["tmp_name"];
 	$folder = "./image/" . $filename;
+
+
+    $filename2 = $_FILES["uploadBadgefile"]["name"];
+	$tempname2 = $_FILES["uploadBadgefile"]["tmp_name"];
+	$folder2 = "./image/" . $filename;
+
 
     $conn = mysqli_connect("localhost","root","","eventadministration") or die($conn);
 
 	
 	
   
-    $sql = mysqli_query($conn,"INSERT INTO `events` (`EventID`, `EventName`, `OrganizerID`, `EventDescription`,`EventFileBanner`) VALUES ('$eid', '$ename', '$oid','$edesc','$filename')") or die("Query Failed".mysqli_error($conn));
-    $sql2 = mysqli_query($conn,"INSERT INTO `outsiderequest` (`EventID`, `OutsideAddress`) VALUES ('$eid', '$address')") or die("Query Failed".mysqli_error($conn));
+    $sql = mysqli_query($conn,"INSERT INTO `events` (`EventID`, `EventName`, `OrganizerID`, `EventDescription`,`EventFileBanner`,`EventFileBadge`,`EventGuest`,`EventBudget`,`ShortDescription`) VALUES ('$eid', '$ename', '$oid','$edesc','$filename','$filename2','$eguest','$ebudget','$esdesc')") or die("Query Failed".mysqli_error($conn));
+    $sql2 = mysqli_query($conn,"INSERT INTO `outsiderequest` (`EventID`, `OutsideAddress`,`EventDate`,`StartTime`,`EndTime`) VALUES ('$eid', '$address','$edate','$estime','$edtime')") or die("Query Failed".mysqli_error($conn));
+
+
+  
+    $sponsers = isset($_POST['sponsers']) ? explode(PHP_EOL, $_POST['sponsers']) : '';
+    foreach($sponsers as $sponser) {
+        
+        if (empty($sponser)) continue;
+        
+        $stmt = $pdo->prepare('INSERT INTO event_sponsers (EventID, SponsorID) VALUES (?, ?)');
+        $stmt->execute([ $eid, $sponser ]);
+    }
+
+    $types = isset($_POST['types']) ? explode(PHP_EOL, $_POST['types']) : '';
+        foreach($types as $type) {
+            
+            if (empty($type)) continue;
+           
+            $stmt = $pdo->prepare('INSERT INTO events_eventtype (EventID, EventType) VALUES (?, ?)');
+            $stmt->execute([ $eid, $type ]);
+        }
 
     if($sql2)
 	{
@@ -219,8 +299,13 @@ if(isset($_POST['submit']))
 
 	}
 	
-	
+
 }
+
+
+
+
+
 ?>
 
 

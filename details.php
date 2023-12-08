@@ -254,15 +254,18 @@ input[type=text], select {
    
    </div>
    </div> 
-     <div class="row"><!--event content-->
+     <div class="row">
       <section>
+      
           <div class="container">
-              <div class="date col-md-1">
+        
+              <div class="date col-md-2">
              
-                  <span class="day"><h3>'. $edate .'</h3></span>
+                  <span class="day"><h3>'. date('j F, y',strtotime($edate)).'</h3></span>
               </div>
-              <div class="col-md-5"><!--image holder with 5 grid column-->
-              <img src="./image/'.  $efile .'" width="350px" height="250px">
+              
+              <div class="col-md-3"><!--image holder with 5 grid column-->
+              <img src="./image/'.  $efile .'" width="250px" height="150px">
               </div>
               &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
               <div class="subcontent col-md-6">
@@ -321,11 +324,17 @@ if(isset($_POST['submit']))
     $role= $_POST['role'];
 
     $conn = mysqli_connect("localhost","root","","eventadministration") or die($conn);
-    $query="SELECT venue_.VenueCapacity as capacity,count(ParticipantID) as participants
-    FROM registration_ join request_ on registration_.EventID=request_.EventID
-                       join slot on slot.SlotID=request_.SlotID
-                       JOIN venue_ on slot.VenueID=venue_.VenueID
-    WHERE request_.EventID = $eid";
+    $query="SELECT VenueCapacity as capacity,participants
+    FROM (SELECT request_.EventID as eid,VenueCapacity
+    FROM request_ join slot on request_.SlotID=slot.SlotID
+                  JOIN venue_ on slot.VenueID=slot.VenueID
+                  
+     WHERE request_.EventID = $eid) as ctab 
+     JOIN
+       (SELECT events.EventID as eid,COUNT(ParticipantID) as participants
+    FROM events JOIN registration_ on events.EventID=registration_.EventID
+     WHERE events.EventID = $eid) as ptab
+     on ctab.eid=ptab.eid";
 	 $result = $conn->query($query);
    if ($result->num_rows > 0) {
        

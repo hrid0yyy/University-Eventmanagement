@@ -174,13 +174,13 @@ $date = date('Y-m-d');
     $sql = "((SELECT events.EventID,EventName,ShortDescription,EventFileBanner,EventDate 
     FROM events join request_ on events.EventID=request_.EventID 
     join slot on request_.SlotID=slot.SlotID 
-    where accept=1)
+    where accept=1 and EventDate>CURDATE())
      
      UNION
     
     (SELECT events.EventID,EventName,ShortDescription,EventFileBanner,EventDate 
     FROM events join outsiderequest on events.EventID=outsiderequest.EventID 
-    where accept=1))";
+    where accept=1 and EventDate>CURDATE()))";
     //fire query
     $result = mysqli_query($conn, $sql);
     if(mysqli_num_rows($result) > 0)

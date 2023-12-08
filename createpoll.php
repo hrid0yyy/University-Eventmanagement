@@ -94,7 +94,7 @@
 <?=template_footer()?>
   <?php
 $pdo = pdo_connect_mysql();
-echo $oid;
+
 if (isset($_POST['submit'])) {
     // Post data not empty insert a new record
     // Check if POST variable "title" exists, if not default the value to blank, basically the same for all variables
