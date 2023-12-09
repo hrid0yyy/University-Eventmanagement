@@ -78,7 +78,14 @@ if ($result->num_rows > 0) {
      <link rel="stylesheet" href="css/bootstrap.min.css">
      <link rel="stylesheet" href="css/font-awesome.min.css">
      <link rel="stylesheet" href="css/aos.css">
+<style>
+  .center {
+  display: block;
+  margin-left: 170px;
 
+ 
+}
+</style>
      <!-- MAIN CSS -->
      <link rel="stylesheet" href="css/tooplate-gymso-style.css">
 <!--
@@ -103,7 +110,9 @@ https://www.tooplate.com/view/2119-gymso-fitness
 
                          <div class="col-lg-8 col-md-10 mx-auto col-12">
                               <div class="hero-text mt-5 text-center">
-
+                              <div class="col-md-5"><!--image holder with 5 grid column-->
+                              <img src="./image/'. $efile .'" width="350px" height="250px" class="center">
+                              </div>
                                     <h6 data-aos="fade-up" data-aos-delay="300">Organized By '. $oname .'</h6>
 
                                     <h1 class="text-white" data-aos="fade-up" data-aos-delay="500">'. $ename .'</h1>
@@ -240,7 +249,7 @@ https://www.tooplate.com/view/2119-gymso-fitness
                             <textarea class="form-control" rows="5" name="qus" placeholder="Your Question"></textarea>
 
                             <button type="submit" class="form-control" id="submit-button" name="qsubmit">Send</button>
-                            <a href="#"  data-aos="fade-up" data-aos-delay="300" >Other Questions </a>
+                            <a href="Faqs.php?eid=<?php echo $eid; ?>"  data-aos="fade-up" data-aos-delay="300" >Other Questions </a>
 
                         </form>
                     </div>
