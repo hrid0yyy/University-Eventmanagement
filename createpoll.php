@@ -82,7 +82,7 @@
         <label for="description">Description</label>
         <input type="text" name="description" id="description" placeholder="Description">
         <label for="answers">Poll Option Per Line (per line)</label>
-        <textarea name="answers" id="answers" placeholder="Description" required></textarea>
+        <textarea name="answers" id="answers" placeholder="give 3 options" required></textarea>
         <input type="submit" value="Create" name="submit">
     </form>
 

@@ -83,10 +83,23 @@
             }
         }
                 ?>	
-                
-						<div class="poll-progress-percent">
+                <!-- <?php
+				for ($x = 0; $x < $i; $x++){
+						echo'<div class="poll-progress-percent">
 							<label>
-								<input type="radio" name="popt" value="<?php echo $pollopt[0] ?>" class="exp-option-box">
+								<input type="radio" name="popt" value="'; ?> <?php echo $pollopt[$x] ?> <?php echo'" class="exp-option-box">
+								<span class="checkmark-border position-relative"></span>
+								<span class="exp-label">'; ?> <?php echo $pollopt[$x] ?> <?php echo'</span>
+							</label>
+							<div class="progress">
+								<div class="progress-bar" data-percent="'; ?><?php echo $per[$x] ?>  <?php echo'"></div>
+							</div>
+						</div>';
+				}
+                     ?> -->
+ <div class="poll-progress-percent">
+							<label>
+								<input type="radio" name="popt" value="<?php echo $pollopt[0] ?>"  class="exp-option-box">
 								<span class="checkmark-border position-relative"></span>
 								<span class="exp-label"><?php echo $pollopt[0] ?></span>
 							</label>

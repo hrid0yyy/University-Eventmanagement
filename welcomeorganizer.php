@@ -1,9 +1,4 @@
-<?php
-	session_start();
-	if(!isset($_SESSION['username'])){
-		header('location:welcomeorganizer.php');
-	}
-?>
+
 <?php
     $servername = 'localhost';
     $username = 'root';
@@ -27,6 +22,7 @@
 
   
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700' rel='stylesheet'>
+  <link href="https://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet">
 
   
   <link href='lib/bootstrap/css/bootstrap.min.css' rel='stylesheet'>
@@ -131,7 +127,14 @@
     </style>
 	
 </head>
+<style>
+.center {
+  margin: auto;
+  width: 80%;
 
+  padding: 10px;
+}
+</style>
 
 	
 <body background='img/black.jpg' style='background-size: cover; background-repeat: no-repeat;'>
@@ -159,6 +162,115 @@
 	</header>	
 
   <br><br> <br> <br> <br>
+  <div class="center">
+  <div class="row">
+
+<div class="col-lg-3">
+<div class="panel panel-warning">
+<div class="panel-heading">
+<div class="row">
+<div class="col-xs-6">
+<i class="fa fa-check fa-5x"></i>
+</div>
+<div class="col-xs-6 text-right">
+<?php
+ $query = "SELECT COUNT(*) as accepted
+ FROM request_ JOIN events on request_.EventID=events.EventID
+               JOIN organizer on organizer.OrganizerID=events.OrganizerID
+ WHERE accept=1 and organizer.OrganizerID= $oid";
+ $result = $conn->query($query);
+ if ($result->num_rows > 0) {
+     
+     $row = mysqli_fetch_assoc($result);
+     
+     $accepted=$row['accepted'];
+     
+ 
+  }
+
+
+?>
+<p class="announcement-heading"><?php echo $accepted; ?></p>
+<p class="announcement-text">Accepted Events</p>
+</div>
+</div>
+</div>
+
+</a>
+</div>
+</div>
+<div class="col-lg-3">
+<div class="panel panel-danger">
+<div class="panel-heading">
+<div class="row">
+<div class="col-xs-6">
+<i class="fa fa-tasks fa-5x"></i>
+</div>
+<div class="col-xs-6 text-right"><?php
+ $query = "SELECT COUNT(*) as pending
+ FROM request_ JOIN events on request_.EventID=events.EventID
+               JOIN organizer on organizer.OrganizerID=events.OrganizerID
+ WHERE accept is NULL and organizer.OrganizerID= $oid";
+ $result = $conn->query($query);
+ if ($result->num_rows > 0) {
+     
+     $row = mysqli_fetch_assoc($result);
+     
+     $pending=$row['pending'];
+     
+ 
+  }
+
+
+?>
+<p class="announcement-heading"><?php echo $pending; ?></p>
+<p class="announcement-text">Pending Request</p>
+</div>
+</div>
+</div>
+
+
+</a>
+</div>
+</div>
+<div class="col-lg-3">
+<div class="panel panel-success">
+<div class="panel-heading">
+<div class="row">
+<div class="col-xs-6">
+<i class="fa fa-comments fa-5x"></i>
+</div>
+<div class="col-xs-6 text-right">
+<?php
+ $query = "SELECT COUNT(*) as remain
+ FROM qa JOIN events on qa.EventID=events.EventID
+               JOIN organizer on organizer.OrganizerID=events.OrganizerID
+ WHERE ans is null and organizer.OrganizerID= $oid";
+ $result = $conn->query($query);
+ if ($result->num_rows > 0) {
+     
+     $row = mysqli_fetch_assoc($result);
+     
+     $remain=$row['remain'];
+     
+ 
+  }
+
+
+?>
+<p class="announcement-heading"><?php echo $remain; ?></p>
+<p class="announcement-text">Unanswered Question</p>
+</div>
+</div>
+</div>
+
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<br> <br> 
 
   <!-- <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search Venue"> -->
   <h1 style="text-align: center;">Inquiry</h1>

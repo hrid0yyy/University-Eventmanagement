@@ -171,10 +171,10 @@ if(!isset($_SESSION['username'])){
   <table class="table" id="myTable">
   <thead>
     <tr>
-      <th scope="col">SL</th>
       <th scope="col">Slot</th>
       <th scope="col">Event Name</th>
-      <th scope="col">Description</th>
+      <th scope="col">Organizer Name</th>
+      <th scope="col">Performance</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -182,34 +182,51 @@ if(!isset($_SESSION['username'])){
     
   <?php
        
-       $que = "SELECT events.EventID as eid,EventName,EventDescription,SlotID
-       FROM request_ join events on request_.EventID=events.EventID where accept is NULL ";
+       $que = "SELECT SlotID,OrganizerName,EventName,rat,eid
+       FROM 
+       (SELECT organizer.OrganizerID as oid,OrganizerName,events.EventID as  eid,EventName,EventDescription,SlotID
+              FROM request_ join events on request_.EventID=events.EventID 
+                            JOIN organizer on events.OrganizerID=organizer.OrganizerID           
+              where accept is NULL) as tab1
+              JOIN
+       (SELECT organizer.OrganizerID as oid, avg(Rating) as rat
+       FROM feedback_ JOIN events on feedback_.EventID=events.EventID
+                       JOIN organizer on organizer.OrganizerID=events.OrganizerID) as tab2
+               ON tab1.oid=tab2.oid";
        $sl = 0;
        $res = mysqli_query($conn,$que);
        while($row = mysqli_fetch_assoc($res))
        {
         $sl = $sl + 1;
           echo "<tr>
-          <th scope='row'>". $sl . "</th>
-          <td>". $row['SlotID'] . "</td>
+          <th scope='row'>". $row['SlotID']. "</th>
           <td>". $row['EventName'] . "</td>
-          <td>". $row['EventDescription'] . "</td>
+          <td>". $row['OrganizerName'] . "</td>
+          <td>". $row['rat'] . "</td>
           <td> <button class='accept btn btn-sm btn-primary' id=d".$row['eid'].">Accept</button>  <button class='delete btn btn-sm btn-primary' id=d".$row['eid'].">Delete</button></td>
         </tr>";
          
        }
-       $que = "SELECT events.EventID as eid,EventName,EventDescription,OutsideAddress
-       FROM outsiderequest join events on outsiderequest.EventID=events.EventID where accept is NULL ";
-       $sl = 0;
+       $que = "SELECT OutsideAddress,OrganizerName,EventName,rat,eid
+       FROM 
+       (SELECT organizer.OrganizerID as oid,OrganizerName,events.EventID as  eid,EventName,OutsideAddress
+              FROM outsiderequest join events on outsiderequest.EventID=events.EventID 
+                            JOIN organizer on events.OrganizerID=organizer.OrganizerID           
+              where accept is NULL) as tab1
+              JOIN
+       (SELECT organizer.OrganizerID as oid, avg(Rating) as rat
+       FROM feedback_ JOIN events on feedback_.EventID=events.EventID
+                       JOIN organizer on organizer.OrganizerID=events.OrganizerID) as tab2
+               ON tab1.oid=tab2.oid";
        $res = mysqli_query($conn,$que);
        while($row = mysqli_fetch_assoc($res))
        {
         $sl = $sl + 1;
           echo "<tr>
-          <th scope='row'>". $sl . "</th>
-          <td>". $row['OutsideAddress'] . "</td>
+          <th scope='row'>". $row['OutsideAddress']. "</th>
           <td>". $row['EventName'] . "</td>
-          <td>". $row['EventDescription'] . "</td>
+          <td>". $row['OrganizerName'] . "</td>
+          <td>". $row['rat'] . "</td>
           <td> <button class='oaccept btn btn-sm btn-primary' id=d".$row['eid'].">Accept</button>  <button class='odelete btn btn-sm btn-primary' id=d".$row['eid'].">Delete</button></td>
         </tr>";
          
