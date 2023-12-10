@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2023 at 08:33 PM
+-- Generation Time: Dec 10, 2023 at 05:35 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -274,30 +274,35 @@ CREATE TABLE `participants` (
   `ParticipantEmail` varchar(50) NOT NULL,
   `ParticipantContactNumber` varchar(20) NOT NULL,
   `ParticipantRole` varchar(30) NOT NULL,
-  `ParticipantBloodGroup` varchar(10) DEFAULT NULL
+  `ParticipantBloodGroup` varchar(10) DEFAULT NULL,
+  `pass` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `participants`
 --
 
-INSERT INTO `participants` (`ParticipantID`, `ParticipantFirstName`, `ParticipantlastName`, `ParticipantEmail`, `ParticipantContactNumber`, `ParticipantRole`, `ParticipantBloodGroup`) VALUES
-(0, 'ara', 'sala', 'redoy.khan898@gmail.com', 'sdfsd', 'student', 'o+'),
-(2, 'moga', 'ahmed', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+'),
-(4, 'hridowererwy', 'werwerwe', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+'),
-(69, 'moga', 'sala', 'redoy.khan898@gmail.com', '545456', 'student', 'o+'),
-(241, 'red', 'ahe', 'hridoyahmedddd@gmail.com', '01911360990', 'student', 'o+'),
-(879, 'hridoy', 'ahmed', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+'),
-(4556, 'hridoy', 'fsdf', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+'),
-(4578, 'gfdg', 'dfgdf', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+'),
-(4897, 'red', 'ahmed', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+'),
-(5656, 'hridoy', 'ahmed', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+'),
-(11221, 'arafat', 'ahmed', 'arafat@mail.com', '01611360991', 'student', 'A+'),
-(11241, 'red', 'ahe', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+'),
-(456456, 'fghfgh', 'fghfg', 'redoy.khan898@gmail.com', '01911360990', 'student', 'fghfg'),
-(546456, 'ara', 'ara', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+'),
-(4587978, 'hridoy', 'ahmed', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+'),
-(2147483647, 'hridoy', 'ahmed', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+');
+INSERT INTO `participants` (`ParticipantID`, `ParticipantFirstName`, `ParticipantlastName`, `ParticipantEmail`, `ParticipantContactNumber`, `ParticipantRole`, `ParticipantBloodGroup`, `pass`) VALUES
+(0, 'ara', 'sala', 'redoy.khan898@gmail.com', 'sdfsd', 'student', 'o+', '1234'),
+(2, 'moga', 'ahmed', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+', '1234'),
+(4, 'hridowererwy', 'werwerwe', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+', '1234'),
+(69, 'moga', 'sala', 'redoy.khan898@gmail.com', '545456', 'student', 'o+', '1234'),
+(111, 'messi', 'jr', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+', '1234'),
+(222, 'ronaldo', 'ara', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+', '1234'),
+(241, 'red', 'ahe', 'hridoyahmedddd@gmail.com', '01911360990', 'student', 'o+', '1234'),
+(321, 'rifat', 'ahmed', 'hridoyahmedddd@gmail.com', '01911360990', 'student', 'A+', '1234'),
+(444, 'neymar', 'jr', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+', '1234'),
+(879, 'hridoy', 'ahmed', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+', '1234'),
+(4556, 'hridoy', 'fsdf', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+', '1234'),
+(4578, 'gfdg', 'dfgdf', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+', '1234'),
+(4897, 'red', 'ahmed', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+', '1234'),
+(5656, 'hridoy', 'ahmed', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+', '1234'),
+(11221, 'arafat', 'ahmed', 'arafat@mail.com', '01611360991', 'student', 'A+', '1234'),
+(11241, 'red', 'ahe', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+', '1234'),
+(456456, 'fghfgh', 'fghfg', 'redoy.khan898@gmail.com', '01911360990', 'student', 'fghfg', '1234'),
+(546456, 'ara', 'ara', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+', '1234'),
+(4587978, 'hridoy', 'ahmed', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+', '1234'),
+(2147483647, 'hridoy', 'ahmed', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+', '1234');
 
 -- --------------------------------------------------------
 
@@ -323,9 +328,32 @@ INSERT INTO `polloption` (`PollOpt`, `PollID`, `count`) VALUES
 ('avoidrafa', 37, 2),
 ('warfaze', 37, 1),
 ('c', 38, 4),
-('c++', 38, 1),
-('java', 38, 1),
-('python', 38, 1);
+('c++', 38, 2),
+('java', 38, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pollvote`
+--
+
+CREATE TABLE `pollvote` (
+  `PollID` int(11) NOT NULL,
+  `ParticipantID` int(11) NOT NULL,
+  `PollOpt` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pollvote`
+--
+
+INSERT INTO `pollvote` (`PollID`, `ParticipantID`, `PollOpt`) VALUES
+(38, 2, 'c'),
+(3, 241, 'c'),
+(38, 0, 'c++'),
+(38, 444, ''),
+(38, 241, 'java'),
+(38, 69, 'java');
 
 -- --------------------------------------------------------
 
@@ -356,6 +384,7 @@ INSERT INTO `qa` (`EventID`, `qus`, `ans`, `StudentID`, `StudentEmail`) VALUES
 (123, 'bhai ki koren', 'jan', 123, 'redoy.khan898@gmail.com'),
 (1, 'bhai ki koren', 'kisuna bhai', 888, 'sahmed221068@bscse.uiu.ac.bd'),
 (1, 'bhai ki koren', 'kisuna bhai', 12345, 'redoy.khan898@gmail.com'),
+(7, 'kire', 'kire', 123, 'redoy.khan898@gmail.com'),
 (1, 'mehrin er buke osudh atkaise bai ki korum ehon', 'ayhayhayhay bai ki kon', 546465, 'sahmed221068@bscse.uiu.ac.bd'),
 (1, 'sdffsdfsdf', 'bal', 45454, 'sahmed221068@bscse.uiu.ac.bd');
 
@@ -376,6 +405,11 @@ CREATE TABLE `registration_` (
 
 INSERT INTO `registration_` (`EventID`, `ParticipantID`) VALUES
 (7, 0),
+(7, 111),
+(7, 222),
+(7, 241),
+(7, 321),
+(7, 444),
 (7, 456456),
 (69, 456456),
 (123, 2),
@@ -628,6 +662,13 @@ ALTER TABLE `polloption`
   ADD PRIMARY KEY (`PollID`,`PollOpt`);
 
 --
+-- Indexes for table `pollvote`
+--
+ALTER TABLE `pollvote`
+  ADD KEY `PollID` (`PollID`),
+  ADD KEY `ParticipantID` (`ParticipantID`);
+
+--
 -- Indexes for table `qa`
 --
 ALTER TABLE `qa`
@@ -769,6 +810,13 @@ ALTER TABLE `outsiderequest`
 --
 ALTER TABLE `polloption`
   ADD CONSTRAINT `polloption_ibfk_1` FOREIGN KEY (`PollID`) REFERENCES `event_poll` (`PollID`);
+
+--
+-- Constraints for table `pollvote`
+--
+ALTER TABLE `pollvote`
+  ADD CONSTRAINT `pollvote_ibfk_1` FOREIGN KEY (`PollID`) REFERENCES `event_poll` (`PollID`),
+  ADD CONSTRAINT `pollvote_ibfk_2` FOREIGN KEY (`ParticipantID`) REFERENCES `participants` (`ParticipantID`);
 
 --
 -- Constraints for table `qa`

@@ -24,7 +24,7 @@
 	<link rel="stylesheet" href="assets/css/animate.min.css">
 	<link rel="stylesheet" href="assets/css/fontawesome-all.css">
 	<link rel="stylesheet" href="assets/css/style.css">
-
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 	<body>
 		<div class="wrapper">
 			<div class="poll-top-head text-center">
@@ -127,7 +127,12 @@
 								<div class="progress-bar" data-percent="<?php echo $per[2] ?>"></div>
 							</div>
 						</div>
-		
+		            <div><label class="w3-input" for="ptid">Enter Your Participant ID</label>
+						<input class="w3-input" type="text" name="ptid" id="ptid">
+						<label class="w3-input" for="ptpass">Enter Your Password</label>
+						<input class="w3-input" type="text" name="ptpass" id="ptpass">
+					</div>
+					<br>
 						<button type="submit" name="submit" class="btn btn-primary">Submit vote</button>
 					</form>
 
@@ -151,6 +156,8 @@
     <?php
  if(isset($_POST['submit']))
 {
+	$ptid = $_POST['ptid'];
+	$ptpass = $_POST['ptpass'];
     $popt= $_POST['popt'];
   $query="SELECT count
   FROM polloption
@@ -162,16 +169,59 @@
     while($row = mysqli_fetch_assoc($result)){
             $c = $row["count"];
     }
-} 
-
-$c += 1;
- $sql="Update polloption
-set count='$c'
-where PollOpt = '$popt' and PollID= $pid ";
-$r = mysqli_query($conn, $sql);
-if($sql){
-echo "<script>location.href='viewpoll.php'</script>";
 }
+
+
+
+$query="SELECT *
+FROM participants
+WHERE ParticipantID=$ptid and pass = $ptpass";
+  
+  $result = mysqli_query($conn, $query);
+  if(mysqli_num_rows($result) > 0)
+ {
+	$query="SELECT *
+FROM pollvote
+WHERE ParticipantID = $ptid and PollID =$pid";
+  
+  $result = mysqli_query($conn, $query);
+  if(mysqli_num_rows($result) > 0)
+ {
+	echo "<script>alert('You already gave your vote')</script>";
+    echo "<script>location.href='viewpoll.php'</script>";
+ }
+ else
+ {
+	$sql="INSERT INTO `pollvote` (`PollID`, `ParticipantID`, `PollOpt`) VALUES ('$pid', '$ptid', '$popt');";
+	$r = mysqli_query($conn, $sql);
+
+	$c += 1;
+	$sql="Update polloption
+   set count='$c'
+   where PollOpt = '$popt' and PollID= $pid ";
+   $r = mysqli_query($conn, $sql);
+   if($sql){
+	echo "<script>alert('Thanks for your vote')</script>";
+   echo "<script>location.href='viewpoll.php'</script>";
+   }
+
+ }
+ }
+ else{
+	echo "<script>alert('Wrong credential!')</script>";
+ }
+
+
+
+
+
+
+
+
+
+    
+    
+
   
 	
     }	

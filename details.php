@@ -324,7 +324,8 @@ echo $address; ?>&output=embed"></iframe>
 
           <div class="modal-body">
             <form action="#" method="post">
-            <input type="text" class="form-control"  name="id" id="id" placeholder="Enter ID" >
+            <input type="text" class="form-control"  name="id" id="id" placeholder="Enter ID"  required>
+            <input type="text" class="form-control"  name="pass" id="pass" placeholder="Enter Pass"  required>
             <input class="form-control" type="text" name="fname" id="fname" placeholder="Enter your first name" required >
 			  
         <input class="form-control" type="text" name="lname" id="lname" placeholder="Enter your last name" required >
@@ -425,6 +426,7 @@ if(isset($_POST['submit']))
     $number= $_POST['number'];
     $email= $_POST['email'];
     $role= $_POST['role'];
+    $pass= $_POST['pass'];
 
     $conn = mysqli_connect("localhost","root","","eventadministration") or die($conn);
     $query="SELECT VenueCapacity as capacity,participants
@@ -446,7 +448,7 @@ if(isset($_POST['submit']))
       $participants = $row['participants'];
    }
      if($limit>$participants){
-    $sql = "INSERT INTO `participants` (`ParticipantID`, `ParticipantFirstName`, `ParticipantlastName`, `ParticipantEmail`, `ParticipantContactNumber`,`ParticipantBloodGroup`,`ParticipantRole`) VALUES ('$id', '$fname', '$lname', '$email','$number','$bg','$role'); ";
+    $sql = "INSERT INTO `participants` (`ParticipantID`, `ParticipantFirstName`, `ParticipantlastName`, `ParticipantEmail`, `ParticipantContactNumber`,`ParticipantBloodGroup`,`ParticipantRole`,`pass`) VALUES ('$id', '$fname', '$lname', '$email','$number','$bg','$role','$pass'); ";
         
     $res = mysqli_query($conn,$sql);
     $sql2 = " INSERT INTO registration_ (`EventID`,`ParticipantID`) VALUES ('$eid','$id');";
@@ -488,7 +490,7 @@ if(isset($_POST['submit']))
       $number= $_POST['number'];
       $email= $_POST['email'];
       $role= $_POST['role'];
-  
+      $pass= $_POST['pass'];
       $conn = mysqli_connect("localhost","root","","eventadministration") or die($conn);
       $query="SELECT VenueCapacity as capacity,participants
       FROM (SELECT outsiderequest.EventID as eid,capacity as VenueCapacity
@@ -509,7 +511,7 @@ if(isset($_POST['submit']))
         $participants = $row['participants'];
      }
        if($limit>$participants){
-      $sql = "INSERT INTO `participants` (`ParticipantID`, `ParticipantFirstName`, `ParticipantlastName`, `ParticipantEmail`, `ParticipantContactNumber`,`ParticipantBloodGroup`,`ParticipantRole`) VALUES ('$id', '$fname', '$lname', '$email','$number','$bg','$role'); ";
+      $sql = "INSERT INTO `participants` (`ParticipantID`, `ParticipantFirstName`, `ParticipantlastName`, `ParticipantEmail`, `ParticipantContactNumber`,`ParticipantBloodGroup`,`ParticipantRole`,`pass`) VALUES ('$id', '$fname', '$lname', '$email','$number','$bg','$role','$pass'); ";
           
       $res = mysqli_query($conn,$sql);
       $sql2 = " INSERT INTO registration_ (`EventID`,`ParticipantID`) VALUES ('$eid','$id');";

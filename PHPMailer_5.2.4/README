@@ -27,7 +27,7 @@ attachments.
 Formatting email correctly is surprisingly difficult. There are myriad
 overlapping RFCs, requiring tight adherence to horribly complicated
 formatting and encoding rules - the vast majority of code that you'll find
-online that uses the mail() function directly is just plain wrong! *Please*
+online that uses the mail() function directly is just plain wrong! _Please_
 don't be tempted to do it yourself - if you don't use PHPMailer, there are
 many other excellent libraries that you should look at before rolling your
 own - try SwiftMailer, Zend_Mail, eZcomponents etc.
@@ -95,6 +95,7 @@ You'll find plenty more to play with in the `examples` folder.
 That's it. You should now be ready to use PHPMailer!
 
 ## Localization
+
 PHPMailer defaults to English, but in the `languages` folder you'll find
 numerous translations for PHPMailer error messages that you may encounter.
 Their filenames contain [ISO 639-1](http://en.wikipedia.org/wiki/ISO_639-1)
@@ -125,13 +126,14 @@ tracker](https://code.google.com/a/apache-extras.org/p/phpmailer/issues/list).
 We're particularly interested in fixing edge-cases, expanding test coverage
 and updating translations.
 
-Please *don't* use the sourceforge project any more.
+Please _don't_ use the sourceforge project any more.
 
 ## Changelog
 
 See changelog.txt
 
 ## History
+
 - PHPMailer was originally written in 2001 by Brent R. Matzelle as a [SourceForge project](http://sourceforge.net/projects/phpmailer/).
 - Marcus Bointon (coolbru on SF) and Andy Prevost (codeworxtech) took over the project in 2004.
 - The project became an [Apache Extras project on Google Code](https://code.google.com/a/apache-extras.org/p/phpmailer/) in 2010, managed by Jim Jagielski
