@@ -64,7 +64,7 @@
         <ul class='nav-menu'>
           <li class='menu-active'><a href='welcomeadmin.php'>Admin Home</a></li>
           <li><a href='eventreq.php'>Event requests</a></li>
-          <li><a href='ViewAllEvent.php'>View All Event</a></li>
+          <li><a href='org.php'>Organziers</a></li>
 			 <!-- <li class='menu-has-`children'><a href='applyleave.php'>Leave</a>
             <ul>
               <li><a href='applyleave.php'>Apply For Leave</a></li>

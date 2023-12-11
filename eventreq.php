@@ -131,7 +131,7 @@ if(!isset($_SESSION['username'])){
         <ul class="nav-menu">
           <li><a href="welcomeadmin.php">Admin Home</a></li>
           <li class="menu-active"><a href="eventreq.php">Event Requests</a></li>
-          <li><a href=":ViewAllEvent.php">View All Event</a></li>
+          <li><a href="org.php">Organziers</a></li>
 		  <li><a href="logout.php">Logout</a></li>
         </ul>
       </nav>
@@ -175,14 +175,17 @@ if(!isset($_SESSION['username'])){
       <th scope="col">Event Name</th>
       <th scope="col">Organizer Name</th>
       <th scope="col">Performance</th>
-      <th scope="col">Action</th>
+      
+      <th scope="col">Response</th>
+      <th scope="col">Details</th>
+      <th scope="col">Notice</th>
     </tr>
   </thead>
   <tbody>
     
   <?php
        
-       $que = "SELECT SlotID,OrganizerName,EventName,rat,eid
+       $que = "SELECT tab1.oid as oid ,SlotID,OrganizerName,EventName,rat,eid
        FROM 
        (SELECT organizer.OrganizerID as oid,OrganizerName,events.EventID as  eid,EventName,EventDescription,SlotID
               FROM request_ join events on request_.EventID=events.EventID 
@@ -204,10 +207,12 @@ if(!isset($_SESSION['username'])){
           <td>". $row['OrganizerName'] . "</td>
           <td>". $row['rat'] . "</td>
           <td> <button class='accept btn btn-sm btn-primary' id=d".$row['eid'].">Accept</button>  <button class='delete btn btn-sm btn-primary' id=d".$row['eid'].">Delete</button></td>
+          <td><a href='adetails.php?eid=". $row['eid'] ."'>Link</a></td>
+          <td><a href='notice.php?oid=". $row['oid'] ."&oname=".$row['OrganizerName']."&eid=".$row['eid']."&ename=".$row['EventName']."'>Link</a></td>
         </tr>";
          
        }
-       $que = "SELECT OutsideAddress,OrganizerName,EventName,rat,eid
+       $que = "SELECT tab1.oid as oid,OutsideAddress,OrganizerName,EventName,rat,eid
        FROM 
        (SELECT organizer.OrganizerID as oid,OrganizerName,events.EventID as  eid,EventName,OutsideAddress
               FROM outsiderequest join events on outsiderequest.EventID=events.EventID 
@@ -228,6 +233,9 @@ if(!isset($_SESSION['username'])){
           <td>". $row['OrganizerName'] . "</td>
           <td>". $row['rat'] . "</td>
           <td> <button class='oaccept btn btn-sm btn-primary' id=d".$row['eid'].">Accept</button>  <button class='odelete btn btn-sm btn-primary' id=d".$row['eid'].">Delete</button></td>
+          <td><a href='adetails.php?eid=". $row['eid'] ."'>Link</a></td>
+
+          <td><a href='notice.php?oid=". $row['oid'] ."&oname=".$row['OrganizerName']."&eid=".$row['eid']."&ename=".$row['EventName']."'>Link</a></td>
         </tr>";
          
        }

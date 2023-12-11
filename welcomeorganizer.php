@@ -38,7 +38,9 @@
   <link rel='stylesheet' href='//fonts.googleapis.com/icon?family=Material+Icons' />
   <link href='css/style.css' rel='stylesheet'>
   <style>
-        body{
+    .txt{
+      color: black;
+    }        body{
             background: url("img/black.jpg");
             background-size:cover;
             background-repeat:repeat-y;
@@ -296,9 +298,9 @@
     echo "<tr>
     <th scope='row'>". $row['EventName'] . "</th>
     <td>". $row['qus'] . "</td>
-    <td> <form method='POST'>  <input type='text' id='ans' name='ans' oplaceholder='give your ans'></td>
-    <td> <button class='btn btn-sm btn-primary' name='submit' >ANS</button></td> 
-    <td> <button class='btn btn-sm btn-primary' name='delete' >DEL</button></td> </form>
+    <td> <form method='POST'>  <input class='txt' type='text' id='ans' name='ans' oplaceholder='give your ans' required></td>
+    <td> <button class='btn btn-sm btn-primary' id=".$row['qus']." name='submit' >ANS</button></td> 
+    <td> <button class='btn btn-sm btn-primary' id=".$row['qus']." name='delete' >DEL</button></td> </form>
   </tr>";
   if($ans==null)
   {
@@ -342,29 +344,40 @@ else{
 
 <br> <br> <br> <br> <br> <br>
 <h1 style="text-align: center;">Feedbacks</h1>
-  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search Event Name">
+  <input class="txt" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search Event Name">
 
 <table id="myTable2">
   <tr class="header">
-  <th style="width:20%;">EventID</th>
+  <th style="width:20%;">ParticipantsID</th>
     <th style="width:50%;">Event Name</th>
+    <th style="width:60%;">Event Date</th>
+    <th style="width:60%;">Comments</th>
     <th style="width:60%;">Rating</th>
+    
   </tr>
 <?php
-  $que = "SELECT feedback_.EventID as eid,EventName,avg(Rating) as Rating
-  FROM feedback_  JOIN events on feedback_.EventID=events.EventID
-                  JOIN organizer on organizer.OrganizerID=events.OrganizerID
-  Where organizer.OrganizerID=1
-  GROUP by EventName";
+  $que = "SELECT Pid,EventName,Rating,Comments,EventDate
+  FROM
+  (SELECT feedback_.EventID as eid,EventName,Rating,Comments,Pid
+    FROM feedback_  JOIN events on feedback_.EventID=events.EventID
+                    JOIN organizer on organizer.OrganizerID=events.OrganizerID
+    Where organizer.OrganizerID=$oid) as tab1
+   JOIN
+   (SELECT events.EventID as eid,EventDate
+  from events JOIN request_ on request_.EventID=events.EventID
+              JOIN slot on slot.SlotID=request_.SlotID
+   WHERE OrganizerID=$oid) as tab2
+   on tab1.eid=tab2.eid";
   $res = mysqli_query($conn,$que);
   if(mysqli_num_rows($res) > 0)
  {
   while($row = mysqli_fetch_assoc($res))
   {
     echo "<tr>
-    <th scope='row'>". $row['eid'] . "</th>
+    <th scope='row'>". $row['Pid'] . "</th>
     <td>". $row['EventName'] . "</td>
-
+    <td>". date('j F, y',strtotime($row['EventDate'])) . "</td>
+    <td>". $row['Comments'] . "</td>
     <td>". $row['Rating'] . "</td>
     
      </tr>";
@@ -378,9 +391,14 @@ else{
 ?>
  
 </table>
-
+<br> <br>
 
 <script>
+
+
+
+
+
 function myFunction() {
   // Declare variables
   var input, filter, table, tr, td, i, txtValue;

@@ -250,7 +250,7 @@ $result2 = mysqli_query($conn,$query);
             </div>
 <br>
  <?php
-   $sql = "SELECT * FROM `qa` where EventID = '$eid' and ans is not null";
+   $sql = "SELECT * FROM `qa` where EventID = '$eid' and ans is not null and ans != ' '";
 
    $result = mysqli_query($conn,$sql);
    if(mysqli_num_rows($result) > 0)

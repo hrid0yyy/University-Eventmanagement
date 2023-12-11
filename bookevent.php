@@ -2,6 +2,11 @@
 <html>
 <?php
          $slotid = $_GET['id'];
+
+        
+
+    include 'functions.php';
+
     ?>	
 <head>
 	
@@ -117,37 +122,49 @@
                     <div class="col-md-1"><label for="eid">Event ID<span>&#42;</span></label></div>
                     <div class="col-md-5">
                     <input type="text" class="form-control has-success" id="eid" placeholder="Enter Event ID" name="eid" onblur="checkUName()" onkeyup="checkUserName()" required></div> 
-                    <div class="col-md-2 text-right"><label for="photo">&nbsp;&nbsp;Photo</label></div>
-                    <div class="col-md-3"><input type="file" class="form-control" id="uploadfile" name="uploadfile" style="height:45px" /></div>
+                    <div class="col-md-2 text-left"><label for="photo">&nbsp;&nbsp;Banner</label></div>
+                    <div class="col-md-3" style="margin-left: -112px;"><input type="file" class="form-control" id="uploadfile" name="uploadfile" style="height:45px" /></div>
                 </div>
-                <br><br>
+                <br>
+               
+    
                 <div class="row">
                     <div class="col-md-1"><label for="ename">Event Name<span>&#42;</span></label></div>
                     <div class="col-md-5">
                     <input type="text" class="form-control has-success" id="ename" placeholder="Enter Event Name" name="ename" onblur="checkUName()" onkeyup="checkUserName()" required></div> 
+                    <div class="col-md-2 text-left" ><label for="uploadBadgefile">&nbsp;&nbsp;Badge</label></div>
+                    <div class="col-md-3"style="margin-left: -112px;" ><input type="file" class="form-control" id="uploadBadgefile" name="uploadBadgefile" style="height:45px" /></div>
                     
                 </div>
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-5"><p id="erruname"></p></div>
-                </div>
+                
             </div>
 
             <div class="form-group">
+
                 <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-5"><p id="errmobile"></p></div>
-                    <div class="col-md-2"></div>
-                    <div class="col-md-3"><p id="errdob"></p></div>
-                </div>
-                <div class="row">
-                   <div class="col-md-1"><label for="edesc">Description<span>&#42;</span></label></div>
-                    <div class="col-md-5"><input type="text" class="form-control" id="edesc" placeholder="Enter Event Description" name="edesc"  required></div> 
+                <div > <label for="edesc">Description<span>&#42;</span></label></div>
+                <div class="col-md-5" style="margin-left: 0px;"><textarea name="edesc" rows="5" cols="50" id="edesc" placeholder="Event Description" required></textarea></div>
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                 <div class="col-md-4" style="margin-left: 0px;"><textarea name="esdesc" rows="3" cols="50" id="esdesc" placeholder="Headline(Short Description)" required></textarea></div>  
                     <div class="col-md-1"></div>
                     
                 </div>
-                <br> <br>
-                <?php echo"
+                <br> 
+                <div class="row">
+                   <div class="col-md-1"><label for="eguest">Event Guests<span>&#42;</span></label></div>
+                   <div class="col-md-5" style="margin-left: 00px;"><textarea name="eguest" rows="2" cols="50" id="eguest" placeholder="guests" required></textarea></div> 
+                   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                 <div class="col-md-4" style="margin-left: 0px;"><textarea name="ebudget" rows="1" cols="50" id="ebudget" placeholder="Budget" required></textarea></div>
+                    
+                </div>
+                <br> 
+                <div > <label for="types">Event Type Per Line<span>&#42;</span></label></div>
+                <div class="col-md-5" style="margin-left: 70px;"><textarea name="types" rows="5" cols="50" id="types" placeholder="Event Types" ></textarea></div> 
+                   <br> 
+                   <div > <label for="sponsers">Sponsers Per Line<span>&#42;</span></label></div>
+                <div class="col-md-5" style="margin-left: 70px;"><textarea name="sponsers" rows="5" cols="50" id="sponsers" placeholder="Event Sponsers" ></textarea></div> 
+                   <br> 
+                   <?php echo"
                 <div class='row'>
                    <div class='col-md-1'><label for='sid'>Slot ID<span>&#42;</span></label></div>
                     <div class='col-md-5'><input type='text' class='form-control' id='sid' placeholder='". $slotid ."' name='sid' disabled ></div> 
@@ -155,11 +172,11 @@
                     
                 </div>";
                 ?>
-               
             </div>
 
              
         </div>
+        
         
        
         
@@ -177,6 +194,9 @@
             </div>
         </div>
     </form>
+
+
+   
     </div>
     
 	<script src="lib/jquery/jquery.min.js"></script>
@@ -205,24 +225,54 @@
 
 
 <?php
-
+  $pdo = pdo_connect_mysql();
 if(isset($_POST['submit']))
 {
     $eid= $_POST['eid'];
     $ename= $_POST['ename'];
     $edesc= $_POST['edesc'];
-    $sid= $_POST['sid'];
+    $esdesc= $_POST['esdesc'];
+   
+    $eguest= $_POST['eguest'];
+    $ebudget= $_POST['ebudget'];
+
+
     $filename = $_FILES["uploadfile"]["name"];
 	$tempname = $_FILES["uploadfile"]["tmp_name"];
 	$folder = "./image/" . $filename;
+
+    $filename2 = $_FILES["uploadBadgefile"]["name"];
+	$tempname2 = $_FILES["uploadBadgefile"]["tmp_name"];
+	$folder2 = "./image/" . $filename;
 
     $conn = mysqli_connect("localhost","root","","eventadministration") or die($conn);
 
 	
 	
   
-    $sql = mysqli_query($conn,"INSERT INTO `events` (`EventID`, `EventName`, `OrganizerID`, `EventDescription`,`EventFileBanner`) VALUES ('$eid', '$ename', '$oid','$edesc','$filename')") or die("Query Failed".mysqli_error($conn));
+    $sql = mysqli_query($conn,"INSERT INTO `events` (`EventID`, `EventName`, `OrganizerID`, `EventDescription`,`EventFileBanner`,`EventFileBadge`,`EventGuest`,`EventBudget`,`ShortDescription`) VALUES ('$eid', '$ename', '$oid','$edesc','$filename','$filename2','$eguest','$ebudget','$esdesc')") or die("Query Failed".mysqli_error($conn));
     $sql2 = mysqli_query($conn,"INSERT INTO `request_` (`EventID`, `SlotID`) VALUES ('$eid', '$slotid')") or die("Query Failed".mysqli_error($conn));
+
+    
+    $sponsers = isset($_POST['sponsers']) ? explode(PHP_EOL, $_POST['sponsers']) : '';
+    foreach($sponsers as $sponser) {
+        
+        if (empty($sponser)) continue;
+        
+        $stmt = $pdo->prepare('INSERT INTO event_sponsers (EventID, SponsorID) VALUES (?, ?)');
+        $stmt->execute([ $eid, $sponser ]);
+    }
+
+    $types = isset($_POST['types']) ? explode(PHP_EOL, $_POST['types']) : '';
+        foreach($types as $type) {
+            
+            if (empty($type)) continue;
+           
+            $stmt = $pdo->prepare('INSERT INTO events_eventtype (EventID, EventType) VALUES (?, ?)');
+            $stmt->execute([ $eid, $type ]);
+        }
+ 
+
 
     if($sql2)
 	{

@@ -245,13 +245,12 @@ if(isset($_POST['submit']))
     $ename= $_POST['ename'];
     $edesc= $_POST['edesc'];
     $esdesc= $_POST['esdesc'];
-    $address= $_POST['address'];
     $eguest= $_POST['eguest'];
     $ebudget= $_POST['ebudget'];
     $edate= $_POST['edate'];
     $estime= $_POST['estime'];
     $edtime= $_POST['edtime'];
-
+    $address= $_POST['address'];
 
     $filename = $_FILES["uploadfile"]["name"];
 	$tempname = $_FILES["uploadfile"]["tmp_name"];
