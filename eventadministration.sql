@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2023 at 05:35 PM
+-- Generation Time: Dec 11, 2023 at 10:37 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -91,11 +91,13 @@ INSERT INTO `events` (`EventID`, `EventName`, `EventDescription`, `EventGuest`, 
 (69, 'you know', 'uiui', '', '', '', NULL, NULL, 1),
 (77, 'CA', 'mips,single cycle,ram', 'shoib sir', '500', '', '', NULL, 1),
 (89, 'bidesh', 'bidesh jabi kemne ta nia koibo', '', '', '', NULL, NULL, 1),
+(96, 'dsfdsf', 'sdfsd', 'sdfsd', '4654', '', '', 'dasd', 1),
 (123, 'C clinic', 'here we learn c', 'uiui ,gigi ,kiki', '500000', 'banner.jpeg', 'banner.jpeg', 'c sikhi', 1),
 (412, 'stat', 'PROBy etc', 'sobai', '1000', 'banner2.jpg', 'banner2.jpg', NULL, 1),
 (4579, 'gfd', 'gdfgdfg', 'dfgdf', '456', NULL, NULL, 'dfgfd', 5656),
 (5987, 'canada visa', 'canaday pathay dimu tore', '', '', '', NULL, NULL, 1),
 (6969, 'visal balsal', '.........', '', '', '', NULL, NULL, 1),
+(7890, 'ulala', 'dsfsdfsd', 'dsfsdsdf', '5645', 'banner2.jpg', 'banner3.jpg', 'fdsfdsfsd', 1),
 (45678, 'canada visa', 'dia dimu oihane', '', '', 'canada.jpg', NULL, NULL, 1),
 (56546456, 'bal ', 'valorant grind', '', '', '', NULL, NULL, 1);
 
@@ -116,10 +118,13 @@ CREATE TABLE `events_eventtype` (
 
 INSERT INTO `events_eventtype` (`EventType`, `EventID`) VALUES
 ('data', 7),
+('dd', 96),
 ('dfg', 12),
 ('dfgdf', 12),
 ('gdf', 12),
-('programming', 7);
+('programming', 7),
+('rew', 96),
+('sdfsf', 96);
 
 -- --------------------------------------------------------
 
@@ -140,6 +145,9 @@ INSERT INTO `events_status` (`EventStatus`, `EventID`) VALUES
 ('Previous', 1),
 ('Previous', 2),
 ('Previous', 89),
+('Previous', 96),
+('Previous', 123),
+('Previous', 7890),
 ('Previous', 56546456);
 
 -- --------------------------------------------------------
@@ -183,7 +191,10 @@ INSERT INTO `event_sponsers` (`EventID`, `SponsorID`) VALUES
 (7, 1),
 (7, 3),
 (12, 1),
-(12, 2);
+(12, 2),
+(96, 1),
+(96, 2),
+(96, 3);
 
 -- --------------------------------------------------------
 
@@ -206,7 +217,34 @@ CREATE TABLE `feedback_` (
 INSERT INTO `feedback_` (`Rating`, `Comments`, `EventID`, `Fid`, `Pid`) VALUES
 (5, 'gdfgdf', 1, 18, 11221),
 (1, 'gfhfgh', 1, 39, 5656),
-(4, 'fgdfgdf', 2, 40, 5656);
+(4, 'fgdfgdf', 2, 40, 5656),
+(5, 'dfgfd', 123, 41, 5656);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notice`
+--
+
+CREATE TABLE `notice` (
+  `notice` varchar(100) NOT NULL,
+  `time` datetime NOT NULL,
+  `EventID` int(11) NOT NULL,
+  `OrganizerID` int(11) NOT NULL,
+  `reply` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `notice`
+--
+
+INSERT INTO `notice` (`notice`, `time`, `EventID`, `OrganizerID`, `reply`) VALUES
+('dfgfddfgdfgdg', '2023-12-11 03:06:48', 1, 1, NULL),
+('kire', '2023-12-11 03:06:57', 1, 1, NULL),
+('aise', '2023-12-11 03:12:38', 69, 1, NULL),
+('mesii', '2023-12-11 03:34:44', 69, 1, NULL),
+('baincod', '2023-12-11 03:14:22', 77, 1, NULL),
+('lula', '2023-12-11 03:13:41', 412, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -375,11 +413,8 @@ CREATE TABLE `qa` (
 
 INSERT INTO `qa` (`EventID`, `qus`, `ans`, `StudentID`, `StudentEmail`) VALUES
 (1, 'ayahy bai', 'oyehoye bai', 54456, 'redoy.khan898@gmail.com'),
-(1, 'ballagena bai', NULL, 456456, 'sahmed221068@bscse.uiu.ac.bd'),
-(7, 'bhai', NULL, 45645, 'redoy.khan898@gmail.com'),
-(1, 'bhai bhallage na ar', 'dsfsdf', 4456, 'redoy.khan898@gmail.com'),
+(7, 'baia', 'baia', 123, 'redoy.khan898@gmail.com'),
 (1, 'bhai kemon asen ki b', 'dasd', 5456, 'redoy.khan898@gmail.com'),
-(1, 'bhai kemon asen ki khaisen ajke ? bhabi kemon ase ki khasise? apnare bade', 'bai', 645654, 'redoy.khan898@gmail.com'),
 (1, 'bhai ki kore ekhane', 'amio janina bai', 123, 'sahmed221068@bscse.uiu.ac.bd'),
 (123, 'bhai ki koren', 'jan', 123, 'redoy.khan898@gmail.com'),
 (1, 'bhai ki koren', 'kisuna bhai', 888, 'sahmed221068@bscse.uiu.ac.bd'),
@@ -440,10 +475,12 @@ CREATE TABLE `request_` (
 
 INSERT INTO `request_` (`EventID`, `accept`, `SlotID`) VALUES
 (1, 1, 123),
+(2, 1, 654645),
 (69, NULL, 456),
 (89, 1, 23),
-(89, 1, 789),
+(96, NULL, 23),
 (123, 1, 123),
+(7890, NULL, 23),
 (56546456, 1, 89);
 
 -- --------------------------------------------------------
@@ -505,7 +542,7 @@ INSERT INTO `slot` (`StartTime`, `EndTime`, `SlotID`, `EventDate`, `VenueID`, `a
 ('20:23:08', '22:23:08', 89, '2023-12-01', 456, 0),
 ('20:23:08', '22:23:08', 123, '2023-12-10', 456, 0),
 ('20:23:08', '22:23:08', 456, '2023-12-20', 456, 0),
-('20:23:08', '22:23:08', 654645, '2023-12-20', 456, 1);
+('20:23:08', '22:23:08', 654645, '2023-12-20', 456, 0);
 
 -- --------------------------------------------------------
 
@@ -638,6 +675,13 @@ ALTER TABLE `feedback_`
   ADD KEY `Pid` (`Pid`);
 
 --
+-- Indexes for table `notice`
+--
+ALTER TABLE `notice`
+  ADD PRIMARY KEY (`EventID`,`OrganizerID`,`notice`),
+  ADD KEY `OrganizerID` (`OrganizerID`);
+
+--
 -- Indexes for table `organizer`
 --
 ALTER TABLE `organizer`
@@ -749,7 +793,7 @@ ALTER TABLE `event_poll`
 -- AUTO_INCREMENT for table `feedback_`
 --
 ALTER TABLE `feedback_`
-  MODIFY `Fid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `Fid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- Constraints for dumped tables
@@ -800,6 +844,13 @@ ALTER TABLE `feedback_`
   ADD CONSTRAINT `feedback__ibfk_1` FOREIGN KEY (`Pid`) REFERENCES `participants` (`ParticipantID`);
 
 --
+-- Constraints for table `notice`
+--
+ALTER TABLE `notice`
+  ADD CONSTRAINT `notice_ibfk_1` FOREIGN KEY (`EventID`) REFERENCES `events` (`EventID`),
+  ADD CONSTRAINT `notice_ibfk_2` FOREIGN KEY (`OrganizerID`) REFERENCES `organizer` (`OrganizerID`);
+
+--
 -- Constraints for table `outsiderequest`
 --
 ALTER TABLE `outsiderequest`
@@ -819,17 +870,18 @@ ALTER TABLE `pollvote`
   ADD CONSTRAINT `pollvote_ibfk_2` FOREIGN KEY (`ParticipantID`) REFERENCES `participants` (`ParticipantID`);
 
 --
--- Constraints for table `qa`
---
-ALTER TABLE `qa`
-  ADD CONSTRAINT `qa_ibfk_1` FOREIGN KEY (`EventID`) REFERENCES `events` (`EventID`);
-
---
 -- Constraints for table `registration_`
 --
 ALTER TABLE `registration_`
   ADD CONSTRAINT `registration__ibfk_1` FOREIGN KEY (`EventID`) REFERENCES `events` (`EventID`),
   ADD CONSTRAINT `registration__ibfk_2` FOREIGN KEY (`ParticipantID`) REFERENCES `participants` (`ParticipantID`);
+
+--
+-- Constraints for table `request_`
+--
+ALTER TABLE `request_`
+  ADD CONSTRAINT `request__ibfk_1` FOREIGN KEY (`EventID`) REFERENCES `events` (`EventID`),
+  ADD CONSTRAINT `request__ibfk_2` FOREIGN KEY (`SlotID`) REFERENCES `slot` (`SlotID`);
 
 --
 -- Constraints for table `resources_`
