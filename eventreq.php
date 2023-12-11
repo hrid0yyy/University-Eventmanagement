@@ -31,6 +31,13 @@ if(!isset($_SESSION['username'])){
         $sql2 = "UPDATE `request_` SET `accept` = '1' WHERE `request_`.`EventID` = '$EventID';";
         
          $res2 = mysqli_query($conn,$sql2);
+
+         $query="INSERT IGNORE INTO events_status
+         SELECT 'Ongoing',EventID
+         FROM events
+         where EventID = $EventID";
+         $res7= mysqli_query($conn, $query);
+
          $sql3 = "UPDATE `slot` JOIN `request_` on slot.SlotID=request_.SlotID SET `available` = '0' WHERE `request_`.`EventID` = '$EventID';";
 
         $res3 = mysqli_query($conn,$sql3);

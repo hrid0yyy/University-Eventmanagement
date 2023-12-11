@@ -176,10 +176,19 @@
 </div>
 <div class="col-xs-6 text-right">
 <?php
- $query = "SELECT COUNT(*) as accepted
- FROM request_ JOIN events on request_.EventID=events.EventID
-               JOIN organizer on organizer.OrganizerID=events.OrganizerID
- WHERE accept=1 and organizer.OrganizerID= $oid";
+ $query = "SELECT a1+a2 as accepted
+ FROM (SELECT COUNT(*) as a1 ,organizer.OrganizerID as oid
+  FROM outsiderequest JOIN events on outsiderequest.EventID=events.EventID
+                JOIN organizer on organizer.OrganizerID=events.OrganizerID
+                JOIN events_status on outsiderequest.EventID=events_status.EventID
+  WHERE accept=1 and organizer.OrganizerID= $oid and EventStatus = 'Ongoing') as tab1
+  JOIN
+ (SELECT COUNT(*) as a2,organizer.OrganizerID as oid
+  FROM request_ JOIN events on request_.EventID=events.EventID
+                JOIN organizer on organizer.OrganizerID=events.OrganizerID
+                JOIN events_status on request_.EventID=events_status.EventID
+  WHERE accept=1 and organizer.OrganizerID= $oid and EventStatus = 'Ongoing') as tab2
+  on tab1.oid=tab2.oid";
  $result = $conn->query($query);
  if ($result->num_rows > 0) {
      

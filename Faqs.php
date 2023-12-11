@@ -228,7 +228,7 @@ $result2 = mysqli_query($conn,$query);
   {
   while($row = mysqli_fetch_assoc($result2)){
 
-   echo '<p>Ask our experienced '. $row["OrganizerName"] .' team your question about the '. $row["EventName"] .' Event </p>';
+   echo '<p>Ask our experienced '. $row["OrganizerName"] .' team about the '. $row["EventName"] .' Event </p>';
 
   }
 }

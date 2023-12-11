@@ -6,10 +6,18 @@
     $database = "eventadministration";
     
     $conn = mysqli_connect($servername,$username,$password,$database);
-    $query="INSERT IGNORE INTO events_status
-    SELECT 'Previous',EventID
-    FROM request_ JOIN slot on request_.SlotID=slot.SlotID
-    WHERE EventDate < '$date'";
+    $query="UPDATE events_status JOIN request_ on events_status.EventID=request_.EventID
+    JOIN slot on request_.SlotID=slot.SlotID
+SET EventStatus = 'Previous'
+WHERE EventDate <  '$date' and accept=1";
+    $res= mysqli_query($conn, $query);
+
+
+
+    $query="UPDATE events_status JOIN outsiderequest on events_status.EventID=outsiderequest.EventID
+                     
+    SET EventStatus = 'Previous'
+    WHERE EventDate <  '$date' and accept = 1";
     $res= mysqli_query($conn, $query);
  ?>
 
@@ -364,11 +372,16 @@
 <br>
 <body>
 <?php
- $sql = "SELECT events.EventID as eid,EventName,EventDescription,EventGuest,EventDate,OrganizerName FROM events join events_status on events.EventID=events_status.EventID
+ $sql = "(SELECT events.EventID as eid,EventName,EventDescription,EventGuest,EventDate,OrganizerName FROM events join events_status on events.EventID=events_status.EventID
+ join organizer on events.OrganizerID=organizer.OrganizerID
+            JOIN outsiderequest on outsiderequest.EventID=events.EventID
+             where EventStatus='Previous')
+UNION
+(SELECT events.EventID as eid,EventName,EventDescription,EventGuest,EventDate,OrganizerName FROM events join events_status on events.EventID=events_status.EventID
  join organizer on events.OrganizerID=organizer.OrganizerID
             JOIN request_ on request_.EventID=events.EventID
             join slot on slot.SlotID=request_.SlotID
-             where EventStatus='Previous';";
+             where EventStatus='Previous')";
  $result = mysqli_query($conn, $sql);
  if(mysqli_num_rows($result) > 0)
  {

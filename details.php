@@ -9,7 +9,7 @@ $flag = 0;
 
 //checking if connection is working or not
 //Output Form Entries from the Database
-$query = "SELECT events.EventID,EventName,EventDescription,EventFileBanner,EventDate,VenueName,StartTime,EndTime,OrganizerName,OrganizerEmail,OrganizerContactNumber,ShortDescription FROM events join request_ on events.EventID=request_.EventID join slot on slot.SlotID=request_.SlotID join venue_ on slot.VenueID=venue_.VenueID
+$query = "SELECT events.EventID,EventName,EventDescription,EventGuest,EventFileBanner,EventDate,VenueName,StartTime,EndTime,OrganizerName,OrganizerEmail,OrganizerContactNumber,ShortDescription,OrganizerDescription,OrganizerFileLogo,VenueFileimg,VenueLocation FROM events join request_ on events.EventID=request_.EventID join slot on slot.SlotID=request_.SlotID join venue_ on slot.VenueID=venue_.VenueID
 JOIN organizer on events.OrganizerID=organizer.OrganizerID  where events.EventID=$eid";
 $result = $conn->query($query);
 if ($result->num_rows > 0) {
@@ -22,18 +22,21 @@ if ($result->num_rows > 0) {
     $esdesc=$row['ShortDescription'];
     $efile=$row['EventFileBanner'];
     $edate=$row['EventDate'];
-    $eaddress=$row['VenueName'];
+    $eguest=$row['EventGuest'];
+    $eaddress=$row['VenueName']." ".$row['VenueLocation'];
     $estime=$row['StartTime'];
    $eetime=$row['EndTime'];
    $oname=$row['OrganizerName'];
    $onumber=$row['OrganizerContactNumber'];
    $oemail=$row['OrganizerEmail'];
-
+   $odesc=$row['OrganizerDescription'];
+   $ofile=$row['OrganizerFileLogo'];
+   $vfile=$row['VenueFileimg'];
  }
  else
  {
    $flag = 1;
-   $query = "SELECT events.EventID,EventName,EventDescription,EventFileBanner,ShortDescription,EventDate,OutsideAddress,StartTime,EndTime,OrganizerName,OrganizerEmail,OrganizerContactNumber FROM events join outsiderequest on events.EventID=outsiderequest.EventID 
+   $query = "SELECT events.EventID,EventName,EventDescription,EventGuest,EventFileBanner,ShortDescription,EventDate,OutsideAddress,StartTime,EndTime,OrganizerName,OrganizerEmail,OrganizerContactNumber,OrganizerDescription,OrganizerFileLogo FROM events join outsiderequest on events.EventID=outsiderequest.EventID 
    JOIN organizer on events.OrganizerID=organizer.OrganizerID  where events.EventID=$eid";
    $result = $conn->query($query);
    if ($result->num_rows > 0) {
@@ -45,14 +48,15 @@ if ($result->num_rows > 0) {
    $esdesc=$row['ShortDescription'];
    $efile=$row['EventFileBanner'];
    $edate=$row['EventDate'];
+   $eguest=$row['EventGuest'];
    $eaddress=$row['OutsideAddress'];
    $estime=$row['StartTime'];
    $eetime=$row['EndTime'];
    $oname=$row['OrganizerName'];
    $onumber=$row['OrganizerContactNumber'];
    $oemail=$row['OrganizerEmail'];
-   
-
+   $odesc=$row['OrganizerDescription'];
+   $ofile=$row['OrganizerFileLogo'];
 
  }
 }
@@ -98,7 +102,7 @@ https://www.tooplate.com/view/2119-gymso-fitness
    
 
 
-     <!-- HERO -->
+
 
 <?php       
     echo'<section class="hero d-flex flex-column justify-content-center align-items-center" id="home">
@@ -115,11 +119,11 @@ https://www.tooplate.com/view/2119-gymso-fitness
                               </div>
                                     <h6 data-aos="fade-up" data-aos-delay="300">Organized By '. $oname .'</h6>
 
-                                    <h1 class="text-white" data-aos="fade-up" data-aos-delay="500">'. $ename .'</h1>
+                                    <h2 class="text-white" data-aos="fade-up" data-aos-delay="500">'. $ename .'</h2>
                                     <h6 data-aos="fade-up" data-aos-delay="300"> '. $esdesc .'</h6>
                                     <br>
-                                    <p data-aos="fade-up" data-aos-delay="500"> description '. $edesc .'</p>
-                                    <p data-aos="fade-up" data-aos-delay="500">Event Guests: </p>
+                                    <p data-aos="fade-up" data-aos-delay="500">'. $edesc .'</p>
+                                    <p data-aos="fade-up" data-aos-delay="500">Event Guests: '. $eguest .'</p>
                                     <p data-aos="fade-up" data-aos-delay="500">Event Sponsers:'; ?>   <?php
                                     $que = "SELECT SponsorName
                                     FROM event_sponsers JOIN sponsors on event_sponsers.SponsorID=sponsors.SponsorID where EventID = 7";
@@ -181,7 +185,7 @@ https://www.tooplate.com/view/2119-gymso-fitness
 
                                 <strong class="mt-3 d-block" data-aos="fade-up" data-aos-delay="700">Start Time - End Time</strong>
 
-                                <p data-aos="fade-up" data-aos-delay="800"><?php echo $estime; echo " "; echo $eetime;  ?></p>
+                                <p data-aos="fade-up" data-aos-delay="800"><?php echo date('h:i:s a', strtotime($estime)); echo "-"; echo date('h:i:s a', strtotime($eetime));  ?></p>
                                </div>
                           </div>
                      </div>
@@ -191,18 +195,16 @@ https://www.tooplate.com/view/2119-gymso-fitness
         </div>
     </section>
 
-
-     <!-- ABOUT
      <section class="about section" id="about">
                <div class="container">
                     <div class="row">
 
-                            <div class="mt-lg-5 mb-lg-0 mb-4 col-lg-5 col-md-10 mx-auto col-12">
-                                <h2 class="mb-4" data-aos="fade-up" data-aos-delay="300">Hello, we are Gymso</h2>
+                            <div class="mt-lg-0 mb-lg-0 mb-4 col-lg-5 col-md-10 mx-auto col-12">
+                                <h2 class="mb-4" data-aos="fade-up" data-aos-delay="300">Hello, we are <?php echo $oname; ?></h2>
 
-                                <p data-aos="fade-up" data-aos-delay="400">You are NOT allowed to redistribute this HTML template downloadable ZIP file on any template collection site. You are allowed to use this template for your personal or business websites.</p>
+                                <p data-aos="fade-up" data-aos-delay="400"><?php  echo $odesc ?></p>
 
-                                <p data-aos="fade-up" data-aos-delay="500">If you have any question regarding <a rel="nofollow"  target="_parent">Gymso Fitness HTML template</a>, you can <a rel="nofollow" href="https://www.tooplate.com/contact" target="_parent">contact Tooplate</a> immediately. Thank you.</p>
+                                <p data-aos="fade-up" data-aos-delay="500">If you have any question regarding <a rel="nofollow"  target="_parent"><?php echo $ename  ?></a>, you can <a rel="nofollow" href="#contact" target="_parent">contact us</a> immediately. Thank you.</p>
 
                             </div>
 
@@ -210,14 +212,14 @@ https://www.tooplate.com/view/2119-gymso-fitness
 
                             <div class="mr-lg-auto mt-5 mt-lg-0 mt-md-0 col-lg-3 col-md-6 col-12" data-aos="fade-up" data-aos-delay="800">
                                 <div class="team-thumb">
-                                    <img src="images/team/team-image01.jpg" class="img-fluid" alt="Trainer">
+                            <?php   echo'<img src="./image/'. $ofile .'" width="250 px" height="150px" >';  ?>
 
                                     <div class="team-info d-flex flex-column">
 
-                                        <h3>Catherina</h3>
-                                        <span>Body trainer</span>
+                                       
+                                        <span><?php echo $oname  ?></span>
 
-                                        <ul class="social-icon mt-3">
+                                        <ul class="social-icon mt-0">
                                             <li><a href="#" class="fa fa-instagram"></a></li>
                                             <li><a href="#" class="fa fa-facebook"></a></li>
                                         </ul>
@@ -227,7 +229,7 @@ https://www.tooplate.com/view/2119-gymso-fitness
 
                     </div>
                </div>
-     </section> -->
+     </section>
 
 
    
@@ -255,7 +257,7 @@ https://www.tooplate.com/view/2119-gymso-fitness
                     </div>
 
                     <div class="mx-auto mt-4 mt-lg-0 mt-md-0 col-lg-5 col-md-6 col-12">
-                        <h2 class="mb-4" data-aos="fade-up" data-aos-delay="600">Where you can <span>find us</span></h2>
+                        <h2 class="mb-4" data-aos="fade-up" data-aos-delay="600">Venue </h2>
 
                         <p data-aos="fade-up" data-aos-delay="800"><i class="fa fa-map-marker mr-1"></i><?php echo $eaddress;  ?></p>
 <!-- How to change your own map point
@@ -272,6 +274,10 @@ $address= str_replace(" ","+",$eaddress);
 
 echo $address; ?>&output=embed"></iframe>
 <?php
+
+}
+else{
+echo '<img src="./image/'. $vfile .'" width="450px" height="350px" >';
 
 }
 
@@ -315,7 +321,7 @@ echo $address; ?>&output=embed"></iframe>
         <div class="modal-content">
           <div class="modal-header">
 
-            <h2 class="modal-title" id="membershipFormLabel">Membership Form</h2>
+            <h2 class="modal-title" id="membershipFormLabel">Registration Form</h2>
 
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
@@ -340,11 +346,7 @@ echo $address; ?>&output=embed"></iframe>
 
                 <button type="submit" class="form-control" id="submit-button" name="submit">Submit Button</button>
 
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="signup-agree">
-                    <label class="custom-control-label text-small text-muted" for="signup-agree">I agree to the <a href="#">Terms &amp;Conditions</a>
-                    </label>
-                </div>
+                
             </form>
           </div>
 
@@ -384,11 +386,7 @@ echo $address; ?>&output=embed"></iframe>
 
                 <button type="submit" class="form-control" id="submit-button" name="vsubmit">Submit Button</button>
 
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="signup-agree">
-                    <label class="custom-control-label text-small text-muted" for="signup-agree">I agree to the <a href="#">Terms &amp;Conditions</a>
-                    </label>
-                </div>
+               
             </form>
           </div>
 
