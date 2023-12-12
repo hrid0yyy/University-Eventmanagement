@@ -6,6 +6,9 @@
     $database = 'eventadministration';
     
     $conn = mysqli_connect($servername,$username,$password,$database);
+
+
+
  ?>
 <!doctype html>
 <html>
@@ -16,7 +19,11 @@
   <meta content='' name='keywords'>
   <meta content='' name='description'>
 
-  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link href='img/favicon.png' rel='icon'>
   <link href='img/apple-touch-icon.png' rel='apple-touch-icon'>
 
@@ -149,14 +156,32 @@
       </div>
 <?php	
   $oid = $_GET["oid"];
+
     echo" <nav id='nav-menu-container'>
         <ul class='nav-menu'>
-          
+        
           <li class='menu-active'><a href='welcomeorganizer.php?oid=". $oid . "'>Organizer Home</a></li>   
           <li><a href='addevent.php?oid=". $oid . "'>Request event</a></li>
           <li><a href='createpoll.php?oid=". $oid . "'>Create Poll</a></li>
+         
 		  <li><a href='logout2.php'>Logout</a></li>
+   
         </ul>
+        <ul class='nav navbar-nav navbar-right'>
+         
+        <li class='dropdown'>
+ 
+        <a href='#' class='dropdown-toggle' data-toggle='dropdown'><span class='label label-pill label-danger count' style='border-radius:10px;'></span> <span class='glyphicon glyphicon-bell' style='font-size:18px;'></span></a>
+
+      <ul class='dropdown-menu'></ul>
+
+     </li>
+     </ul>
+
+       
+   
+    
+        
       </nav>";
 
       ?>
@@ -244,6 +269,42 @@
 </a>
 </div>
 </div>
+<div class="col-lg-3">
+<div class="panel panel-danger">
+<div class="panel-heading">
+<div class="row">
+<div class="col-xs-6">
+<i class="fa fa-tasks fa-5x"></i>
+</div>
+<div class="col-xs-6 text-right"><?php
+ $query = "SELECT COUNT(*) as pending
+ FROM request_ JOIN events on request_.EventID=events.EventID
+               JOIN organizer on organizer.OrganizerID=events.OrganizerID
+ WHERE accept=0 and organizer.OrganizerID= $oid";
+ $result = $conn->query($query);
+ if ($result->num_rows > 0) {
+     
+     $row = mysqli_fetch_assoc($result);
+     
+     $pending=$row['pending'];
+     
+ 
+  }
+
+
+?>
+<p class="announcement-heading"><?php echo $pending; ?></p>
+<p class="announcement-text">Declined Request</p>
+</div>
+</div>
+</div>
+
+
+</a>
+</div>
+</div>
+
+
 <div class="col-lg-3">
 <div class="panel panel-success">
 <div class="panel-heading">
@@ -435,6 +496,96 @@ function myFunction() {
 </script>
 
 
+<script>
+
+$(document).ready(function(){
+
+// updating the view with notifications using ajax
+
+function load_unseen_notification(view = '')
+
+{
+
+ $.ajax({
+  url:"fetch.php?oid=<?php echo  $oid ?>",
+  method:"POST",
+  data:{view:view},
+  dataType:"json",
+  success:function(data)
+
+  {
+
+   $('.dropdown-menu').html(data.notification);
+
+   if(data.unseen_notification > 0)
+   {
+    $('.count').html(data.unseen_notification);
+   }
+
+  }
+
+ });
+
+}
+
+load_unseen_notification();
+
+// submit form and get new records
+
+// $('#comment_form').on('submit', function(event){
+//  event.preventDefault();
+
+//  if($('#eid').val() != '' && $('#oid').val() != '' && $('#notice').val() != '')
+
+//  {
+
+//   var form_data = $(this).serialize();
+
+//   $.ajax({
+
+//    url:"index.php",
+//    method:"POST",
+//    data:form_data,
+//    success:function(data)
+
+//    {
+
+//     $('#comment_form')[0].reset();
+//     load_unseen_notification();
+
+//    }
+
+//   });
+
+//  }
+
+//  else
+
+//  {
+//   alert("Both Fields are Required");
+//  }
+
+// });
+
+// load new notifications
+
+$(document).on('click', '.dropdown-toggle', function(){
+
+ $('.count').html('');
+
+ load_unseen_notification('yes');
+
+});
+
+setInterval(function(){
+
+ load_unseen_notification();;
+
+}, 1000);
+
+});
+
+</script>
 	
   <script src='lib/jquery/jquery.min.js'></script>
   <script src='lib/jquery/jquery-migrate.min.js'></script>

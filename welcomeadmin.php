@@ -91,7 +91,7 @@
 <div class="col-xs-6 text-right"><?php
  $query = "SELECT COUNT(*) as remain
  FROM slot
-  WHERE available = 0;";
+  WHERE available = 1;";
  $result = $conn->query($query);
  if ($result->num_rows > 0) {
      

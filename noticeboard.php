@@ -2,23 +2,34 @@
  $delete = false;
 session_start();
 if(!isset($_SESSION['username'])){
-     header("location:notice.php");
+     header("location:noticeboard.php");
     }
 
 ?>
 <?php
+  $oid = $_GET["oid"];
+  $eid = $_GET["eid"];
+  $time = $_GET["time"];
+
     $servername = "localhost";
     $username = "root";
     $password = "";
     $database = "eventadministration";
     
     $conn = mysqli_connect($servername,$username,$password,$database);
-    $oid=$_GET['oid'];
-    $ename=$_GET['ename'];
-    $oname=$_GET['oname'];
-    $eid=$_GET['eid'];
-    date_default_timezone_set("Asia/Dhaka");
-     $time = date("Y-m-d h:i:sa");
+    $query = "SELECT *
+    FROM notice join events on notice.EventID=events.EventID
+    WHERE notice.EventID =$eid and notice.OrganizerID = $oid and time='$time'";
+    $result = $conn->query($query);
+    if ($result->num_rows > 0) {
+        
+        $row = mysqli_fetch_assoc($result);
+        
+
+        $ename=$row['EventName'];
+        $notice=$row['notice'];
+    
+     }
     ?>
 <!DOCTYPE html>
 <html>
@@ -90,14 +101,20 @@ if(!isset($_SESSION['username'])){
         <h1><a href="#intro" class="scrollto">Organizers</a></h1>
       </div>
 		
-      <nav id="nav-menu-container">
-        <ul class="nav-menu">
-          <li><a href="welcomeadmin.php">Admin Home</a></li>
-          <li class="menu-active"><a href="eventreq.php">Event Requests</a></li>
-          <li><a href="org.php">Organziers</a></li>
-		  <li><a href="logout.php">Logout</a></li>
-        </ul>
-      </nav>
+      <?php	
+
+
+    echo" <nav id='nav-menu-container'>
+        <ul class='nav-menu'>
+        
+          <li class='menu-active'><a href='welcomeorganizer.php?oid=". $oid . "'>Organizer Home</a></li>   
+          
+   
+    
+        
+      </nav>";
+
+      ?>
     </div>
 	</header>	
 
@@ -108,8 +125,8 @@ if(!isset($_SESSION['username'])){
 							<div class="col-md-7 d-flex align-items-stretch">
 								<div class="contact-wrap w-100 p-md-5 p-4">
 									<h3 class="mb-4">Notice Board</h3>
-                                    <h5 class="mb-4">Organnizer Name: <?php echo $oname  ?></h5>
-                                    <h5 class="mb-4">Event Name: <?php echo $ename  ?></h5>
+                                    <h5 class="mb-4">Event Name: <?php echo $ename ?> </h5>
+                                    <h5 class="mb-4">Notice: <p><?php echo $notice; ?></p></h5>
 									<div id="form-message-warning" class="mb-4"></div> 
 		
 									<form method="POST" action="#" id="contactForm" name="contactForm">
@@ -117,7 +134,7 @@ if(!isset($_SESSION['username'])){
 											
 											<div class="col-md-12">
 												<div class="form-group">
-                                                <textarea name="notice" rows="5" cols="50" id="notice" placeholder="notice" ></textarea>
+                                                <textarea name="reply" rows="5" cols="50" id="reply" placeholder="reply" ></textarea>
 												</div>
 											</div>
 											<div class="col-md-12">
@@ -134,19 +151,17 @@ if(!isset($_SESSION['username'])){
 <?php
  if(isset($_POST['submit']))
  {
-     $notice = $_POST['notice'];
-     $sql2 = "INSERT INTO `notice` (`OrganizerID`, `EventID`, `notice`,`time`,`view`) VALUES ('$oid', '$eid', '$notice','$time',0);";
-     
+     $reply = $_POST['reply'];
+     $sql2 = "UPDATE `notice` SET `reply` = '$reply' WHERE `notice`.`time` = '$time' AND `notice`.`EventID` = $eid AND `notice`.`OrganizerID` = $oid;";
+     $r2 = mysqli_query($conn,$sql2);
+     if($r2){
+     echo"<script>alert('Submitted')</script>";
+     echo"<script>location.href='welcomeorganizer.php?oid=". $oid. "'</script>";
+     }
+     else{
+      echo"<script>alert('Not Submitted')</script>";
+     }
 
-     $res3 = mysqli_query($conn,$sql2);
-     if($res3){
-        echo "<script>alert('Successfull')</script>";
-        echo "<script>location.href='welcomeadmin.php'</script>";
-        }
-        else
-        {
-            echo "<script>alert('Not Successfull')</script>";  
-        }
  }
 
 ?>
