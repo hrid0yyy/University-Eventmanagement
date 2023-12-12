@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 11, 2023 at 10:37 AM
+-- Generation Time: Dec 12, 2023 at 06:16 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -85,7 +85,7 @@ CREATE TABLE `events` (
 
 INSERT INTO `events` (`EventID`, `EventName`, `EventDescription`, `EventGuest`, `EventBudget`, `EventFileBanner`, `EventFileBadge`, `ShortDescription`, `OrganizerID`) VALUES
 (1, 'learn java', 'Java is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible. It is a general-purpose programming language intended to let programmers write once, run anywhere (WORA),[16] meaning that compiled Java code can run on all platforms that support Java without the need to recompile.[17] Java applications are typically compiled to bytecode that can run on any Java virtual machine (JVM) regardless of the underlying comput', 'kuddus mia, delulu mia', '500000', NULL, NULL, 'here we learn about java', 1),
-(2, 'learn machine learning', 'As a scientific endeavor, machine learning grew out of the quest for artificial intelligence (AI). In the early days of AI as an academic discipline, some researchers were interested in having machines learn from data. They attempted to approach the problem with various symbolic methods, ', 'abul , babul', '78987', NULL, NULL, 'here we learn about machine learning', 1),
+(2, 'learn machine learning', 'As a scientific endeavor, machine learning grew out of the quest for artificial intelligence (AI). In the early days of AI as an academic discipline, some researchers were interested in having machines learn from data. They attempted to approach the problem with various symbolic methods, ', 'abul , babul', '78987', 'ml.jpg', NULL, 'here we learn about machine learning', 1),
 (7, 'dbms', 'data base management system', 'sadia maam', '800', 'download.jpg', 'download.jpg', NULL, 1),
 (12, 'bal ', 'gfdgdfg', 'gdfg', '45645', 'banner3.jpg', 'banner.jpeg', 'gdfgdfg', 1),
 (69, 'you know', 'uiui', '', '', '', NULL, NULL, 1),
@@ -99,6 +99,7 @@ INSERT INTO `events` (`EventID`, `EventName`, `EventDescription`, `EventGuest`, 
 (6969, 'visal balsal', '.........', '', '', '', NULL, NULL, 1),
 (7890, 'ulala', 'dsfsdfsd', 'dsfsdsdf', '5645', 'banner2.jpg', 'banner3.jpg', 'fdsfdsfsd', 1),
 (45678, 'canada visa', 'dia dimu oihane', '', '', 'canada.jpg', NULL, NULL, 1),
+(56675, 'uramu', 'sdfsd', 'sdfsd', '789', 'banner.jpeg', '', 'sdfsdf', 1),
 (56546456, 'bal ', 'valorant grind', '', '', '', NULL, NULL, 1);
 
 -- --------------------------------------------------------
@@ -124,7 +125,9 @@ INSERT INTO `events_eventtype` (`EventType`, `EventID`) VALUES
 ('gdf', 12),
 ('programming', 7),
 ('rew', 96),
-('sdfsf', 96);
+('sdfsf', 96),
+('ttt', 56675),
+('yyr', 56675);
 
 -- --------------------------------------------------------
 
@@ -142,11 +145,18 @@ CREATE TABLE `events_status` (
 --
 
 INSERT INTO `events_status` (`EventStatus`, `EventID`) VALUES
+('Ongoing', 2),
+('Ongoing', 7),
+('Ongoing', 69),
+('Ongoing', 77),
+('Ongoing', 45678),
+('Ongoing', 56675),
 ('Previous', 1),
-('Previous', 2),
 ('Previous', 89),
 ('Previous', 96),
 ('Previous', 123),
+('Previous', 412),
+('Previous', 6969),
 ('Previous', 7890),
 ('Previous', 56546456);
 
@@ -194,7 +204,9 @@ INSERT INTO `event_sponsers` (`EventID`, `SponsorID`) VALUES
 (12, 2),
 (96, 1),
 (96, 2),
-(96, 3);
+(96, 3),
+(56675, 1),
+(56675, 2);
 
 -- --------------------------------------------------------
 
@@ -217,7 +229,6 @@ CREATE TABLE `feedback_` (
 INSERT INTO `feedback_` (`Rating`, `Comments`, `EventID`, `Fid`, `Pid`) VALUES
 (5, 'gdfgdf', 1, 18, 11221),
 (1, 'gfhfgh', 1, 39, 5656),
-(4, 'fgdfgdf', 2, 40, 5656),
 (5, 'dfgfd', 123, 41, 5656);
 
 -- --------------------------------------------------------
@@ -231,20 +242,20 @@ CREATE TABLE `notice` (
   `time` datetime NOT NULL,
   `EventID` int(11) NOT NULL,
   `OrganizerID` int(11) NOT NULL,
-  `reply` varchar(100) DEFAULT NULL
+  `reply` varchar(100) DEFAULT NULL,
+  `view` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `notice`
 --
 
-INSERT INTO `notice` (`notice`, `time`, `EventID`, `OrganizerID`, `reply`) VALUES
-('dfgfddfgdfgdg', '2023-12-11 03:06:48', 1, 1, NULL),
-('kire', '2023-12-11 03:06:57', 1, 1, NULL),
-('aise', '2023-12-11 03:12:38', 69, 1, NULL),
-('mesii', '2023-12-11 03:34:44', 69, 1, NULL),
-('baincod', '2023-12-11 03:14:22', 77, 1, NULL),
-('lula', '2023-12-11 03:13:41', 412, 1, NULL);
+INSERT INTO `notice` (`notice`, `time`, `EventID`, `OrganizerID`, `reply`, `view`) VALUES
+('bhai ki korli eda\r\n', '2023-12-12 10:55:52', 1, 1, NULL, 1),
+('dhur beta', '2023-12-12 10:56:06', 1, 1, NULL, 1),
+('dsfsdf', '2023-12-12 10:29:31', 1, 1, 'gfdgdf', 1),
+('gfdgdfgdfgdfgdf', '2023-12-12 10:43:09', 1, 1, 'fdsf', 1),
+('hayre', '2023-12-12 10:56:33', 1, 1, 'thikase', 1);
 
 -- --------------------------------------------------------
 
@@ -267,7 +278,7 @@ CREATE TABLE `organizer` (
 --
 
 INSERT INTO `organizer` (`OrganizerID`, `OrganizerName`, `OrganizerEmail`, `OrganizerContactNumber`, `OrganizerFileLogo`, `OrganizerDescription`, `OrganizerPass`) VALUES
-(1, 'uiu app forum', 'af@mail.com', '01911360991', NULL, '', '1234'),
+(1, 'uiu app forum', 'af@mail.com', '01911360991', 'appforum.jpg', 'APP Forum\'s an initiative of UIUDCCSA. UIU App forum is a developer\'s community with machine learning', '1234'),
 (5656, 'uiu dance club', 'redoy.khan898@gmail.com', '01911360990', NULL, '', 'lalalula'),
 (45645, 'uiu club', 'hridoyahmedddd@gmail.com', '01911360990', NULL, '', '456');
 
@@ -293,11 +304,11 @@ CREATE TABLE `outsiderequest` (
 
 INSERT INTO `outsiderequest` (`EventID`, `accept`, `OutsideAddress`, `StartTime`, `EndTime`, `EventDate`, `capacity`) VALUES
 (7, 1, 'uiu united city', '11:00:00', '13:00:00', '2023-12-30', 10),
-(12, 0, 'uiu united city', '12:38:00', '12:39:00', NULL, NULL),
-(77, NULL, 'uiu united city', NULL, NULL, NULL, NULL),
-(412, NULL, 'uiu united city', '13:29:00', '15:29:00', NULL, NULL),
-(6969, 1, 'NSU dhaka', NULL, NULL, NULL, NULL),
-(45678, 1, 'the westin dhaka', NULL, NULL, NULL, NULL);
+(12, 0, 'uiu united city', '12:38:00', '12:39:00', '2023-12-31', NULL),
+(77, 1, 'uiu united city', NULL, NULL, '2023-12-25', NULL),
+(412, 1, 'uiu united city', '13:29:00', '15:29:00', '2023-12-01', NULL),
+(6969, 1, 'NSU dhaka', NULL, NULL, '2023-12-01', NULL),
+(45678, 1, 'the westin dhaka', NULL, NULL, '2023-12-28', NULL);
 
 -- --------------------------------------------------------
 
@@ -419,6 +430,7 @@ INSERT INTO `qa` (`EventID`, `qus`, `ans`, `StudentID`, `StudentEmail`) VALUES
 (123, 'bhai ki koren', 'jan', 123, 'redoy.khan898@gmail.com'),
 (1, 'bhai ki koren', 'kisuna bhai', 888, 'sahmed221068@bscse.uiu.ac.bd'),
 (1, 'bhai ki koren', 'kisuna bhai', 12345, 'redoy.khan898@gmail.com'),
+(2, 'kgfdsgdfg', NULL, 123, 'sahmed221068@bscse.uiu.ac.bd'),
 (7, 'kire', 'kire', 123, 'redoy.khan898@gmail.com'),
 (1, 'mehrin er buke osudh atkaise bai ki korum ehon', 'ayhayhayhay bai ki kon', 546465, 'sahmed221068@bscse.uiu.ac.bd'),
 (1, 'sdffsdfsdf', 'bal', 45454, 'sahmed221068@bscse.uiu.ac.bd');
@@ -476,11 +488,12 @@ CREATE TABLE `request_` (
 INSERT INTO `request_` (`EventID`, `accept`, `SlotID`) VALUES
 (1, 1, 123),
 (2, 1, 654645),
-(69, NULL, 456),
+(69, 1, 456),
 (89, 1, 23),
-(96, NULL, 23),
+(96, 1, 23),
 (123, 1, 123),
-(7890, NULL, 23),
+(7890, 0, 23),
+(56675, 1, 4345),
 (56546456, 1, 89);
 
 -- --------------------------------------------------------
@@ -538,10 +551,11 @@ CREATE TABLE `slot` (
 --
 
 INSERT INTO `slot` (`StartTime`, `EndTime`, `SlotID`, `EventDate`, `VenueID`, `available`) VALUES
-('20:23:08', '22:23:08', 23, '2023-12-01', 456, 1),
+('20:23:08', '22:23:08', 23, '2023-12-01', 456, 0),
 ('20:23:08', '22:23:08', 89, '2023-12-01', 456, 0),
 ('20:23:08', '22:23:08', 123, '2023-12-10', 456, 0),
 ('20:23:08', '22:23:08', 456, '2023-12-20', 456, 0),
+('20:23:08', '22:23:08', 4345, '2023-12-31', 456, 0),
 ('20:23:08', '22:23:08', 654645, '2023-12-20', 456, 0);
 
 -- --------------------------------------------------------
@@ -587,7 +601,7 @@ CREATE TABLE `venue_` (
 --
 
 INSERT INTO `venue_` (`VenueID`, `VenueName`, `VenueCapacity`, `VenueFileimg`, `VenueLocation`) VALUES
-(456, 'comp lab 1', 10, NULL, 'third floor 307 room');
+(456, 'comp lab 1', 10, 'Lab.jpg', 'third floor 307 room');
 
 -- --------------------------------------------------------
 
