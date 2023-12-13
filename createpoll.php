@@ -62,8 +62,8 @@
         <ul class='nav-menu'>
           
           <li class='menu-active'><a href='welcomeorganizer.php?oid=". $oid . "'>Organizer Home</a></li>   
-          <li><a href='addevent.php?oid=". $oid . "'>Request event</a></li>
-          <li><a href='createpoll.php?oid=". $oid . "'>Create Poll</a></li>
+   
+          
 		  <li><a href='logout2.php'>Logout</a></li>
         </ul>
       </nav>";

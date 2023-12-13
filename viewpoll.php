@@ -18,6 +18,7 @@
 
 
 <title>Polls</title>
+<?php require 'utils/styles.php'; ?>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta content="" name="keywords">
   <meta content="" name="description">
@@ -377,38 +378,20 @@
  if(mysqli_num_rows($result) > 0)
  {
    while($row = mysqli_fetch_assoc($result)){
- echo '<div class="container">
-<div class="row">
-<div class="col-lg-6">
-<div class="card card-margin">
-<div class="card-header no-border">
-<h5 class="card-title">'. $row["EventName"] .'</h5>
-</div>
-<div class="card-body pt-0">
-<div class="widget-49">
-<div class="widget-49-title-wrapper">
-<div class="widget-49-date-primary">
-<span class="widget-49-date-day">>_<</span>
-<span class="widget-49-date-month"></span>
-</div>
-<div class="widget-49-meeting-info">
-<span class="widget-49-pro-title">'. $row["OrganizerName"] .'</span>
-
-</div>
-</div>
-<span class="widget-49-meeting-time">'. $row["Description"] .'</span>
-<div class="widget-49-meeting-action">
-<a href="pollvote.php?pid='. $row['PollID'] .'" class="btn btn-sm btn-flash-border-primary">Vote</a>
-</div>
-</div>
-</div>
-</div>
-</div>';
+    echo '<div class="alert alert-dark" role="alert">
+    <h4 class="alert-heading">'. $row['EventName'] .'!</h4>
+    <p>'.$row['Description'].'</p>
+    <hr>
+    <p class="mb-0">Organizer: '.$row['OrganizerName'].', Contact Number: '.$row['OrganizerContactNumber'].'</p>
+    <hr>
+    <p class="mb-0">If you want this event to happen please us with your <a href="pollvote.php?pid='.$row['PollID'].'">opinion!!</a></p>
+  </div>';
    }
   }
 
 
 ?>
+<a href=""></a>
 
 
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>

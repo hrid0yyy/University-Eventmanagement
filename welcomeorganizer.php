@@ -160,9 +160,11 @@
     echo" <nav id='nav-menu-container'>
         <ul class='nav-menu'>
         
-          <li class='menu-active'><a href='welcomeorganizer.php?oid=". $oid . "'>Organizer Home</a></li>   
+          <li class='menu-active'><a href='welcomeorganizer.php?oid=". $oid . "'>Organizer Home</a></li>
+          <li><a href='participants.php?oid=". $oid . "'>Participants</a></li>
+          <li><a href='volunteers.php?oid=". $oid . "'>Volunteers</a></li>     
           <li><a href='addevent.php?oid=". $oid . "'>Request event</a></li>
-          <li><a href='createpoll.php?oid=". $oid . "'>Create Poll</a></li>
+          <li><a href='poll.php?oid=". $oid . "'>Poll</a></li>
          
 		  <li><a href='logout2.php'>Logout</a></li>
    
