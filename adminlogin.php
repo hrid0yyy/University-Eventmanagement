@@ -217,7 +217,7 @@ input[type="password"]
 			
           <div class="carousel-item active">
 			 
-            <div class="carousel-background"><img src="img/uiu1.jpg" alt=""></div>
+            <div class="carousel-background"><img src="img/uiu1.jpg" style="height:100%; width:100%;" alt=""></div>
             <div class="carousel-container">
               <div class="carousel-content">
               </div>

@@ -9,7 +9,7 @@ $flag = 0;
 
 //checking if connection is working or not
 //Output Form Entries from the Database
-$query = "SELECT events.EventID,EventName,EventDescription,EventFileBanner,EventDate,VenueName,StartTime,EndTime,OrganizerName,OrganizerEmail,OrganizerContactNumber,ShortDescription FROM events join request_ on events.EventID=request_.EventID join slot on slot.SlotID=request_.SlotID join venue_ on slot.VenueID=venue_.VenueID
+$query = "SELECT events.EventID,EventName,EventBudget,EventDescription,EventFileBanner,EventDate,VenueName,StartTime,EndTime,OrganizerName,OrganizerEmail,OrganizerContactNumber,ShortDescription FROM events join request_ on events.EventID=request_.EventID join slot on slot.SlotID=request_.SlotID join venue_ on slot.VenueID=venue_.VenueID
 JOIN organizer on events.OrganizerID=organizer.OrganizerID  where events.EventID=$eid";
 $result = $conn->query($query);
 if ($result->num_rows > 0) {
@@ -28,12 +28,12 @@ if ($result->num_rows > 0) {
    $oname=$row['OrganizerName'];
    $onumber=$row['OrganizerContactNumber'];
    $oemail=$row['OrganizerEmail'];
-
+   $ebudget=$row['EventBudget'];
  }
  else
  {
    $flag = 1;
-   $query = "SELECT events.EventID,EventName,EventDescription,EventFileBanner,ShortDescription,EventDate,OutsideAddress,StartTime,EndTime,OrganizerName,OrganizerEmail,OrganizerContactNumber FROM events join outsiderequest on events.EventID=outsiderequest.EventID 
+   $query = "SELECT events.EventID,EventName,EventBudget,EventDescription,EventFileBanner,ShortDescription,EventDate,OutsideAddress,StartTime,EndTime,OrganizerName,OrganizerEmail,OrganizerContactNumber FROM events join outsiderequest on events.EventID=outsiderequest.EventID 
    JOIN organizer on events.OrganizerID=organizer.OrganizerID  where events.EventID=$eid";
    $result = $conn->query($query);
    if ($result->num_rows > 0) {
@@ -51,6 +51,7 @@ if ($result->num_rows > 0) {
    $oname=$row['OrganizerName'];
    $onumber=$row['OrganizerContactNumber'];
    $oemail=$row['OrganizerEmail'];
+   $ebudget=$row['EventBudget'];
    
 
 
@@ -113,14 +114,15 @@ https://www.tooplate.com/view/2119-gymso-fitness
                               <div class="col-md-5"><!--image holder with 5 grid column-->
                               <img src="./image/'. $efile .'" width="350px" height="250px" class="center">
                               </div>
-                                    <h6 data-aos="fade-up" data-aos-delay="300">Organized By '. $oname .'</h6>
+                                    <h6 data-aos="fade-up" data-aos-delay="300" style="color: white;">Organized By '. $oname .'</h6>
 
                                     <h1 class="text-white" data-aos="fade-up" data-aos-delay="500">'. $ename .'</h1>
-                                    <h6 data-aos="fade-up" data-aos-delay="300"> '. $esdesc .'</h6>
+                                    <h6 data-aos="fade-up" data-aos-delay="300" style="color: white;"> '. $esdesc .'</h6>
                                     <br>
-                                    <p data-aos="fade-up" data-aos-delay="500"> description '. $edesc .'</p>
-                                    <p data-aos="fade-up" data-aos-delay="500">Event Guests: </p>
-                                    <p data-aos="fade-up" data-aos-delay="500">Event Sponsers:'; ?>   <?php
+                                    <p data-aos="fade-up" data-aos-delay="500" style="color: white;"> Description: '. $edesc .'</p>
+                                    <p data-aos="fade-up" data-aos-delay="500" style="color: red;"> Budget: '. $ebudget .'</p>
+                                    <p data-aos="fade-up" data-aos-delay="500" style="color: red;">Event Guests: </p>
+                                    <p data-aos="fade-up" data-aos-delay="500" style="color: red;">Event Sponsers:'; ?>   <?php
                                     $que = "SELECT SponsorName
                                     FROM event_sponsers JOIN sponsors on event_sponsers.SponsorID=sponsors.SponsorID where EventID = 7";
        $res = mysqli_query($conn,$que);
@@ -132,7 +134,7 @@ https://www.tooplate.com/view/2119-gymso-fitness
          
        } ?>  <?php
                                      echo'</p>
-                                     <p data-aos="fade-up" data-aos-delay="500">Event Type:'; ?>   <?php
+                                     <p data-aos="fade-up" data-aos-delay="500" style="color: white;">Event Type:'; ?>   <?php
                                      $que = "SELECT EventType
                                      FROM events_eventtype  where EventID = 7";
         $res = mysqli_query($conn,$que);
@@ -143,7 +145,8 @@ https://www.tooplate.com/view/2119-gymso-fitness
     
           
         } ?> 
-                           <?php          echo'<p data-aos="fade-up" data-aos-delay="500">Event Date: '. date('j F, y',strtotime($edate)).'</p>
+                           <?php          echo'<p style="color: white;" data-aos="fade-up" data-aos-delay="500">Address: '. $eaddress.'. Event Date: '. date('j F, y',strtotime($edate)).'. Start Time: '. date('h:i:s a ', strtotime($estime)) .' End TIme: '. date('h:i:s a ', strtotime($eetime)) .'</p>
+                
                            
                                    
                               </div>

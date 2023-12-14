@@ -15,13 +15,18 @@ if(isset($_SESSION['username']))
       $conn = mysqli_connect($servername,$username,$password,$database);
       if(isset($_POST['signup']))
     {
-      // update
       $id = $_POST['id'];
       $organization = $_POST['organization'];
       $email = $_POST['email'];
       $number = $_POST['number'];
       $password = $_POST['password'];
-      $sql = "INSERT INTO `organizer` (`OrganizerID`, `OrganizerName`, `OrganizerEmail`, `OrganizerPass`,`OrganizerContactNumber`)  VALUES ('$id', '$organization', '$email', '$password','$number')";
+      $odesc= $_POST['odesc'];
+
+      $filename = $_FILES["file"]["name"];
+      $tempname = $_FILES["file"]["tmp_name"];
+      $folder = "./image/" . $filename;
+
+      $sql = "INSERT INTO `organizer` (`OrganizerID`, `OrganizerName`, `OrganizerEmail`, `OrganizerPass`,`OrganizerContactNumber`,`OrganizerDescription`,`OrganizerFileLogo`)  VALUES ('$id', '$organization', '$email', '$password','$number','$odesc','$filename')";
 
       $res = mysqli_query($conn,$sql);
      
@@ -243,21 +248,30 @@ if(isset($_SESSION['username']))
         </div>
         <div class="modal-body" align="center">
           <form action="#" method="POST">
-			<input type="text" name="id" id="id" placeholder="Enter unique ID for your organization" style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
+          <!-- <label for="file">Organization Logo</label>
+        <input type="file"  name="file" id="file" placeholder="Enter your organization logo" required  style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
+			  <br>
+			  <br> -->
+			<input type="text" name="id" id="id" placeholder="Enter unique ID for your organization" required style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
 			  <br>
 			  <br>
-        <input type="text" name="email" id="email" placeholder="Enter Your email" style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
+        <input type="text" name="email" id="email" placeholder="Enter Your email" required  style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
 			  <br>
 			  <br>
-        <input type="text" name="password" id="password" placeholder="Enter your password" style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
+        <input type="text" name="password" id="password" placeholder="Enter your password" required  style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
 			  <br>
 			  <br>
-        <input type="text" name="organization" id="organization" placeholder="Enter your organization name" style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
+        <input type="text" name="organization" id="organization" placeholder="Enter your organization name" required  style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
 			  <br>
 			  <br>
-        <input type="text" name="number" id="number" placeholder="Enter Your number name" style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
+        <input type="text" rows="3" name="odesc" id="organization" placeholder="Organization Description" required  style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
 			  <br>
 			  <br>
+        <input type="text" name="number" id="number" placeholder="Enter Your number " required  style="width: 220px; text-align: center;height: 30px;border-radius: 6px;outline: none; border-bottom-color: lightgreen; border-top-color: lightgreen; border-right-color: lightgreen; border-left-color: lightgreen;">
+			  <br>
+			  <br>
+       
+        
         
 				<button type="submit" name="signup" class="btn btn-success" name="btn">Enter</button>
 			</form>
@@ -283,7 +297,7 @@ if(isset($_SESSION['username']))
 			
           <div class="carousel-item active">
 			 
-            <div class="carousel-background"><img src="img/uiu2.jpg" alt=""></div>
+            <div class="carousel-background"><img src="img/uiu2.jpg" style="height:100%; width:100%;" alt=""></div>
             <div class="carousel-container">
               <div class="carousel-content">
               </div>

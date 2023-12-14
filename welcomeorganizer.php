@@ -370,7 +370,7 @@
     echo "<tr>
     <th scope='row'>". $row['EventName'] . "</th>
     <td>". $row['qus'] . "</td>
-    <td> <form method='POST'>  <input class='txt' type='text' id='ans' name='ans' oplaceholder='give your ans' required></td>
+    <td> <form method='POST'>  <input class='txt' type='text' id='ans' name='ans' oplaceholder='give your ans' ></td>
     <td> <button class='btn btn-sm btn-primary' id=".$row['qus']." name='submit' >ANS</button></td> 
     <td> <button class='btn btn-sm btn-primary' id=".$row['qus']." name='delete' >DEL</button></td> </form>
   </tr>";
@@ -420,11 +420,11 @@ else{
 
 <table id="myTable2">
   <tr class="header">
-  <th style="width:20%;">ParticipantsID</th>
-    <th style="width:50%;">Event Name</th>
-    <th style="width:60%;">Event Date</th>
+  <th style="width:10%;">ParticipantsID</th>
+    <th style="width:10%;">Event Name</th>
+    <th style="width:10%;">Event Date</th>
     <th style="width:60%;">Comments</th>
-    <th style="width:60%;">Rating</th>
+    <th style="width:10%;">Rating</th>
     
   </tr>
 <?php

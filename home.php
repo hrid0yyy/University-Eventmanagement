@@ -82,7 +82,7 @@ $date = date('Y-m-d');
         <div class="carousel-inner" role="listbox">
 
           <div class="carousel-item active">
-            <div class="carousel-background"><img src="img/campus.jpg" alt=""></div>
+            <div class="carousel-background"><img src="img/campus.jpg" style="height:100%; width:100%;"></div>
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2>United International University</h2>
@@ -93,7 +93,7 @@ $date = date('Y-m-d');
           </div>
 
           <div class="carousel-item">
-            <div class="carousel-background"><img src="img/Class.jpg" alt=""></div>
+            <div class="carousel-background"><img src="img/Class.jpg" style="height:100%; width:100%;"></div>
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2>Classroom</h2>
@@ -104,7 +104,7 @@ $date = date('Y-m-d');
           </div>
 
           <div class="carousel-item">
-            <div class="carousel-background"><img src="img/Field.jpg" alt=""></div>
+            <div class="carousel-background"><img src="img/Field.jpg" style="height:100%; width:100%;"></div>
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2>Field</h2>
@@ -115,7 +115,7 @@ $date = date('Y-m-d');
           </div>
 
           <div class="carousel-item">
-            <div class="carousel-background"><img src="img/Hall.jpg" alt=""></div>
+            <div class="carousel-background"><img src="img/Hall.jpg" style="height:100%; width:100%;"></div>
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2>UIU Multipurpose Hall</h2>
@@ -126,7 +126,7 @@ $date = date('Y-m-d');
           </div>
 
           <div class="carousel-item">
-            <div class="carousel-background"><img src="img/Lab.jpg" alt=""></div>
+            <div class="carousel-background"><img src="img/Lab.jpg" style="height:100%; width:100%;"></div>
             <div class="carousel-container">
               <div class="carousel-content">
                 <h2>Computer Lab</h2>
@@ -150,9 +150,9 @@ $date = date('Y-m-d');
 
       </div>
     </div>
-  </section>
+  </section><br> <br>
 	<section id="events">
-  <br> <br>
+  
   <div class="content"><!--body content holder-->
             <div class="container">
                 <div class="col-md-12" style="text-align: center;"><!--body content title holder with 12 grid columns-->
@@ -214,7 +214,7 @@ $date = date('Y-m-d');
                       
                    </div>
                </div>
-           </section>
+           
        </div> ';
 
       }
@@ -232,7 +232,7 @@ $date = date('Y-m-d');
     mysqli_close($conn);
 
 ?>
-
+</section>
 
 
 	

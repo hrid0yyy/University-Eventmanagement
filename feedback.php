@@ -225,6 +225,9 @@ background:#eee;
 <div class="form-group col-md-6">
 <input type="text" name="pid" class="form-control" placeholder="Enter your Participant ID" required="required">
 </div>
+<div class="form-group col-md-6">
+<input type="text" name="ppass" class="form-control" placeholder="Enter your Password" required="required">
+</div>
 <div class="form-group col-md-12">
 <label for="rating">Your Rattings</label>
   <select name="rating" id="rating">
@@ -252,7 +255,22 @@ if(isset($_POST['submit']))
     $eid= $_GET['eid'];
     $rating= $_POST['rating'];
     $pid= $_POST['pid'];
+    $ppass= $_POST['ppass'];
     $comments= $_POST['comments'];
+     
+    
+    
+    $sql9 = "SELECT * 
+    FROM participants
+    WHERE ParticipantID= $pid and pass='$ppass'";
+    $r9 = mysqli_query($conn, $sql9);
+    if(mysqli_num_rows($r9) == 0)
+    {
+        echo "<script>alert('Wrong Credentials Try Again!')</script>";
+		echo "<script>location.href='feedback.php?eid=". $eid ."'</script>";
+    
+     }
+     else{
 
 
 
@@ -293,6 +311,7 @@ if(isset($_POST['submit']))
 	}
 }
 
+}
 }
 ?>
 
