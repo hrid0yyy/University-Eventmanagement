@@ -181,7 +181,6 @@ if(!isset($_SESSION['username'])){
       <th scope="col">Slot</th>
       <th scope="col">Event Name</th>
       <th scope="col">Organizer Name</th>
-      <th scope="col">Performance</th>
       
       <th scope="col">Response</th>
       <th scope="col">Details</th>
@@ -192,17 +191,10 @@ if(!isset($_SESSION['username'])){
     
   <?php
        
-       $que = "SELECT tab1.oid as oid ,SlotID,OrganizerName,EventName,rat,eid
-       FROM 
-       (SELECT organizer.OrganizerID as oid,OrganizerName,events.EventID as  eid,EventName,EventDescription,SlotID
+       $que = "SELECT organizer.OrganizerID as oid,OrganizerName,events.EventID as  eid,EventName,EventDescription,SlotID
               FROM request_ join events on request_.EventID=events.EventID 
                             JOIN organizer on events.OrganizerID=organizer.OrganizerID           
-              where accept is NULL) as tab1
-              JOIN
-       (SELECT organizer.OrganizerID as oid, avg(Rating) as rat
-       FROM feedback_ JOIN events on feedback_.EventID=events.EventID
-                       JOIN organizer on organizer.OrganizerID=events.OrganizerID) as tab2
-               ON tab1.oid=tab2.oid";
+              where accept is NULL";
        $sl = 0;
        $res = mysqli_query($conn,$que);
        while($row = mysqli_fetch_assoc($res))
@@ -212,24 +204,16 @@ if(!isset($_SESSION['username'])){
           <th scope='row'>". $row['SlotID']. "</th>
           <td>". $row['EventName'] . "</td>
           <td>". $row['OrganizerName'] . "</td>
-          <td>". $row['rat'] . "</td>
           <td> <button class='accept btn btn-sm btn-primary' id=d".$row['eid'].">Accept</button>  <button class='delete btn btn-sm btn-primary' id=d".$row['eid'].">Delete</button></td>
           <td><a href='adetails.php?eid=". $row['eid'] ."'>Link</a></td>
           <td><a href='notice.php?oid=". $row['oid'] ."&oname=".$row['OrganizerName']."&eid=".$row['eid']."&ename=".$row['EventName']."'>Link</a></td>
         </tr>";
          
        }
-       $que = "SELECT tab1.oid as oid,OutsideAddress,OrganizerName,EventName,rat,eid
-       FROM 
-       (SELECT organizer.OrganizerID as oid,OrganizerName,events.EventID as  eid,EventName,OutsideAddress
-              FROM outsiderequest join events on outsiderequest.EventID=events.EventID 
-                            JOIN organizer on events.OrganizerID=organizer.OrganizerID           
-              where accept is NULL) as tab1
-              JOIN
-       (SELECT organizer.OrganizerID as oid, avg(Rating) as rat
-       FROM feedback_ JOIN events on feedback_.EventID=events.EventID
-                       JOIN organizer on organizer.OrganizerID=events.OrganizerID) as tab2
-               ON tab1.oid=tab2.oid";
+       $que = " SELECT organizer.OrganizerID as oid,OrganizerName,events.EventID as  eid,EventName,OutsideAddress
+       FROM outsiderequest join events on outsiderequest.EventID=events.EventID 
+                     JOIN organizer on events.OrganizerID=organizer.OrganizerID           
+       where accept is NULL";
        $res = mysqli_query($conn,$que);
        while($row = mysqli_fetch_assoc($res))
        {
@@ -238,7 +222,6 @@ if(!isset($_SESSION['username'])){
           <th scope='row'>". $row['OutsideAddress']. "</th>
           <td>". $row['EventName'] . "</td>
           <td>". $row['OrganizerName'] . "</td>
-          <td>". $row['rat'] . "</td>
           <td> <button class='oaccept btn btn-sm btn-primary' id=d".$row['eid'].">Accept</button>  <button class='odelete btn btn-sm btn-primary' id=d".$row['eid'].">Delete</button></td>
           <td><a href='adetails.php?eid=". $row['eid'] ."'>Link</a></td>
 

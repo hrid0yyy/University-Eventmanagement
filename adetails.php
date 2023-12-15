@@ -9,7 +9,7 @@ $flag = 0;
 
 //checking if connection is working or not
 //Output Form Entries from the Database
-$query = "SELECT events.EventID,EventName,EventBudget,EventDescription,EventFileBanner,EventDate,VenueName,StartTime,EndTime,OrganizerName,OrganizerEmail,OrganizerContactNumber,ShortDescription FROM events join request_ on events.EventID=request_.EventID join slot on slot.SlotID=request_.SlotID join venue_ on slot.VenueID=venue_.VenueID
+$query = "SELECT events.EventID,EventName,EventBudget,EventDescription,EventFileBanner,EventDate,VenueName,StartTime,EndTime,OrganizerName,EventGuest,OrganizerEmail,OrganizerContactNumber,ShortDescription FROM events join request_ on events.EventID=request_.EventID join slot on slot.SlotID=request_.SlotID join venue_ on slot.VenueID=venue_.VenueID
 JOIN organizer on events.OrganizerID=organizer.OrganizerID  where events.EventID=$eid";
 $result = $conn->query($query);
 if ($result->num_rows > 0) {
@@ -29,11 +29,12 @@ if ($result->num_rows > 0) {
    $onumber=$row['OrganizerContactNumber'];
    $oemail=$row['OrganizerEmail'];
    $ebudget=$row['EventBudget'];
+   $eguest=$row['EventGuest'];
  }
  else
  {
    $flag = 1;
-   $query = "SELECT events.EventID,EventName,EventBudget,EventDescription,EventFileBanner,ShortDescription,EventDate,OutsideAddress,StartTime,EndTime,OrganizerName,OrganizerEmail,OrganizerContactNumber FROM events join outsiderequest on events.EventID=outsiderequest.EventID 
+   $query = "SELECT events.EventID,EventName,EventBudget,EventDescription,EventFileBanner,ShortDescription,EventDate,OutsideAddress,EventGuest,StartTime,EndTime,OrganizerName,OrganizerEmail,OrganizerContactNumber FROM events join outsiderequest on events.EventID=outsiderequest.EventID 
    JOIN organizer on events.OrganizerID=organizer.OrganizerID  where events.EventID=$eid";
    $result = $conn->query($query);
    if ($result->num_rows > 0) {
@@ -52,7 +53,7 @@ if ($result->num_rows > 0) {
    $onumber=$row['OrganizerContactNumber'];
    $oemail=$row['OrganizerEmail'];
    $ebudget=$row['EventBudget'];
-   
+   $eguest=$row['EventGuest'];
 
 
  }
@@ -121,14 +122,15 @@ https://www.tooplate.com/view/2119-gymso-fitness
                                     <br>
                                     <p data-aos="fade-up" data-aos-delay="500" style="color: white;"> Description: '. $edesc .'</p>
                                     <p data-aos="fade-up" data-aos-delay="500" style="color: red;"> Budget: '. $ebudget .'</p>
-                                    <p data-aos="fade-up" data-aos-delay="500" style="color: red;">Event Guests: </p>
-                                    <p data-aos="fade-up" data-aos-delay="500" style="color: red;">Event Sponsers:'; ?>   <?php
-                                    $que = "SELECT SponsorName
-                                    FROM event_sponsers JOIN sponsors on event_sponsers.SponsorID=sponsors.SponsorID where EventID = 7";
+                                    <p data-aos="fade-up" data-aos-delay="500" style="color: red;">Event Guests: '. $eguest .'</p>
+                                    <p data-aos="fade-up" data-aos-delay="500" style="color: red;">Sponsers</p>
+                                    <p data-aos="fade-up" data-aos-delay="500" style="color: red;">'; ?>   <?php
+                                    $que = "SELECT SponsorName,SponsorFileLogo
+                                    FROM event_sponsers JOIN sponsors on event_sponsers.SponsorID=sponsors.SponsorID where EventID = $eid";
        $res = mysqli_query($conn,$que);
        while($row = mysqli_fetch_assoc($res))
        {
-          echo $row["SponsorName"];
+          echo "<img src='./image/". $row['SponsorFileLogo'] ."' width='45px' height='35px' style='border-radius: 50%;' >";
           echo " ";
    
          
@@ -136,12 +138,12 @@ https://www.tooplate.com/view/2119-gymso-fitness
                                      echo'</p>
                                      <p data-aos="fade-up" data-aos-delay="500" style="color: white;">Event Type:'; ?>   <?php
                                      $que = "SELECT EventType
-                                     FROM events_eventtype  where EventID = 7";
+                                     FROM events_eventtype  where EventID = $eid";
         $res = mysqli_query($conn,$que);
         while($row = mysqli_fetch_assoc($res))
         {
            echo $row["EventType"];
-           echo " ";
+           echo ", ";
     
           
         } ?> 

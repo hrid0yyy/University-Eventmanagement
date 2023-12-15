@@ -124,13 +124,14 @@ https://www.tooplate.com/view/2119-gymso-fitness
                                     <br>
                                     <p data-aos="fade-up" data-aos-delay="500">'. $edesc .'</p>
                                     <p data-aos="fade-up" data-aos-delay="500">Event Guests: '. $eguest .'</p>
-                                    <p data-aos="fade-up" data-aos-delay="500">Event Sponsers:'; ?>   <?php
-                                    $que = "SELECT SponsorName
-                                    FROM event_sponsers JOIN sponsors on event_sponsers.SponsorID=sponsors.SponsorID where EventID = 7";
+                                    <p data-aos="fade-up" data-aos-delay="500" >Sponsers</p>
+                                    <p data-aos="fade-up" data-aos-delay="500">'; ?>   <?php
+                                    $que = "SELECT SponsorName,SponsorFileLogo
+                                    FROM event_sponsers JOIN sponsors on event_sponsers.SponsorID=sponsors.SponsorID where EventID = $eid";
        $res = mysqli_query($conn,$que);
        while($row = mysqli_fetch_assoc($res))
        {
-          echo $row["SponsorName"];
+          echo "<img src='./image/". $row['SponsorFileLogo'] ."' width='45px' height='35px' style='border-radius: 50%;' >";
           echo " ";
    
          
@@ -138,12 +139,12 @@ https://www.tooplate.com/view/2119-gymso-fitness
                                      echo'</p>
                                      <p data-aos="fade-up" data-aos-delay="500">Event Type:'; ?>   <?php
                                      $que = "SELECT EventType
-                                     FROM events_eventtype  where EventID = 7";
+                                     FROM events_eventtype  where EventID = $eid";
         $res = mysqli_query($conn,$que);
         while($row = mysqli_fetch_assoc($res))
         {
            echo $row["EventType"];
-           echo " ";
+           echo ", ";
     
           
         } ?> 

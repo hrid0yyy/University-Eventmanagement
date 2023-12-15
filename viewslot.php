@@ -148,21 +148,26 @@
 
 <table id="myTable">
   <tr class="header">
-  <th style="width:60%;">Slot ID</th>
-    <th style="width:60%;">Venue</th>
-    <th style="width:60%;">Location</th>
-    <th style="width:60%;">Capacity</th>
+  <th style="width:20%;">Date</th>
+    <th style="width:20%;">Venue</th>
+    <th style="width:20%;">Start Time</th>
+    <th style="width:20%;">End time</th>
+    <th style="width:20%;">Location</th>
+    <th style="width:20%;">Capacity</th>
   </tr>
   <?php
-  $que = "SELECT SlotID,VenueName,VenueLocation,VenueCapacity
+  $que = "SELECT EventDate,StartTime,EndTime,SlotID,VenueName,VenueLocation,VenueCapacity
   FROM slot join venue_ on slot.VenueID=venue_.VenueID
-  WHERE available = 1";
+  WHERE available = 1
+  order by EventDate asc";
   $res = mysqli_query($conn,$que);
   while($row = mysqli_fetch_assoc($res))
   {
     echo "<tr>
-    <th scope='row'>". $row['SlotID'] . "</th>
+    <th scope='row'>". date('j F, y',strtotime($row['EventDate'])) . "</th>
     <td>". $row['VenueName'] . "</td>
+    <td>". date('h:i a', strtotime($row['StartTime'])) . "</td>
+    <td>". date('h:i a', strtotime($row['EndTime'])) . "</td>
     <td>". $row['VenueLocation'] . "</td>
     <td>". $row['VenueCapacity'] . "</td>
     <td>  <a href='bookevent.php?id=". $row['SlotID'] . "&oid=".$oid."'>Book</a> </td>

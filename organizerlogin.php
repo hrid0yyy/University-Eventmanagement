@@ -203,10 +203,10 @@ if(isset($_SESSION['username']))
         <form action="#" method="POST">
 			<br>
       <p> Email</p> 
-            <input type="text" id="user" placeholder="Enter Email" name="user" autocomplete="off" >
+            <input type="text" class="form-control" id="user" placeholder="Enter Email" name="user" autocomplete="off" >
 			<br><br>
             <p> Password </p>
-            <input type="text" id="pass" placeholder="Enter Password" name="pass" autocomplete="off" >
+            <input type="password" class="form-control" id="pass" placeholder="Enter Password" name="pass" autocomplete="off" >
 					<br><br>
             <input type="submit" id="submit" name="submit" value="Login">
 			
@@ -308,15 +308,7 @@ if(isset($_SESSION['username']))
 
         </div>
 
-        <a class="carousel-control-prev" href="#introCarousel" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon ion-chevron-left" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-
-        <a class="carousel-control-next" href="#introCarousel" role="button" data-slide="next">
-          <span class="carousel-control-next-icon ion-chevron-right" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
+       
 
       </div>
     </div>

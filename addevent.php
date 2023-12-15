@@ -77,7 +77,8 @@
     echo" <nav id='nav-menu-container'>
         <ul class='nav-menu'>
           
-          <li class='menu-active'><a href='welcomeorganizer.php?oid=". $oid . "'>Organizer Home</a></li>   
+          <li class='menu-active'><a href='welcomeorganizer.php?oid=". $oid . "'>Organizer Home</a></li> 
+          <li class='menu-active'><a href='sponsers.php?oid=". $oid . "'>Sponsers</a></li>  
           <li class='menu-active'><a href='addevent.php?oid=". $oid . "'>Add Event</a></li>
           <li><a href='viewslot.php?oid=". $oid . "'>Available slot</a></li>
 		  <li><a href='logout2.php'>Logout</a></li>
@@ -188,6 +189,14 @@
                     
                     
                 </div>
+                <br>
+                <div class="row">
+                   <div class="col-md-1"><label for="capacity">Capacity<span>&#42;</span></label></div>
+                    <div class="col-md-5"><input type="text" class="form-control" id="capacity" placeholder="Event capacity" name="capacity" required ></div> 
+                    
+                    
+                    
+                </div>
                
             </div>
 
@@ -251,6 +260,7 @@ if(isset($_POST['submit']))
     $estime= $_POST['estime'];
     $edtime= $_POST['edtime'];
     $address= $_POST['address'];
+    $capacity= $_POST['capacity'];
 
     $filename = $_FILES["uploadfile"]["name"];
 	$tempname = $_FILES["uploadfile"]["tmp_name"];
@@ -268,7 +278,7 @@ if(isset($_POST['submit']))
 	
   
     $sql = mysqli_query($conn,"INSERT INTO `events` (`EventID`, `EventName`, `OrganizerID`, `EventDescription`,`EventFileBanner`,`EventFileBadge`,`EventGuest`,`EventBudget`,`ShortDescription`) VALUES ('$eid', '$ename', '$oid','$edesc','$filename','$filename2','$eguest','$ebudget','$esdesc')") or die("Query Failed".mysqli_error($conn));
-    $sql2 = mysqli_query($conn,"INSERT INTO `outsiderequest` (`EventID`, `OutsideAddress`,`EventDate`,`StartTime`,`EndTime`) VALUES ('$eid', '$address','$edate','$estime','$edtime')") or die("Query Failed".mysqli_error($conn));
+    $sql2 = mysqli_query($conn,"INSERT INTO `outsiderequest` (`EventID`, `OutsideAddress`,`EventDate`,`StartTime`,`EndTime`,`capacity`) VALUES ('$eid', '$address','$edate','$estime','$edtime','$capacity')") or die("Query Failed".mysqli_error($conn));
 
 
   
