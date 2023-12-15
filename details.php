@@ -4,6 +4,7 @@ $username = "root";
 $password = "";
 $database = "eventadministration";
 $eid = $_GET["eid"];
+$rat = $_GET["rat"];
 $conn = mysqli_connect($servername,$username,$password,$database);
 $flag = 0;
 
@@ -88,6 +89,38 @@ if ($result->num_rows > 0) {
   margin-left: 170px;
 
  
+}
+.ratings-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+}
+
+.item-name {
+    font-weight: bold;
+}
+
+.rating {
+    color: #00f;
+    font-size: 24px;
+}
+
+.star {
+    color: #ddd;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.filled {
+    color: #f8d825;
 }
 </style>
      <!-- MAIN CSS -->
@@ -214,18 +247,26 @@ https://www.tooplate.com/view/2119-gymso-fitness
 
                             <div class="mr-lg-auto mt-5 mt-lg-0 mt-md-0 col-lg-3 col-md-6 col-12" data-aos="fade-up" data-aos-delay="800">
                                 <div class="team-thumb">
-                            <?php   echo'<img src="./image/'. $ofile .'" width="250 px" height="150px" >';  ?>
+                            <?php   echo'<img src="./image/'. $ofile .'" width="250 px" height="250px" >';  ?>
 
                                     <div class="team-info d-flex flex-column">
 
                                        
                                         <span><?php echo $oname  ?></span>
-
+                                       <span> <?php 
+                                          if($rat != null) {   
+                                            for ($i = 1; $i <= 5; $i++) {
+                                             echo "<span  class='star " . (($i <= $rat) ? 'filled' : '') . "'>&#9733;</span>";
+                                         }   
+                                       } 
+                                        ?></span>
                                         <ul class="social-icon mt-0">
                                             <li><a href="#" class="fa fa-instagram"></a></li>
                                             <li><a href="#" class="fa fa-facebook"></a></li>
                                         </ul>
+                                       
                                     </div>
+                                   
                                 </div>
                             </div>
 
@@ -620,6 +661,15 @@ else{
 
 if(isset($_POST['qsubmit']))
 {
+  $q= "SELECT EventName
+  FROM events join outsiderequest on events.EventID=outsiderequest.EventID   
+  WHERE events.EventID=$eid AND (EventDate >= CURDATE() + INTERVAL 4 DAY)";
+  $r = $conn->query($q);
+
+  if ($r->num_rows > 0){
+
+
+
     $sid= $_POST['sid'];
     $qus= $_POST['qus'];
     $email= $_POST['email'];
@@ -633,6 +683,12 @@ if(isset($_POST['qsubmit']))
 		echo "<script>alert('We will answer your qus soon')</script>";
 
 	}
+}
+else
+{
+
+  echo "<script>alert('Deadline is over')</script>";
+}
 	
 	
 }

@@ -35,7 +35,40 @@ $date = date('Y-m-d');
 
   
   <link href="css/style.css" rel="stylesheet">
+<style>
+  .ratings-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 800px;
+    margin: 20px auto;
+}
 
+.item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+}
+
+.item-name {
+    font-weight: bold;
+}
+
+.rating {
+    color: #00f;
+    font-size: 24px;
+}
+
+.star {
+    color: #ddd;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.filled {
+    color: #f8d825;
+}
+</style>
   
 </head>
 
@@ -58,6 +91,7 @@ $date = date('Y-m-d');
             <ul>
               <li><a href="#events">Upcoming Events</a></li>
               <li><a href="prevevents.php">Previous Events</a></li>
+              <li><a href="mevents.php">Milestone Events</a></li>
             </ul>
           </li>
           <!-- <li><a href="#about">About Us</a></li> -->
@@ -171,16 +205,26 @@ $date = date('Y-m-d');
     $conn = mysqli_connect($servername,$username,$password,$database);
     //checking if connection is working or not
     //Output Form Entries from the Database
-    $sql = "((SELECT events.EventID,EventName,ShortDescription,EventFileBanner,EventDate 
-    FROM events join request_ on events.EventID=request_.EventID 
-    join slot on request_.SlotID=slot.SlotID 
-    where accept=1 and EventDate>CURDATE())
-     
-     UNION
-    
-    (SELECT events.EventID,EventName,ShortDescription,EventFileBanner,EventDate 
-    FROM events join outsiderequest on events.EventID=outsiderequest.EventID 
-    where accept=1 and EventDate>CURDATE()))";
+    $sql = "SELECT OrganizerName,rat,eid,EventName,ShortDescription,EventFileBanner,EventDate
+    FROM
+    (SELECT avg(Rating) as rat,organizer.OrganizerID as oid
+    FROM feedback_ JOIN  events on feedback_.EventID=events.EventID
+                   JOIN  organizer on events.OrganizerID=organizer.OrganizerID) as tab1
+                   JOIN
+    (((SELECT organizer.OrganizerID as oid,OrganizerName,events.EventID as eid,EventName,ShortDescription,EventFileBanner,EventDate
+        FROM events join request_ on events.EventID=request_.EventID 
+        join slot on request_.SlotID=slot.SlotID
+        JOIN organizer on events.OrganizerID=organizer.OrganizerID
+        where accept=1 and EventDate>CURDATE())
+         
+         UNION
+        
+        (SELECT organizer.OrganizerID as oid,OrganizerName,events.EventID,EventName,ShortDescription,EventFileBanner,EventDate 
+        FROM events join outsiderequest on events.EventID=outsiderequest.EventID 
+         JOIN organizer on events.OrganizerID=organizer.OrganizerID
+        where accept=1 and EventDate>CURDATE()))) as tab2
+        
+        on tab1.oid=tab2.oid";
     //fire query
     $result = mysqli_query($conn, $sql);
     if(mysqli_num_rows($result) > 0)
@@ -204,12 +248,14 @@ $date = date('Y-m-d');
                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
                    <div class="col-md-6">
                        <h1 class="title">'. $row["EventName"] .'</h1>
-                       <p class="location">
                       
-                       </p>
-                       <h5 class="definition">'. $row["ShortDescription"] .'</h5>
-                       
-                       <a href="details.php?eid='. $row['EventID'] .'">View Details</a>
+                       <h5 class="definition">'. $row["OrganizerName"] .'  ';
+                   if($row['rat'] != null) {   
+                       for ($i = 1; $i <= 5; $i++) {
+                        echo "<span class='star " . (($i <= $row['rat']) ? 'filled' : '') . "'>&#9733;</span>";
+                    }   
+                  }    
+                    echo '</h5><h7>'.$row["ShortDescription"].'  </h7><a href="details.php?eid='. $row['eid'] .'&rat='.$row['rat'].'">View Details</a>
                     
                       
                    </div>

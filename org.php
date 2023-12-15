@@ -75,6 +75,38 @@ if(!isset($_SESSION['username'])){
 		
         .box{border:1px solid lightgrey;padding:20px;border-radius:5px;}
         .box-sm{border:1px solid lightgrey;padding:5px;border-radius:5px;background-color:white;}
+        .ratings-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+}
+
+.item-name {
+    font-weight: bold;
+}
+
+.rating {
+    color: #00f;
+    font-size: 24px;
+}
+
+.star {
+    color: #ddd;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.filled {
+    color: #f8d825;
+}     
     </style>
    
 </head>
@@ -141,7 +173,10 @@ if(!isset($_SESSION['username'])){
           echo "<tr>
           <th scope='row'>". $row['OrganizerName']. "</th>
           <td>". $row['EventName'] . "</td>
-          <td>". $row['AVG(Rating)'] . "</td>
+          <td>";  
+           for ($i = 1; $i <= 5; $i++) {
+            echo "<span class='star " . (($i <= $row['AVG(Rating)']) ? 'filled' : '') . "'>&#9733;</span>";
+        } echo"</td>
           <td>". $row['total'] . "</td>
           <td><a href='notice.php?oid=". $row['oid'] ."&oname=".$row['OrganizerName']."&eid=".$row['eid']."&ename=".$row['EventName']."'>Link</a></td>
   

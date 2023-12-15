@@ -29,7 +29,7 @@ WHERE EventDate <  '$date' and accept=1";
 <meta charset="utf-8">
 
 
-<title>Previous Events</title>
+<title>Milestone Events</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta content="" name="keywords">
   <meta content="" name="description">
@@ -396,7 +396,7 @@ WHERE EventDate <  '$date' and accept=1";
     <nav aria-label="breadcrumb" class="main-breadcrumb">
 <ol class="breadcrumb">
 <li class="breadcrumb-item"><a href="home.php">Home</a></li>
-<li class="breadcrumb-item active" aria-current="page">Previous Events</li>
+<li class="breadcrumb-item active" aria-current="page">Milestone Events</li>
 </ol>
 </nav>
 
@@ -419,7 +419,8 @@ WHERE EventDate <  '$date' and accept=1";
               (SELECT EventID as eid,avg(rating) as rat
  FROM feedback_ 
  GROUP by EventID) as tab2
- on tab1.eid=tab2.eid";
+ on tab1.eid=tab2.eid
+ where rat >=4.5";
  $result = mysqli_query($conn, $sql);
  if(mysqli_num_rows($result) > 0)
  {
@@ -449,7 +450,7 @@ WHERE EventDate <  '$date' and accept=1";
 <br>
 <span>'. $row["EventDescription"] .'</span>
 <div class="widget-49-meeting-action">
-<a href="feedback.php?eid='. $row['eid'] .'" class="btn btn-sm btn-flash-border-primary">Feedback</a>
+<a href="details.php?eid='. $row['eid'] .'&rat='.$row['rat'].'" class="btn btn-sm btn-flash-border-primary">Details</a>
 </div>
 </div>
 </div>
