@@ -375,17 +375,17 @@ echo '<img src="./image/'. $vfile .'" width="450px" height="350px" >';
             <form action="#" method="post">
             <input type="text" class="form-control"  name="id" id="id" placeholder="Enter ID"  required>
             <input type="text" class="form-control"  name="pass" id="pass" placeholder="Enter Pass"  required>
-            <input class="form-control" type="text" name="fname" id="fname" placeholder="Enter your first name" required >
+            <input class="form-control" type="text" name="fname" id="fname" placeholder="Enter your first name"  required>
 			  
         <input class="form-control" type="text" name="lname" id="lname" placeholder="Enter your last name" required >
 			  
-        <input class="form-control" type="text" name="bg" id="bg" placeholder="Enter your blood group"  required >
+        <input class="form-control" type="text" name="bg" id="bg" placeholder="Enter your blood group"  >
 			  
         <input class="form-control" type="text" name="number" id="number" placeholder="Enter your phone number" required >
 			 
-        <input class="form-control" type="email" name="email" id="email" placeholder="Enter your email" required >
+        <input class="form-control" type="email" name="email" id="email" placeholder="Enter your email" required>
       
-        <input class="form-control" type="text" name="role" id="role" placeholder="Enter your role" required >
+        <input class="form-control" type="text" name="role" id="role" placeholder="Enter your role"  required>
 
                 <button type="submit" class="form-control" id="submit-button" name="submit">Submit Button</button>
 
@@ -419,11 +419,11 @@ echo '<img src="./image/'. $vfile .'" width="450px" height="350px" >';
             <form action="#" method="post">
             <input class="form-control"  type="text" name="vid" id="vid" placeholder="Enter ID" required >
 			  
-        <input class="form-control"  type="text" name="vname" id="vname" placeholder="Enter your name" required >
+        <input class="form-control"  type="text" name="vname" id="vname" placeholder="Enter your name"  required>
 			  
-        <input class="form-control"  type="text" name="vnumber" id="vnumber" placeholder="Enter your phone number" required >
+        <input class="form-control"  type="text" name="vnumber" id="vnumber" placeholder="Enter your phone number"  required>
 			  
-        <input class="form-control"  type="email" name="vemail" id="vemail" placeholder="Enter your email" required >
+        <input class="form-control"  type="email" name="vemail" id="vemail" placeholder="Enter your email"  required>
        
         <input class="form-control"  type="text" name="vrole" id="vrole" placeholder="Enter your designation" required>
 
@@ -489,6 +489,7 @@ if(isset($_POST['submit']))
       $participants = $row['participants'];
    }
      if($limit>$participants){
+     
     $sql = "INSERT INTO `participants` (`ParticipantID`, `ParticipantFirstName`, `ParticipantlastName`, `ParticipantEmail`, `ParticipantContactNumber`,`ParticipantBloodGroup`,`ParticipantRole`,`pass`) VALUES ('$id', '$fname', '$lname', '$email','$number','$bg','$role','$pass'); ";
         
     $res = mysqli_query($conn,$sql);
@@ -498,7 +499,7 @@ if(isset($_POST['submit']))
     echo "<script>alert('Registration Successfull')</script>";
  
     }
-    
+  
      }
 
      else{
@@ -551,7 +552,8 @@ if(isset($_POST['submit']))
         $limit = $row['capacity'];
         $participants = $row['participants'];
      }
-       if($limit>$participants){
+       if($limit>$participants){ 
+       
       $sql = "INSERT INTO `participants` (`ParticipantID`, `ParticipantFirstName`, `ParticipantlastName`, `ParticipantEmail`, `ParticipantContactNumber`,`ParticipantBloodGroup`,`ParticipantRole`,`pass`) VALUES ('$id', '$fname', '$lname', '$email','$number','$bg','$role','$pass'); ";
           
       $res = mysqli_query($conn,$sql);
@@ -561,7 +563,7 @@ if(isset($_POST['submit']))
       echo "<script>alert('Registration Successfull')</script>";
 
       }
-      
+    
        }
   
        else{
@@ -599,8 +601,8 @@ if(isset($_POST['vsubmit']))
 
     $conn = mysqli_connect("localhost","root","","eventadministration") or die($conn);
 
-	
-
+   
+ 
     $sql = "INSERT INTO `volunteers_` (`VolunteerID`, `VolunteerName`, `VolunteerEmail`, `VolunteerContactNumber`, `VolunteerDesignation`) VALUES ('$vid', '$vname', '$vemail','$vnumber','$vrole'); ";
         
     $res = mysqli_query($conn,$sql);
@@ -610,7 +612,7 @@ if(isset($_POST['vsubmit']))
       echo "<script>alert('Registration Successfull')</script>";
 
       }
-	
+    
 	
 }
 
@@ -636,7 +638,7 @@ else{
 
     $conn = mysqli_connect("localhost","root","","eventadministration") or die($conn);
 
-	
+	 
 
     $sql = "INSERT INTO `volunteers_` (`VolunteerID`, `VolunteerName`, `VolunteerEmail`, `VolunteerContactNumber`, `VolunteerDesignation`) VALUES ('$vid', '$vname', '$vemail','$vnumber','$vrole'); ";
         
@@ -647,7 +649,7 @@ else{
       echo "<script>alert('Registration Successfull')</script>";
 
       }
-	
+    
 	
 }
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 12, 2023 at 06:16 PM
+-- Generation Time: Dec 15, 2023 at 06:21 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -50,17 +50,6 @@ CREATE TABLE `assist` (
   `VolunteerID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `assist`
---
-
-INSERT INTO `assist` (`EventID`, `VolunteerID`) VALUES
-(7, 43543),
-(7, 456456),
-(123, 324),
-(123, 1256),
-(123, 123456);
-
 -- --------------------------------------------------------
 
 --
@@ -84,23 +73,11 @@ CREATE TABLE `events` (
 --
 
 INSERT INTO `events` (`EventID`, `EventName`, `EventDescription`, `EventGuest`, `EventBudget`, `EventFileBanner`, `EventFileBadge`, `ShortDescription`, `OrganizerID`) VALUES
-(1, 'learn java', 'Java is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible. It is a general-purpose programming language intended to let programmers write once, run anywhere (WORA),[16] meaning that compiled Java code can run on all platforms that support Java without the need to recompile.[17] Java applications are typically compiled to bytecode that can run on any Java virtual machine (JVM) regardless of the underlying comput', 'kuddus mia, delulu mia', '500000', NULL, NULL, 'here we learn about java', 1),
-(2, 'learn machine learning', 'As a scientific endeavor, machine learning grew out of the quest for artificial intelligence (AI). In the early days of AI as an academic discipline, some researchers were interested in having machines learn from data. They attempted to approach the problem with various symbolic methods, ', 'abul , babul', '78987', 'ml.jpg', NULL, 'here we learn about machine learning', 1),
-(7, 'dbms', 'data base management system', 'sadia maam', '800', 'download.jpg', 'download.jpg', NULL, 1),
-(12, 'bal ', 'gfdgdfg', 'gdfg', '45645', 'banner3.jpg', 'banner.jpeg', 'gdfgdfg', 1),
-(69, 'you know', 'uiui', '', '', '', NULL, NULL, 1),
-(77, 'CA', 'mips,single cycle,ram', 'shoib sir', '500', '', '', NULL, 1),
-(89, 'bidesh', 'bidesh jabi kemne ta nia koibo', '', '', '', NULL, NULL, 1),
-(96, 'dsfdsf', 'sdfsd', 'sdfsd', '4654', '', '', 'dasd', 1),
-(123, 'C clinic', 'here we learn c', 'uiui ,gigi ,kiki', '500000', 'banner.jpeg', 'banner.jpeg', 'c sikhi', 1),
-(412, 'stat', 'PROBy etc', 'sobai', '1000', 'banner2.jpg', 'banner2.jpg', NULL, 1),
-(4579, 'gfd', 'gdfgdfg', 'dfgdf', '456', NULL, NULL, 'dfgfd', 5656),
-(5987, 'canada visa', 'canaday pathay dimu tore', '', '', '', NULL, NULL, 1),
-(6969, 'visal balsal', '.........', '', '', '', NULL, NULL, 1),
-(7890, 'ulala', 'dsfsdfsd', 'dsfsdsdf', '5645', 'banner2.jpg', 'banner3.jpg', 'fdsfdsfsd', 1),
-(45678, 'canada visa', 'dia dimu oihane', '', '', 'canada.jpg', NULL, NULL, 1),
-(56675, 'uramu', 'sdfsd', 'sdfsd', '789', 'banner.jpeg', '', 'sdfsdf', 1),
-(56546456, 'bal ', 'valorant grind', '', '', '', NULL, NULL, 1);
+(1, 'C CLINIC', 'UIU Computer Club is going to arrange a two days workshop named “C-Clinic”.\r\nThis program is arranged for those students who took SPL or APL course in this trimester.\r\nAs our mid exam is almost knocking at the door, it is needed to revise all the contents of running course.\r\nIt will be like an “Adda” about C language. You can bring all your questions, we will try to solve together . 😉', 'tarek sir', '100000000', '23456415_2013767945528243_1989576446997817108_o.jpg', '', 'for varsity student', 4),
+(101, 'Computronix Academy', 'UIU APP FORUM Presents Computronix Academy – a haven for budding minds interested in exploring the fields of Computer Science & Engineering (CSE) and Data Science (DS).\r\n', '', '10000', 'computronix academy.jpg', '', '', 4),
+(102, 'Google Developer Groups(GDGs)', 'Google DevFest is a global tech event presented by 𝐆𝐨𝐨𝐠𝐥𝐞 𝐃𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐫 𝐆𝐫𝐨𝐮𝐩𝐬 (GDGs), bringing together developers, tech enthusiasts, and experts for a day of presentations\r\nand networking.\r\n\r\nIt serves as a platform for knowledge sharing and collaboration among developers and tech professionals.', '', '50000', '', 'devfest.jpg', '', 4),
+(103, 'AI conversation 101', '', '', '50000', 'AI conversation', '', 'A workshop GPT and ChatGPT Technology', 4),
+(104, 'Nationwide Coding Boot-camp on 𝐁𝐥𝐨𝐜𝐤𝐜𝐡𝐚𝐢𝐧', 'A blockchain is a distributed database or ledger shared among a computer network\'s nodes. They are best known for their crucial role in cryptocurrency systems for maintaining a secure and decentralized record of transactions, but they are not limited to cryptocurrency uses. Blockchains can be used to make data in any industry immutable—the term used to describe the inability to be altered.  Because there is no way to change a block, the only trust needed is at the point where a user or program e', '', '10000', 'blockchain.jpg', '', '', 5);
 
 -- --------------------------------------------------------
 
@@ -118,16 +95,8 @@ CREATE TABLE `events_eventtype` (
 --
 
 INSERT INTO `events_eventtype` (`EventType`, `EventID`) VALUES
-('data', 7),
-('dd', 96),
-('dfg', 12),
-('dfgdf', 12),
-('gdf', 12),
-('programming', 7),
-('rew', 96),
-('sdfsf', 96),
-('ttt', 56675),
-('yyr', 56675);
+('educational', 1),
+('programming', 1);
 
 -- --------------------------------------------------------
 
@@ -145,20 +114,9 @@ CREATE TABLE `events_status` (
 --
 
 INSERT INTO `events_status` (`EventStatus`, `EventID`) VALUES
-('Ongoing', 2),
-('Ongoing', 7),
-('Ongoing', 69),
-('Ongoing', 77),
-('Ongoing', 45678),
-('Ongoing', 56675),
-('Previous', 1),
-('Previous', 89),
-('Previous', 96),
-('Previous', 123),
-('Previous', 412),
-('Previous', 6969),
-('Previous', 7890),
-('Previous', 56546456);
+('Ongoing', 1),
+('Previous', 101),
+('Previous', 104);
 
 -- --------------------------------------------------------
 
@@ -178,9 +136,7 @@ CREATE TABLE `event_poll` (
 --
 
 INSERT INTO `event_poll` (`EventName`, `Description`, `PollID`, `OrganizerID`) VALUES
-('web dev', 'web banano sikhabo', 3, 1),
-('joy bangla', 'concert', 37, 1),
-('programming', 'lang', 38, 1);
+('joy bangla concert', 'choose your favourite band', 46, 2);
 
 -- --------------------------------------------------------
 
@@ -198,15 +154,10 @@ CREATE TABLE `event_sponsers` (
 --
 
 INSERT INTO `event_sponsers` (`EventID`, `SponsorID`) VALUES
-(7, 1),
-(7, 3),
-(12, 1),
-(12, 2),
-(96, 1),
-(96, 2),
-(96, 3),
-(56675, 1),
-(56675, 2);
+(1, 202),
+(1, 203),
+(104, 201),
+(104, 203);
 
 -- --------------------------------------------------------
 
@@ -219,17 +170,22 @@ CREATE TABLE `feedback_` (
   `Comments` varchar(500) NOT NULL,
   `EventID` int(11) NOT NULL,
   `Fid` int(11) NOT NULL,
-  `Pid` int(11) NOT NULL
+  `Pid` int(11) NOT NULL,
+  `date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `feedback_`
 --
 
-INSERT INTO `feedback_` (`Rating`, `Comments`, `EventID`, `Fid`, `Pid`) VALUES
-(5, 'gdfgdf', 1, 18, 11221),
-(1, 'gfhfgh', 1, 39, 5656),
-(5, 'dfgfd', 123, 41, 5656);
+INSERT INTO `feedback_` (`Rating`, `Comments`, `EventID`, `Fid`, `Pid`, `date`) VALUES
+(5, 'it was good', 101, 45, 2, '2023-12-14'),
+(4, 'it was average', 101, 46, 3, '2023-12-14'),
+(5, 'awesome it helped me a lot', 101, 47, 6, '2023-12-14'),
+(5, 'choole', 104, 48, 7, '2023-12-14'),
+(1, 'chi', 101, 49, 10, '2023-12-14'),
+(1, 'chi ', 101, 50, 11, '2023-12-14'),
+(4, 'goodddd', 101, 51, 4, '2023-12-15');
 
 -- --------------------------------------------------------
 
@@ -245,17 +201,6 @@ CREATE TABLE `notice` (
   `reply` varchar(100) DEFAULT NULL,
   `view` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `notice`
---
-
-INSERT INTO `notice` (`notice`, `time`, `EventID`, `OrganizerID`, `reply`, `view`) VALUES
-('bhai ki korli eda\r\n', '2023-12-12 10:55:52', 1, 1, NULL, 1),
-('dhur beta', '2023-12-12 10:56:06', 1, 1, NULL, 1),
-('dsfsdf', '2023-12-12 10:29:31', 1, 1, 'gfdgdf', 1),
-('gfdgdfgdfgdfgdf', '2023-12-12 10:43:09', 1, 1, 'fdsf', 1),
-('hayre', '2023-12-12 10:56:33', 1, 1, 'thikase', 1);
 
 -- --------------------------------------------------------
 
@@ -278,9 +223,22 @@ CREATE TABLE `organizer` (
 --
 
 INSERT INTO `organizer` (`OrganizerID`, `OrganizerName`, `OrganizerEmail`, `OrganizerContactNumber`, `OrganizerFileLogo`, `OrganizerDescription`, `OrganizerPass`) VALUES
-(1, 'uiu app forum', 'af@mail.com', '01911360991', 'appforum.jpg', 'APP Forum\'s an initiative of UIUDCCSA. UIU App forum is a developer\'s community with machine learning', '1234'),
-(5656, 'uiu dance club', 'redoy.khan898@gmail.com', '01911360990', NULL, '', 'lalalula'),
-(45645, 'uiu club', 'hridoyahmedddd@gmail.com', '01911360990', NULL, '', '456');
+(1, 'Sports Club', 'uiusportsclub@gmail.com', '01741771774', 'UIU Sports Club.jpg', 'The United International University Sports Club is a vibrant and dynamic organization dedicated to promoting a culture of sports and physical fitness within the university community. Committed to fostering teamwork, skill development, and a healthy lifestyle, the club provides a platform for students to engage in various sports and recreational activities.\r\n\r\nFrom organizing intercollegiate tournaments to hosting friendly matches and fitness events, the United International University Sports Clu', '1234'),
+(2, 'Cultural Club', 'uiucc16@gmail.com', '01637665221', 'UIU Cultural Club.jpg', 'The United International University Cultural Club is a dynamic and inclusive organization dedicated to celebrating the rich diversity of cultures within the university community. Committed to fostering a vibrant and harmonious environment, the Cultural Club provides a platform for students to express their creativity, showcase their talents, and engage in various cultural activities.\r\n\r\nFrom organizing cultural festivals and performances to hosting art exhibitions, workshops, and literary events', '1234'),
+(3, 'Photography Club', 'photographyclubuiu@gmail.com', '01732137465', 'UIU Photography Club.jpg', 'The United International University Photography Club is a creative community dedicated to capturing and celebrating the visual wonders of the world through the lens. This club provides a platform for students with a passion for photography to come together, share their experiences, and enhance their skills.', '1234'),
+(4, 'APP Forum', 'appforum@uiu.ac.bd', '01672899396', 'UIU APP FORUM.jpg', 'The United International University App Forum serves as a dynamic hub for tech enthusiasts within the university community. With a focus on app development, this forum provides a platform for students to share ideas, collaborate on projects, and stay updated on the latest trends in the ever-evolving world of mobile applications. Through workshops, discussions, and hands-on activities, the App Forum aims to foster innovation, skill development, and a sense of community among students.1. CSE softw', '1234'),
+(5, 'Computer Club', 'computerclub@cse.uiu.ac.bd', '01700-898574', 'UIU Computer Club.png', 'UIU Computer Club\'s objectives are to widen the scope of our members to make them prepare for the competitive software & IT industry. We aim to impart knowledge that is not usually covered in mainstream areas therefore it will be beneficial to our members.To promote programming as a culture to excel the inherent qualities of the students; to attain world-class problem solving skills, to pursue professional grooming as Software Engineers, to contribute in the field of Robotics.', '1234'),
+(6, 'Robotics Club', 'robotics@uiu.ac.bd', '01718-092400', 'UIU Robotics.jpg', 'The United International University Robotics Club is a vibrant community fostering innovation and collaboration in robotics. Engage in hands-on projects, workshops, and explore the limitless potential of technology.', '1234'),
+(7, 'Accounting Forum', 'uiuaccforum@gmail.com', '01621863427', 'Accounting Forum - UIUAF.jpg', 'This forum’s main aim is to organize seminars, workshops, discussions and other related programs.', '1234'),
+(8, 'Directorate of Student Affairs (DCCSA)', 'dsa@uiu.ac.bd', '09604848848', 'Directorate of Student Affairs - UIU.jpg', 'The Directorate of Career Counseling & Student Affairs at United International University guides students in career development, provides counseling services, and enhances overall student well-being.', '1234'),
+(9, 'Social Services Club', 'ssc@uiu.ac.bd', ' ', 'UIU Social Services Club.jpg', ' The main purpose of our club is to serve social services voluntarily to those people who are deprive.', '1234'),
+(10, 'English Language Forum', 'uiuelf11@gmail.com', ' ', 'UIU English Language Forum', 'UIU English Language Forum.', '1234'),
+(11, 'Theatre & Film Club', 'uiutfclub@gmail.com', '01764361781', 'UIU Theatre & Film Club.jpg', '', '1234'),
+(12, 'Finance Forum', 'financeforumuiu@gmail.com', '', 'UIU Finance Forum.png', '', '1234'),
+(13, 'Electrical and Electronic Club', 'uiueecweb@gmail.com', ' ', 'UIU Electrical and Electronic Club.png', 'Innovation and excellence to asymptote.', '1234'),
+(14, 'Debate Club- UIUDC', 'uiudc16@gmail.com', '01957139339', 'UIU Debate Club- UIUDC.jpg', '', '1234'),
+(15, 'Junior Economists\' Forum - UIUJEF', 'uiujef7@gmail.com', '01611664083', 'UIU Junior Economists\' Forum - UIUJEF.jpg', 'UIUJEF : Together We Thrive, Together We Rise.', '1234'),
+(16, 'Literature and Writers\' Forum-UIULWF', 'uiulwf@uiu.ac.bd', '', 'UIU Literature and Writers\' Forum-UIULWF.jpg', 'UIU Literature and Writers\' Forum is a student-run organization established in 2017 to cultivate lite', '1234');
 
 -- --------------------------------------------------------
 
@@ -297,18 +255,6 @@ CREATE TABLE `outsiderequest` (
   `EventDate` date DEFAULT NULL,
   `capacity` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `outsiderequest`
---
-
-INSERT INTO `outsiderequest` (`EventID`, `accept`, `OutsideAddress`, `StartTime`, `EndTime`, `EventDate`, `capacity`) VALUES
-(7, 1, 'uiu united city', '11:00:00', '13:00:00', '2023-12-30', 10),
-(12, 0, 'uiu united city', '12:38:00', '12:39:00', '2023-12-31', NULL),
-(77, 1, 'uiu united city', NULL, NULL, '2023-12-25', NULL),
-(412, 1, 'uiu united city', '13:29:00', '15:29:00', '2023-12-01', NULL),
-(6969, 1, 'NSU dhaka', NULL, NULL, '2023-12-01', NULL),
-(45678, 1, 'the westin dhaka', NULL, NULL, '2023-12-28', NULL);
 
 -- --------------------------------------------------------
 
@@ -332,26 +278,22 @@ CREATE TABLE `participants` (
 --
 
 INSERT INTO `participants` (`ParticipantID`, `ParticipantFirstName`, `ParticipantlastName`, `ParticipantEmail`, `ParticipantContactNumber`, `ParticipantRole`, `ParticipantBloodGroup`, `pass`) VALUES
-(0, 'ara', 'sala', 'redoy.khan898@gmail.com', 'sdfsd', 'student', 'o+', '1234'),
-(2, 'moga', 'ahmed', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+', '1234'),
-(4, 'hridowererwy', 'werwerwe', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+', '1234'),
-(69, 'moga', 'sala', 'redoy.khan898@gmail.com', '545456', 'student', 'o+', '1234'),
-(111, 'messi', 'jr', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+', '1234'),
-(222, 'ronaldo', 'ara', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+', '1234'),
-(241, 'red', 'ahe', 'hridoyahmedddd@gmail.com', '01911360990', 'student', 'o+', '1234'),
-(321, 'rifat', 'ahmed', 'hridoyahmedddd@gmail.com', '01911360990', 'student', 'A+', '1234'),
-(444, 'neymar', 'jr', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+', '1234'),
-(879, 'hridoy', 'ahmed', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+', '1234'),
-(4556, 'hridoy', 'fsdf', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+', '1234'),
-(4578, 'gfdg', 'dfgdf', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+', '1234'),
-(4897, 'red', 'ahmed', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+', '1234'),
-(5656, 'hridoy', 'ahmed', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+', '1234'),
-(11221, 'arafat', 'ahmed', 'arafat@mail.com', '01611360991', 'student', 'A+', '1234'),
-(11241, 'red', 'ahe', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+', '1234'),
-(456456, 'fghfgh', 'fghfg', 'redoy.khan898@gmail.com', '01911360990', 'student', 'fghfg', '1234'),
-(546456, 'ara', 'ara', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+', '1234'),
-(4587978, 'hridoy', 'ahmed', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+', '1234'),
-(2147483647, 'hridoy', 'ahmed', 'redoy.khan898@gmail.com', '01911360990', 'student', 'o+', '1234');
+(2, 'Hridoy', 'Ahmed', 'hridoyahmed@gmail.com', '01745675504', 'Student', 'O+', '1234'),
+(3, 'Redwan', 'Ahmed', 'ridwanahmed@gmail.com', '01703359876', 'Student', 'B+', '1234'),
+(4, 'Mustakim', 'Keya', 'mustakimkeya@gmail.com', '01703456789', 'Student', 'A+', '1234'),
+(5, 'Sabrina', 'Sayem', 'sabrinasayem@gmail.com', '01895655048', 'Student', 'AB+', '1234'),
+(6, 'Wasif', 'Ridwan', 'wasifridwan@gmail.com', '01367855876', 'Student', 'B-', '1234'),
+(7, 'Chaity', 'Kamal', 'chaitykamal@gmail.com', '01390761234', 'Student', 'O+', '1234'),
+(8, 'Mehrin', 'Ahmed', 'mehrinahmed@gmail.com', '01678654432', 'Student', 'A+', '1234'),
+(9, 'Yeamin', 'Sorol', 'yeaminsorol@gmail.com', '01563409126', 'Student', 'B+', '1234'),
+(10, 'Shagin', 'Ahmed', 'saginahmed@gmail.com', '01907128369', 'Student', 'A+', '1234'),
+(11, 'Sadik', 'Ahmed', 'sadikahmed@gmail.com', '01876594320', 'Student', 'O+', '1234'),
+(12, 'Kamrul', 'Arnob', 'kamrularnob@gmail.com', '01309812675', 'Student', 'B+', '1234'),
+(13, 'Fayjullah', 'Emon', 'fayjullahemon@gmail.com', '01709457832', 'Student', 'AB+', '1234'),
+(14, 'Maria', 'Khanom', 'mariakhanom@gmail.com', '01785086345', 'Student', 'B+', '1234'),
+(15, 'Mahbub', 'Uddin', 'mahbubuddin@gmail.com', '01709564321', 'Student', 'AB+', '1234'),
+(16, 'Habiba', 'Jemin', 'habibajemin@gmail.com', '01703355504', 'Student', 'B+', '1234'),
+(68, 'arafat', 'ahmed', 'sahmed221068@bscse.uiu.ac.bd', '01911360990', 'student', 'A+', '1234');
 
 -- --------------------------------------------------------
 
@@ -370,15 +312,9 @@ CREATE TABLE `polloption` (
 --
 
 INSERT INTO `polloption` (`PollOpt`, `PollID`, `count`) VALUES
-('I dont care', 3, 21),
-('Interested', 3, 10),
-('Not Interested', 3, 7),
-('artcell', 37, 2),
-('avoidrafa', 37, 2),
-('warfaze', 37, 1),
-('c', 38, 4),
-('c++', 38, 2),
-('java', 38, 3);
+('arnob', 46, 2),
+('artcell', 46, 1),
+('warfaze', 46, 1);
 
 -- --------------------------------------------------------
 
@@ -397,12 +333,10 @@ CREATE TABLE `pollvote` (
 --
 
 INSERT INTO `pollvote` (`PollID`, `ParticipantID`, `PollOpt`) VALUES
-(38, 2, 'c'),
-(3, 241, 'c'),
-(38, 0, 'c++'),
-(38, 444, ''),
-(38, 241, 'java'),
-(38, 69, 'java');
+(46, 5, 'artcell'),
+(46, 8, 'arnob'),
+(46, 10, 'warfaze'),
+(46, 12, 'arnob');
 
 -- --------------------------------------------------------
 
@@ -423,17 +357,8 @@ CREATE TABLE `qa` (
 --
 
 INSERT INTO `qa` (`EventID`, `qus`, `ans`, `StudentID`, `StudentEmail`) VALUES
-(1, 'ayahy bai', 'oyehoye bai', 54456, 'redoy.khan898@gmail.com'),
-(7, 'baia', 'baia', 123, 'redoy.khan898@gmail.com'),
-(1, 'bhai kemon asen ki b', 'dasd', 5456, 'redoy.khan898@gmail.com'),
-(1, 'bhai ki kore ekhane', 'amio janina bai', 123, 'sahmed221068@bscse.uiu.ac.bd'),
-(123, 'bhai ki koren', 'jan', 123, 'redoy.khan898@gmail.com'),
-(1, 'bhai ki koren', 'kisuna bhai', 888, 'sahmed221068@bscse.uiu.ac.bd'),
-(1, 'bhai ki koren', 'kisuna bhai', 12345, 'redoy.khan898@gmail.com'),
-(2, 'kgfdsgdfg', NULL, 123, 'sahmed221068@bscse.uiu.ac.bd'),
-(7, 'kire', 'kire', 123, 'redoy.khan898@gmail.com'),
-(1, 'mehrin er buke osudh atkaise bai ki korum ehon', 'ayhayhayhay bai ki kon', 546465, 'sahmed221068@bscse.uiu.ac.bd'),
-(1, 'sdffsdfsdf', 'bal', 45454, 'sahmed221068@bscse.uiu.ac.bd');
+(1, 'ki hobe ki ekhane actually', 'c sikhabo re bhai dekhen na', 68, 'sahmed221068@bscse.uiu.ac.bd'),
+(104, 'sdfsd', NULL, 123, 'redoy.khan898@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -451,23 +376,38 @@ CREATE TABLE `registration_` (
 --
 
 INSERT INTO `registration_` (`EventID`, `ParticipantID`) VALUES
-(7, 0),
-(7, 111),
-(7, 222),
-(7, 241),
-(7, 321),
-(7, 444),
-(7, 456456),
-(69, 456456),
-(123, 2),
-(123, 4),
-(123, 879),
-(123, 4556),
-(123, 4578),
-(123, 5656),
-(123, 546456),
-(123, 4587978),
-(123, 2147483647);
+(1, 2),
+(1, 7),
+(1, 68),
+(101, 2),
+(101, 3),
+(101, 4),
+(101, 5),
+(101, 6),
+(101, 7),
+(101, 8),
+(101, 9),
+(101, 10),
+(101, 11),
+(101, 12),
+(101, 13),
+(101, 14),
+(101, 15),
+(101, 16),
+(104, 3),
+(104, 4),
+(104, 5),
+(104, 6),
+(104, 7),
+(104, 8),
+(104, 9),
+(104, 10),
+(104, 11),
+(104, 12),
+(104, 13),
+(104, 14),
+(104, 15),
+(104, 16);
 
 -- --------------------------------------------------------
 
@@ -486,50 +426,9 @@ CREATE TABLE `request_` (
 --
 
 INSERT INTO `request_` (`EventID`, `accept`, `SlotID`) VALUES
-(1, 1, 123),
-(2, 1, 654645),
-(69, 1, 456),
-(89, 1, 23),
-(96, 1, 23),
-(123, 1, 123),
-(7890, 0, 23),
-(56675, 1, 4345),
-(56546456, 1, 89);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `resources_`
---
-
-CREATE TABLE `resources_` (
-  `ResourcesID` int(11) NOT NULL,
-  `ResourcesFileimg` varchar(100) DEFAULT NULL,
-  `ResourcesAvailability` varchar(100) DEFAULT NULL,
-  `EventID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `resources_resourcesavailability`
---
-
-CREATE TABLE `resources_resourcesavailability` (
-  `ResourcesAvailability` varchar(30) NOT NULL,
-  `ResourcesID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `resources_resourcestype`
---
-
-CREATE TABLE `resources_resourcestype` (
-  `ResourcesType` varchar(100) NOT NULL,
-  `ResourcesID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(1, 1, 9),
+(101, 1, 16),
+(104, 1, 18);
 
 -- --------------------------------------------------------
 
@@ -551,12 +450,24 @@ CREATE TABLE `slot` (
 --
 
 INSERT INTO `slot` (`StartTime`, `EndTime`, `SlotID`, `EventDate`, `VenueID`, `available`) VALUES
-('20:23:08', '22:23:08', 23, '2023-12-01', 456, 0),
-('20:23:08', '22:23:08', 89, '2023-12-01', 456, 0),
-('20:23:08', '22:23:08', 123, '2023-12-10', 456, 0),
-('20:23:08', '22:23:08', 456, '2023-12-20', 456, 0),
-('20:23:08', '22:23:08', 4345, '2023-12-31', 456, 0),
-('20:23:08', '22:23:08', 654645, '2023-12-20', 456, 0);
+('10:30:00', '12:30:00', 1, '2024-01-01', 2, 1),
+('15:00:00', '17:00:00', 2, '2024-01-10', 10, 0),
+('11:11:00', '12:30:00', 3, '2024-01-15', 9, 1),
+('11:11:00', '12:30:00', 4, '2024-01-15', 9, 1),
+('14:30:00', '17:30:00', 6, '2024-02-01', 4, 1),
+('11:11:00', '12:30:00', 7, '2024-02-10', 6, 1),
+('14:15:00', '16:30:00', 8, '2024-02-15', 1, 1),
+('11:30:00', '12:30:00', 9, '2023-12-25', 1, 0),
+('09:00:00', '16:00:00', 10, '2024-02-20', 8, 1),
+('14:15:00', '16:30:00', 11, '2024-02-15', 1, 1),
+('11:11:00', '12:30:00', 12, '2024-02-15', 6, 1),
+('09:00:00', '12:30:00', 13, '2024-01-20', 3, 1),
+('14:40:00', '15:40:00', 14, '2023-12-29', 3, 1),
+('14:00:00', '16:30:00', 15, '2023-12-05', 2, 1),
+('11:30:00', '12:30:00', 16, '2023-08-25', 1, 1),
+('10:30:00', '16:30:00', 17, '2023-12-02', 1, 1),
+('14:00:00', '16:30:00', 18, '2023-11-24', 9, 1),
+('10:30:00', '16:30:00', 19, '2023-12-02', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -578,9 +489,10 @@ CREATE TABLE `sponsors` (
 --
 
 INSERT INTO `sponsors` (`SponsorID`, `SponsorName`, `SponsorDescription`, `SponsorFileLogo`, `SponsorEmail`, `SponsorContactNumber`) VALUES
-(1, 'NesCafe', '', NULL, '', ''),
-(2, 'Kaler Kontho', '', NULL, '', ''),
-(3, 'GigaByte', '', NULL, '', '');
+(201, 'Directorate of Career Counseling & Student Affairs (DCCSA)', 'This Center provides career development counseling to UIU graduates. Cultivates and maintains relatio.', 'DCCSA_LOGO.jpg', 'career@uiu.ac.bd', '09604-848848'),
+(202, 'GitHub', 'The AI-powered developer platform to build, scale, and deliver secure software.', 'GitHub_LOGO.jpg', 'support@github.com', '09604-998848'),
+(203, 'JetBrains', 'Leaders in Pro Developer Tools! Makers of IntelliJ IDEA, Rider, PyCharm, TeamCity, Kotlin and more.', 'JetBrainsLOGO.png', 'sales@jetbrains.com', '09604-848841'),
+(204, 'Sticker Mule', 'Custom printing that kicks ass. Easy online ordering, 4 day turnaround and free shipping.', 'StickerMuleLOGO.png', 'help@stickermule.com', '+1 303-647-1756');
 
 -- --------------------------------------------------------
 
@@ -601,7 +513,16 @@ CREATE TABLE `venue_` (
 --
 
 INSERT INTO `venue_` (`VenueID`, `VenueName`, `VenueCapacity`, `VenueFileimg`, `VenueLocation`) VALUES
-(456, 'comp lab 1', 10, 'Lab.jpg', 'third floor 307 room');
+(1, 'Multipurpose Hall', 700, 'hall4.jpg', 'UIU Multipurpose Hall(Basement)'),
+(2, 'Smart Room', 300, 'smartroom1.jpg', 'UIU 1st floor'),
+(3, 'Gallery', 500, 'field.png', 'UIU 1st floor'),
+(4, 'Field', 200, 'field2.jpg', 'UIU Field'),
+(5, 'Field', 500, 'field2.png', 'UIU Field'),
+(6, 'Computer Lab', 50, 'computer_lab2.jpg', 'UIU 6th floor'),
+(7, 'Canteen', 200, 'canteen1.jpg', 'UIU G-floor'),
+(8, 'Field', 500, 'Field8.jpg', 'UIU field'),
+(9, 'Computer Lab', 50, 'computer_lab1.jpg', 'UIU 5th floor'),
+(10, 'Smart Room', 300, 'smartroom2.jpg', 'UIU 1st floor');
 
 -- --------------------------------------------------------
 
@@ -616,17 +537,6 @@ CREATE TABLE `volunteers_` (
   `VolunteerContactNumber` varchar(20) NOT NULL,
   `VolunteerDesignation` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `volunteers_`
---
-
-INSERT INTO `volunteers_` (`VolunteerID`, `VolunteerName`, `VolunteerEmail`, `VolunteerContactNumber`, `VolunteerDesignation`) VALUES
-(324, 'hridoy', 'af@mail.com', '01911360991', 'student'),
-(1256, 'hridoy', 'af@mail.com', '01911360991', 'student'),
-(43543, 'erter', 'af@mail.com', 'ertert', 'student'),
-(123456, 'hridoy', 'af@mail.com', '01911360991', 'student'),
-(456456, 'hridoy', 'af@mail.com', '01911360991', 'student');
 
 --
 -- Indexes for dumped tables
@@ -748,27 +658,6 @@ ALTER TABLE `request_`
   ADD KEY `SlotID` (`SlotID`);
 
 --
--- Indexes for table `resources_`
---
-ALTER TABLE `resources_`
-  ADD PRIMARY KEY (`ResourcesID`),
-  ADD KEY `EventID` (`EventID`);
-
---
--- Indexes for table `resources_resourcesavailability`
---
-ALTER TABLE `resources_resourcesavailability`
-  ADD PRIMARY KEY (`ResourcesAvailability`,`ResourcesID`),
-  ADD KEY `ResourcesID` (`ResourcesID`);
-
---
--- Indexes for table `resources_resourcestype`
---
-ALTER TABLE `resources_resourcestype`
-  ADD PRIMARY KEY (`ResourcesType`,`ResourcesID`),
-  ADD KEY `ResourcesID` (`ResourcesID`);
-
---
 -- Indexes for table `slot`
 --
 ALTER TABLE `slot`
@@ -801,13 +690,13 @@ ALTER TABLE `volunteers_`
 -- AUTO_INCREMENT for table `event_poll`
 --
 ALTER TABLE `event_poll`
-  MODIFY `PollID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `PollID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `feedback_`
 --
 ALTER TABLE `feedback_`
-  MODIFY `Fid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `Fid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- Constraints for dumped tables
@@ -896,24 +785,6 @@ ALTER TABLE `registration_`
 ALTER TABLE `request_`
   ADD CONSTRAINT `request__ibfk_1` FOREIGN KEY (`EventID`) REFERENCES `events` (`EventID`),
   ADD CONSTRAINT `request__ibfk_2` FOREIGN KEY (`SlotID`) REFERENCES `slot` (`SlotID`);
-
---
--- Constraints for table `resources_`
---
-ALTER TABLE `resources_`
-  ADD CONSTRAINT `resources__ibfk_1` FOREIGN KEY (`EventID`) REFERENCES `events` (`EventID`);
-
---
--- Constraints for table `resources_resourcesavailability`
---
-ALTER TABLE `resources_resourcesavailability`
-  ADD CONSTRAINT `resources_resourcesavailability_ibfk_1` FOREIGN KEY (`ResourcesID`) REFERENCES `resources_` (`ResourcesID`);
-
---
--- Constraints for table `resources_resourcestype`
---
-ALTER TABLE `resources_resourcestype`
-  ADD CONSTRAINT `resources_resourcestype_ibfk_1` FOREIGN KEY (`ResourcesID`) REFERENCES `resources_` (`ResourcesID`);
 
 --
 -- Constraints for table `slot`

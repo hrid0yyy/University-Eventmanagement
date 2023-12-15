@@ -6,6 +6,7 @@
     
     $conn = mysqli_connect($servername,$username,$password,$database);
     $eid= $_GET['eid'];
+    $date = date('Y-m-d');
  ?>
 
 <!DOCTYPE html>
@@ -44,6 +45,39 @@
 <style type="text/css">
     	body{margin-top:20px;
 background:#eee;
+}
+  
+.ratings-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+}
+
+.item-name {
+    font-weight: bold;
+}
+
+.rating {
+    color: #00f;
+    font-size: 24px;
+}
+
+.star {
+    color: #ddd;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.filled {
+    color: #f8d825;
 }
 
 .contact-area {
@@ -246,8 +280,60 @@ background:#eee;
 </div>
 </div>
 </form>
+<br> <br>
+
+<section>
+    <?php
+    $query="SELECT concat(ParticipantFirstName,' ',ParticipantlastName) as name,Rating,Comments,date
+    FROM feedback_ JOIN participants on feedback_.Pid=participants.ParticipantID
+    where EventID = $eid";
+    $result= mysqli_query($conn, $query);
+
+  echo '<div class="container">
+        <div class="row">
+            <div class="col-sm-5 col-md-6 col-12 pb-4">
+                <h3>Others Comment</h3>  <hr>';
+
+                if(mysqli_num_rows($result) > 0)
+                {
+                  while($row = mysqli_fetch_assoc($result)){
+                echo '<div class="comment mt-4 text-justify float-left">
+                    <h4>'. $row['name'] .'</h4>
+                   
+                    <span>- '. date('j F, y',strtotime($row['date']))  .'</span>
+                    <br>';
+                     
+                        for ($i = 1; $i <= 5; $i++) {
+                         echo "<span class='star " . (($i <= $row['Rating']) ? 'filled' : '') . "'>&#9733;</span>";
+                     }   
+                     
+
+                    echo '<p style="font-size: 20px;">'. $row['Comments'] .'</p>
+                    <hr>
+                </div>  ' ;
+                  }
+                }
+                
+           echo '</div>
+           
+        </div>
+    </div>';
+
+    ?>
+</section>
 </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
 
 <?php
 if(isset($_POST['submit']))
@@ -300,7 +386,7 @@ if(isset($_POST['submit']))
      }
     else{
     
-   $sql = "INSERT INTO `feedback_` (`Rating`, `Comments`, `EventID`, `Fid`, `Pid`) VALUES ('$rating', '$comments', '$eid', NULL, '$pid');";
+   $sql = "INSERT INTO `feedback_` (`Rating`, `Comments`, `EventID`, `Fid`, `Pid`,`date`) VALUES ('$rating', '$comments', '$eid', NULL, '$pid','$date');";
    $res = mysqli_query($conn,$sql);
    if($sql)
 	{
