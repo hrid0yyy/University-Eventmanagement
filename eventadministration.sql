@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 15, 2023 at 06:21 PM
+-- Generation Time: Dec 16, 2023 at 11:20 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -63,7 +63,6 @@ CREATE TABLE `events` (
   `EventGuest` varchar(500) NOT NULL,
   `EventBudget` varchar(50) NOT NULL,
   `EventFileBanner` varchar(100) DEFAULT NULL,
-  `EventFileBadge` varchar(100) DEFAULT NULL,
   `ShortDescription` varchar(100) DEFAULT NULL,
   `OrganizerID` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -72,12 +71,12 @@ CREATE TABLE `events` (
 -- Dumping data for table `events`
 --
 
-INSERT INTO `events` (`EventID`, `EventName`, `EventDescription`, `EventGuest`, `EventBudget`, `EventFileBanner`, `EventFileBadge`, `ShortDescription`, `OrganizerID`) VALUES
-(1, 'C CLINIC', 'UIU Computer Club is going to arrange a two days workshop named “C-Clinic”.\r\nThis program is arranged for those students who took SPL or APL course in this trimester.\r\nAs our mid exam is almost knocking at the door, it is needed to revise all the contents of running course.\r\nIt will be like an “Adda” about C language. You can bring all your questions, we will try to solve together . 😉', 'tarek sir', '100000000', '23456415_2013767945528243_1989576446997817108_o.jpg', '', 'for varsity student', 4),
-(101, 'Computronix Academy', 'UIU APP FORUM Presents Computronix Academy – a haven for budding minds interested in exploring the fields of Computer Science & Engineering (CSE) and Data Science (DS).\r\n', '', '10000', 'computronix academy.jpg', '', '', 4),
-(102, 'Google Developer Groups(GDGs)', 'Google DevFest is a global tech event presented by 𝐆𝐨𝐨𝐠𝐥𝐞 𝐃𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐫 𝐆𝐫𝐨𝐮𝐩𝐬 (GDGs), bringing together developers, tech enthusiasts, and experts for a day of presentations\r\nand networking.\r\n\r\nIt serves as a platform for knowledge sharing and collaboration among developers and tech professionals.', '', '50000', '', 'devfest.jpg', '', 4),
-(103, 'AI conversation 101', '', '', '50000', 'AI conversation', '', 'A workshop GPT and ChatGPT Technology', 4),
-(104, 'Nationwide Coding Boot-camp on 𝐁𝐥𝐨𝐜𝐤𝐜𝐡𝐚𝐢𝐧', 'A blockchain is a distributed database or ledger shared among a computer network\'s nodes. They are best known for their crucial role in cryptocurrency systems for maintaining a secure and decentralized record of transactions, but they are not limited to cryptocurrency uses. Blockchains can be used to make data in any industry immutable—the term used to describe the inability to be altered.  Because there is no way to change a block, the only trust needed is at the point where a user or program e', '', '10000', 'blockchain.jpg', '', '', 5);
+INSERT INTO `events` (`EventID`, `EventName`, `EventDescription`, `EventGuest`, `EventBudget`, `EventFileBanner`, `ShortDescription`, `OrganizerID`) VALUES
+(1, 'C CLINIC', 'UIU Computer Club is going to arrange a two days workshop named “C-Clinic”.\r\nThis program is arranged for those students who took SPL or APL course in this trimester.\r\nAs our mid exam is almost knocking at the door, it is needed to revise all the contents of running course.\r\nIt will be like an “Adda” about C language. You can bring all your questions, we will try to solve together . 😉', 'tarek sir', '100000000', '23456415_2013767945528243_1989576446997817108_o.jpg', 'for varsity student', 4),
+(101, 'Computronix Academy', 'UIU APP FORUM Presents Computronix Academy – a haven for budding minds interested in exploring the fields of Computer Science & Engineering (CSE) and Data Science (DS).\r\n', '', '10000', 'computronix academy.jpg', 'FOR UIU STUDENT', 4),
+(102, 'Google Developer Groups(GDGs)', 'Google DevFest is a global tech event presented by 𝐆𝐨𝐨𝐠𝐥𝐞 𝐃𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐫 𝐆𝐫𝐨𝐮𝐩𝐬 (GDGs), bringing together developers, tech enthusiasts, and experts for a day of presentations\r\nand networking.\r\n\r\nIt serves as a platform for knowledge sharing and collaboration among developers and tech professionals.', '', '50000', 'devfest.jpg', '', 4),
+(103, 'AI conversation 101', '', '', '50000', 'AI conversation', 'A workshop GPT and ChatGPT Technology', 4),
+(104, 'Nationwide Coding Boot-camp on 𝐁𝐥𝐨𝐜𝐤𝐜𝐡𝐚𝐢𝐧', 'A blockchain is a distributed database or ledger shared among a computer network\'s nodes. They are best known for their crucial role in cryptocurrency systems for maintaining a secure and decentralized record of transactions, but they are not limited to cryptocurrency uses. Blockchains can be used to make data in any industry immutable—the term used to describe the inability to be altered.  Because there is no way to change a block, the only trust needed is at the point where a user or program e', '', '10000', 'blockchain.jpg', '', 5);
 
 -- --------------------------------------------------------
 
