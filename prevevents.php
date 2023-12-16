@@ -1,4 +1,6 @@
 <?php
+   require('fpdf/fpdf.php');
+ 
     $date = date('Y-m-d');
     $servername = "localhost";
     $username = "root";
@@ -22,29 +24,109 @@
     if($result){
     if ($result->num_rows > 0) { 
    
-      while($row = mysqli_fetch_assoc($result)){
-   $file= 'image/';
-    $file_path= $file . $row["EventFileBadge"];
-
-        if (file_exists($file_path)) {
-          
-            // Set appropriate headers
-            header('Content-Description: File Transfer');
-            header('Content-Type: application/octet-stream');
-            header('Content-Disposition: attachment; filename="' . basename($file_path) . '"');
-            header('Expires: 0');
-            header('Cache-Control: must-revalidate');
-            header('Pragma: public');
-            header('Content-Length: ' . filesize($file_path));
-    
-            // Output the file
-            readfile($file_path);
-    
-            // Terminate the script to prevent additional output
-            exit;
-        } 
   
-      }
+      $query = "SELECT concat(ParticipantFirstName,' ',ParticipantlastName) as name, participants.ParticipantID as pid,EventName,OrganizerName,ShortDescription,EventDate
+      FROM 
+      events JOIN registration_ on events.EventID=registration_.EventID
+             JOIN organizer on organizer.OrganizerID=events.OrganizerID
+             JOIN participants on registration_.ParticipantID=participants.ParticipantID
+             JOIN request_ on events.EventID=request_.EventID
+             JOIN slot on slot.SlotID=request_.SlotID
+      WHERE participants.ParticipantID=$id and events.EventID = $eventid";
+          $result = $conn->query($query);
+          if ($result->num_rows > 0) {
+          
+              $row = mysqli_fetch_assoc($result);
+              
+              $name = $row['name'];
+              $pid = $row['pid'];
+              $ename = $row['EventName'];
+              $oname = $row['OrganizerName'];
+              $edate = $row['EventDate'];
+              $esdesc = $row['ShortDescription'];
+      
+           }
+      
+      // Create a PDF object
+      $pdf = new FPDF();
+      
+      // Add a page
+      $pdf->AddPage();
+      
+      // Get page dimensions
+      $pageWidth = $pdf->GetPageWidth();
+      $pageHeight = $pdf->GetPageHeight();
+      
+      // Set the thickness of the border
+      $borderThickness = 1;
+      
+      // Set the padding
+      $padding = 10;
+      $pdf->SetDrawColor(0, 100, 0); // RGB values for green
+      
+      // Draw borders on all four sides with padding
+      $pdf->Rect($padding, $padding, $pageWidth - 2 * $padding, $borderThickness); // Top border
+      $pdf->Rect($padding, $pageHeight - $padding - $borderThickness, $pageWidth - 2 * $padding, $borderThickness); // Bottom border
+      $pdf->Rect($padding, $padding, $borderThickness, $pageHeight - 2 * $padding); // Left border
+      $pdf->Rect($pageWidth - $padding - $borderThickness, $padding, $borderThickness, $pageHeight - 2 * $padding); // Right border
+      
+      
+      $pdf->Cell(0, 10, '', 0, 1); // Add some space
+      $pdf->Cell(0, 10, '', 0, 1); // Add some space
+      $pdf->Cell(0, 10, '', 0, 1); // Add some space
+      $pdf->Cell(0, 10, '', 0, 1); // Add some space
+      $pdf->Cell(0, 10, '', 0, 1); // Add some space
+      // Set font for the title
+      $pdf->SetFont('Arial', 'I', 20);
+      $pdf->Cell(0, 10, 'Certificate of Achievement', 0, 1, 'C');
+      
+      // Set font for the content
+      $pdf->SetFont('Arial', '', 12);
+      
+      // Add recipient's name
+      $pdf->Cell(0, 10, '', 0, 1); // Add some space
+      $pdf->Cell(0, 10, 'This is to certify that', 0, 1, 'C');
+      $pdf->Cell(0, 10, $name, 0, 1, 'C');
+      $pdf->Cell(0, 10,'ID: ' .$pid, 0, 1, 'C');
+      
+      $pdf->SetTextColor(0, 100, 0);
+      $pdf->SetFont('Arial', 'I', 16);
+      $text = 'You have successfully completed ';
+      // Add the reason for the certificate
+      $pdf->Cell(0, 10, '', 0, 1); // Add some space
+      $pdf->Cell(0, 10,$text.$ename.' event ' , 0, 1, 'C');
+      
+      $pdf->SetTextColor(0, 0, 0); // RGB values for black
+      $pdf->SetFont('Arial', '', 12);
+      // Add the date
+      $pdf->Cell(0, 10, '', 0, 1); // Add some space
+      $pdf->Cell(0, 10, 'Date: ' . date('j F, y',strtotime($row['EventDate'])), 0, 1, 'C');
+      
+      
+      $pdf->SetTextColor(0, 100, 0);
+      $pdf->Cell(0, 10, '', 0, 1); // Add some space
+      $pdf->Cell(0, 10, 'Organized BY '.$oname, 0, 1, 'C');
+      
+      $pdf->SetTextColor(0, 0, 0); // RGB values for black
+      $pdf->Cell(0, 10, '', 0, 1); // Add some space
+      $pdf->Cell(0, 10, 'Recognized by UIU authority', 0, 1, 'C');
+      
+      
+      
+      
+      // Output the PDF to the browser (use 'D' to force a download)
+      $pdf->Output('certificate.pdf', 'D');
+      
+
+
+
+
+
+
+
+
+
+
     }
   }
 
