@@ -6,6 +6,62 @@
     $database = "eventadministration";
     
     $conn = mysqli_connect($servername,$username,$password,$database);
+
+    if(isset($_POST['submit']))
+ {
+   // update
+   $eventid = $_POST['eid'];
+   $id = $_POST['id'];
+    $pass = $_POST['pass'];
+
+    $query = "SELECT * 
+    FROM participants JOIN registration_ ON participants.ParticipantID=registration_.ParticipantID
+    JOIN events on registration_.EventID=events.EventID
+     WHERE participants.ParticipantID=$id and participants.pass='$pass' and events.EventID = $eventid";
+    $result = $conn->query($query);
+    if($result){
+    if ($result->num_rows > 0) { 
+   
+      while($row = mysqli_fetch_assoc($result)){
+   $file= 'image/';
+    $file_path= $file . $row["EventFileBadge"];
+
+        if (file_exists($file_path)) {
+          
+            // Set appropriate headers
+            header('Content-Description: File Transfer');
+            header('Content-Type: application/octet-stream');
+            header('Content-Disposition: attachment; filename="' . basename($file_path) . '"');
+            header('Expires: 0');
+            header('Cache-Control: must-revalidate');
+            header('Pragma: public');
+            header('Content-Length: ' . filesize($file_path));
+    
+            // Output the file
+            readfile($file_path);
+    
+            // Terminate the script to prevent additional output
+            exit;
+        } 
+  
+      }
+    }
+  }
+
+ 
+  
+ }
+
+
+ 
+
+
+
+
+
+
+
+
     $query="UPDATE events_status JOIN request_ on events_status.EventID=request_.EventID
     JOIN slot on request_.SlotID=slot.SlotID
 SET EventStatus = 'Previous'
@@ -42,6 +98,18 @@ WHERE EventDate <  '$date' and accept=1";
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
 <style type="text/css">
+.btn-flash-border-ash {
+    color: #495057; /* Text color */
+    background-color: #d2d2d2; /* Ash color */
+    border-color: #b0b0b0; /* Border color */
+}
+
+.btn-flash-border-ash:hover {
+    background-color: #87CEEB; /* Ash color on hover */
+    border-color: #87CEEB; /* Border color on hover */
+}
+
+
   .ratings-container {
     display: flex;
     justify-content: space-around;
@@ -49,6 +117,7 @@ WHERE EventDate <  '$date' and accept=1";
     max-width: 800px;
     margin: 20px auto;
 }
+
 
 .item {
     border: 1px solid #ccc;
@@ -403,6 +472,35 @@ WHERE EventDate <  '$date' and accept=1";
 
 <br>
 <body>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Download your badge</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="#" method="post">
+        <input type="hidden" name ="eid" id="eid">
+         <label for="id">ID</label>
+         <input  class="form-control" type="text" name="id" placeholder="Enter your participant ID">
+         <br>
+         <label for="pass">Password</label>
+         <input class="form-control" type="text" name="pass" placeholder="Enter your password">
+         <br>
+         <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+      </div>
+     
+    </div>
+  </div>
+</div>
+
+
 <?php
  $sql = "SELECT tab2.eid,rat,EventName,EventDescription,EventDate,OrganizerName
  FROM ((SELECT events.EventID as eid,EventName,EventDescription,EventDate,OrganizerName FROM events join events_status on events.EventID=events_status.EventID
@@ -448,8 +546,10 @@ WHERE EventDate <  '$date' and accept=1";
 </div>
 <br>
 <span>'. $row["EventDescription"] .'</span>
+<br> <br> 
 <div class="widget-49-meeting-action">
-<a href="feedback.php?eid='. $row['eid'] .'" class="btn btn-sm btn-flash-border-primary">Feedback</a>
+<a class="down btn btn-sm btn-flash-border-ash" id='.$row['eid'].' data-toggle="modal" data-target="#exampleModal">Badge</a> &nbsp; 
+<a href="feedback.php?eid='. $row['eid'] .'" class="btn btn-sm btn-flash-border-ash">Feedback</a>
 </div>
 </div>
 </div>
@@ -461,6 +561,19 @@ WHERE EventDate <  '$date' and accept=1";
 
 ?>
 
+
+<script>
+   edits = document.getElementsByClassName('down');
+      Array.from(edits).forEach((element)=>{
+      element.addEventListener("click",(e)=>{
+    eid.value = e.target.id;
+    console.log(e.target.id);
+  
+    $('#exampleModal').modal('toggle')
+      })
+
+      })
+</script>
 
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
