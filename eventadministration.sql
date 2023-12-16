@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 16, 2023 at 11:20 AM
+-- Generation Time: Dec 16, 2023 at 05:45 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -50,6 +50,13 @@ CREATE TABLE `assist` (
   `VolunteerID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `assist`
+--
+
+INSERT INTO `assist` (`EventID`, `VolunteerID`) VALUES
+(1231434, 11221068);
+
 -- --------------------------------------------------------
 
 --
@@ -76,7 +83,10 @@ INSERT INTO `events` (`EventID`, `EventName`, `EventDescription`, `EventGuest`, 
 (101, 'Computronix Academy', 'UIU APP FORUM Presents Computronix Academy – a haven for budding minds interested in exploring the fields of Computer Science & Engineering (CSE) and Data Science (DS).\r\n', '', '10000', 'computronix academy.jpg', 'FOR UIU STUDENT', 4),
 (102, 'Google Developer Groups(GDGs)', 'Google DevFest is a global tech event presented by 𝐆𝐨𝐨𝐠𝐥𝐞 𝐃𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐫 𝐆𝐫𝐨𝐮𝐩𝐬 (GDGs), bringing together developers, tech enthusiasts, and experts for a day of presentations\r\nand networking.\r\n\r\nIt serves as a platform for knowledge sharing and collaboration among developers and tech professionals.', '', '50000', 'devfest.jpg', '', 4),
 (103, 'AI conversation 101', '', '', '50000', 'AI conversation', 'A workshop GPT and ChatGPT Technology', 4),
-(104, 'Nationwide Coding Boot-camp on 𝐁𝐥𝐨𝐜𝐤𝐜𝐡𝐚𝐢𝐧', 'A blockchain is a distributed database or ledger shared among a computer network\'s nodes. They are best known for their crucial role in cryptocurrency systems for maintaining a secure and decentralized record of transactions, but they are not limited to cryptocurrency uses. Blockchains can be used to make data in any industry immutable—the term used to describe the inability to be altered.  Because there is no way to change a block, the only trust needed is at the point where a user or program e', '', '10000', 'blockchain.jpg', '', 5);
+(104, 'Nationwide Coding Boot-camp on 𝐁𝐥𝐨𝐜𝐤𝐜𝐡𝐚𝐢𝐧', 'A blockchain is a distributed database or ledger shared among a computer network\'s nodes. They are best known for their crucial role in cryptocurrency systems for maintaining a secure and decentralized record of transactions, but they are not limited to cryptocurrency uses. Blockchains can be used to make data in any industry immutable—the term used to describe the inability to be altered.  Because there is no way to change a block, the only trust needed is at the point where a user or program e', '', '10000', 'blockchain.jpg', '', 5),
+(754, 'DataSoft Systems Bangladesh Limited ', 'Open to All UIU Students:\r\nExplore the innovative domain of IIoT – No entry fees are required! 💫\r\nMeet Our Experts:\r\n- Md. Mashuk E-lahi: IoT Engineer\r\n- Emrajul Islam (Naim): Sr. Project Manager\r\n- Mohammed Riyad: SVP, Marketing\r\n- Sami Al Islam: Chief of HR & Administration\r\n- Zakir Hasan Choudhury: Project Manager\r\nSave the date and join us for this insightful seminar!', 'faculties', '00', '402446028_359110250116021_3549580577394590494_n.jpg', '🌟 Join DataSoft Systems Bangladesh Limited Exclusive Industrial IoT Seminar!', 6),
+(4589, '“UNDERSTANDING PHOTOGRAPHY AS A LANGUAGE”', 'Day-long workshop on\r\nINTRODUCTION TO\r\nSTREET PHOTOGRAPHY', 'none', '30000', '393827944_627526706224140_6411872843724107398_n.jpg', 'Day-long workshop on\r\nINTRODUCTION TO\r\nSTREET PHOTOGRAPHY', 3),
+(1231434, 'Coke Studio Bangla Fanfare', 'Coke Studio Bangla Fanfare, headed to UIU for a spectacular talent search on 4th November instead of 31st October & 1st November, is looking for new voices to contribute to the musical experience in \"Coke Studio বাংলা Season 3.\"', 'None', '45000', 'CulturedBangla.jpg', 'Prepare to perform for the world and take part in this amazing musical event at UIU! ', 2);
 
 -- --------------------------------------------------------
 
@@ -95,6 +105,9 @@ CREATE TABLE `events_eventtype` (
 
 INSERT INTO `events_eventtype` (`EventType`, `EventID`) VALUES
 ('educational', 1),
+('educational', 754),
+('Music', 1231434),
+('photography', 4589),
 ('programming', 1);
 
 -- --------------------------------------------------------
@@ -114,7 +127,11 @@ CREATE TABLE `events_status` (
 
 INSERT INTO `events_status` (`EventStatus`, `EventID`) VALUES
 ('Ongoing', 1),
+('Ongoing', 103),
+('Ongoing', 1231434),
 ('Previous', 101),
+('Previous', 102),
+('Previous', 103),
 ('Previous', 104);
 
 -- --------------------------------------------------------
@@ -156,7 +173,13 @@ INSERT INTO `event_sponsers` (`EventID`, `SponsorID`) VALUES
 (1, 202),
 (1, 203),
 (104, 201),
-(104, 203);
+(104, 203),
+(754, 209),
+(754, 210),
+(4589, 207),
+(4589, 208),
+(4589, 209),
+(1231434, 201);
 
 -- --------------------------------------------------------
 
@@ -200,6 +223,14 @@ CREATE TABLE `notice` (
   `reply` varchar(100) DEFAULT NULL,
   `view` int(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `notice`
+--
+
+INSERT INTO `notice` (`notice`, `time`, `EventID`, `OrganizerID`, `reply`, `view`) VALUES
+('hi', '2023-12-16 10:35:09', 754, 6, 'hello', 1),
+('hi', '2023-12-16 10:34:52', 4589, 3, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -356,8 +387,10 @@ CREATE TABLE `qa` (
 --
 
 INSERT INTO `qa` (`EventID`, `qus`, `ans`, `StudentID`, `StudentEmail`) VALUES
+(1231434, 'hi', 'hello', 123, 'sahmed221068@bscse.uiu.ac.bd'),
 (1, 'ki hobe ki ekhane actually', 'c sikhabo re bhai dekhen na', 68, 'sahmed221068@bscse.uiu.ac.bd'),
-(104, 'sdfsd', NULL, 123, 'redoy.khan898@gmail.com');
+(104, 'sdfsd', NULL, 123, 'redoy.khan898@gmail.com'),
+(104, 'sdfsdfsdfsdgsfdg', NULL, 2147483647, 'sahmed221068@bscse.uiu.ac.bd');
 
 -- --------------------------------------------------------
 
@@ -377,6 +410,7 @@ CREATE TABLE `registration_` (
 INSERT INTO `registration_` (`EventID`, `ParticipantID`) VALUES
 (1, 2),
 (1, 7),
+(1, 11),
 (1, 68),
 (101, 2),
 (101, 3),
@@ -406,7 +440,8 @@ INSERT INTO `registration_` (`EventID`, `ParticipantID`) VALUES
 (104, 13),
 (104, 14),
 (104, 15),
-(104, 16);
+(104, 16),
+(1231434, 2);
 
 -- --------------------------------------------------------
 
@@ -427,7 +462,12 @@ CREATE TABLE `request_` (
 INSERT INTO `request_` (`EventID`, `accept`, `SlotID`) VALUES
 (1, 1, 9),
 (101, 1, 16),
-(104, 1, 18);
+(102, 1, 16),
+(103, 1, 17),
+(104, 1, 18),
+(754, NULL, 7),
+(4589, NULL, 6),
+(1231434, 1, 14);
 
 -- --------------------------------------------------------
 
@@ -461,12 +501,12 @@ INSERT INTO `slot` (`StartTime`, `EndTime`, `SlotID`, `EventDate`, `VenueID`, `a
 ('14:15:00', '16:30:00', 11, '2024-02-15', 1, 1),
 ('11:11:00', '12:30:00', 12, '2024-02-15', 6, 1),
 ('09:00:00', '12:30:00', 13, '2024-01-20', 3, 1),
-('14:40:00', '15:40:00', 14, '2023-12-29', 3, 1),
-('14:00:00', '16:30:00', 15, '2023-12-05', 2, 1),
-('11:30:00', '12:30:00', 16, '2023-08-25', 1, 1),
-('10:30:00', '16:30:00', 17, '2023-12-02', 1, 1),
-('14:00:00', '16:30:00', 18, '2023-11-24', 9, 1),
-('10:30:00', '16:30:00', 19, '2023-12-02', 1, 1);
+('14:40:00', '15:40:00', 14, '2023-12-29', 3, 0),
+('14:00:00', '16:30:00', 15, '2023-12-05', 2, 0),
+('11:30:00', '12:30:00', 16, '2023-12-25', 1, 0),
+('10:30:00', '16:30:00', 17, '2023-12-02', 1, 0),
+('14:00:00', '16:30:00', 18, '2023-11-24', 9, 0),
+('10:30:00', '12:30:00', 3124, '2024-03-01', 10, 1);
 
 -- --------------------------------------------------------
 
@@ -491,7 +531,17 @@ INSERT INTO `sponsors` (`SponsorID`, `SponsorName`, `SponsorDescription`, `Spons
 (201, 'Directorate of Career Counseling & Student Affairs (DCCSA)', 'This Center provides career development counseling to UIU graduates. Cultivates and maintains relatio.', 'DCCSA_LOGO.jpg', 'career@uiu.ac.bd', '09604-848848'),
 (202, 'GitHub', 'The AI-powered developer platform to build, scale, and deliver secure software.', 'GitHub_LOGO.jpg', 'support@github.com', '09604-998848'),
 (203, 'JetBrains', 'Leaders in Pro Developer Tools! Makers of IntelliJ IDEA, Rider, PyCharm, TeamCity, Kotlin and more.', 'JetBrainsLOGO.png', 'sales@jetbrains.com', '09604-848841'),
-(204, 'Sticker Mule', 'Custom printing that kicks ass. Easy online ordering, 4 day turnaround and free shipping.', 'StickerMuleLOGO.png', 'help@stickermule.com', '+1 303-647-1756');
+(204, 'Sticker Mule', 'Custom printing that kicks ass. Easy online ordering, 4 day turnaround and free shipping.', 'StickerMuleLOGO.png', 'help@stickermule.com', '+1 303-647-1756'),
+(206, 'bKash Limited', 'bKash Limited (a subsidiary of BRAC Bank Limited) is dedicated to providing Mobile Financial Services.', 'bKash Limited.png', 'support@bkash.com', ' 09604848848'),
+(207, 'Nagad', 'Nagad envisions to be the one-stop digital finance solution for Bangladesh.', 'Nagad.jpg', 'info@nagad.com.bd', '09604848848'),
+(208, 'Rocket', 'Dutch-Bangla Bank pioneered Mobile Banking in Bangladesh.', 'Rocket.jpg', ' ingfo@rocket.com.bd', '09604848848'),
+(209, 'United International University', 'United International University (UIU) is the outcome of the initiative taken by a couple of renowned academicians. It is established with the generous support and patronage of the United Group, a successful business conglomerate operating in diverse business areas.', 'United International University.jpg', 'info@uiu.ac.bd', '09604848848'),
+(210, 'BJIT Group', 'BJIT is a leading global IT outsourcing company shaping the future through Digital Transformation.', 'BJIT Group.png', 'digital.marketing@bjitgroup.com', '01958038009'),
+(211, 'City Bank', 'City Bank is here to change the banking ecosystem with a range of innovative digital solutions for it', 'City Bank.jpg', ' ', ' '),
+(212, 'Dhaka Bank', 'Excellence in Banking', 'Dhaka Bank.jpg', '', ''),
+(213, 'Smart Software Ltd.', 'Smart Software Limited is a Software, Mobile App, eCommerce and Website Development Company.', 'Smart Software Ltd..png', 'hello@smartsoftware.com.bd', '01844047000'),
+(214, 'SoftTech-IT Institute', '', 'SoftTech-IT Institute.jpg', 'softtechitinstitute@gmail.com', '01758101611'),
+(215, 'SR Dream-IT', 'Biggest Freelancing Campaign.', 'SR Dream-IT.jpg', 'support@srdreamit.com', ' ');
 
 -- --------------------------------------------------------
 
@@ -536,6 +586,13 @@ CREATE TABLE `volunteers_` (
   `VolunteerContactNumber` varchar(20) NOT NULL,
   `VolunteerDesignation` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `volunteers_`
+--
+
+INSERT INTO `volunteers_` (`VolunteerID`, `VolunteerName`, `VolunteerEmail`, `VolunteerContactNumber`, `VolunteerDesignation`) VALUES
+(11221068, 'hridoy ahmed', 'af@mail.com', '01911360991', 'student');
 
 --
 -- Indexes for dumped tables

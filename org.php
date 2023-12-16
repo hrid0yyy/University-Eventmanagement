@@ -123,7 +123,7 @@ if(!isset($_SESSION['username'])){
         <ul class="nav-menu">
           <li><a href="welcomeadmin.php">Admin Home</a></li>
           <li class="menu-active"><a href="eventreq.php">Event Requests</a></li>
-          <li><a href="org.php">Organziers</a></li>
+       
 		  <li><a href="logout.php">Logout</a></li>
         </ul>
       </nav>

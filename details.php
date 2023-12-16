@@ -663,9 +663,18 @@ else{
 
 if(isset($_POST['qsubmit']))
 {
-  $q= "SELECT EventName
+  $q= "(SELECT EventName
   FROM events join outsiderequest on events.EventID=outsiderequest.EventID   
-  WHERE events.EventID=$eid AND (EventDate >= CURDATE() + INTERVAL 4 DAY)";
+  WHERE events.EventID=$eid AND (EventDate >= CURDATE() + INTERVAL 4 DAY))
+
+
+UNION
+
+
+(SELECT EventName
+  FROM events join request_ on events.EventID=request_.EventID   
+              JOIN slot on request_.SlotID=slot.SlotID
+  WHERE events.EventID=$eid AND (EventDate >= CURDATE() + INTERVAL 4 DAY))";
   $r = $conn->query($q);
 
   if ($r->num_rows > 0){

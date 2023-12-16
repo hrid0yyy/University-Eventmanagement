@@ -86,7 +86,7 @@
 		
       <nav id='nav-menu-container'>
         <ul class='nav-menu'>
-          <li class='menu-active'><a href='welcomeadmin.php'>Admin Home</a></li>
+         
           <li><a href='venue.php'>Venues</a></li>
           <li><a href='eventreq.php'>Event requests</a></li>
           <li><a href='org.php'>Organziers</a></li>

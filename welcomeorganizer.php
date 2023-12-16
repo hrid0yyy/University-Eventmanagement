@@ -6,8 +6,13 @@
     $database = 'eventadministration';
     
     $conn = mysqli_connect($servername,$username,$password,$database);
-
-
+    $oid = $_GET["oid"];
+    $query="select OrganizerName from organizer where OrganizerID = $oid";
+    $res= mysqli_query($conn, $query);
+    if ($res->num_rows > 0) {
+      $row = mysqli_fetch_assoc($res);
+      $oname= $row['OrganizerName'];
+    }
 
  ?>
 <!doctype html>
@@ -152,15 +157,15 @@
     <div class='container-fluid'>
 
       <div id='logo' class='pull-left'>
-        <h1><a href='#intro' class='scrollto'>Organizer Panel</a></h1>
+        <h1><a href='#intro' class='scrollto'><?php echo $oname.' Panel' ?></a></h1>
       </div>
 <?php	
-  $oid = $_GET["oid"];
+
 
     echo" <nav id='nav-menu-container'>
         <ul class='nav-menu'>
         
-          <li class='menu-active'><a href='welcomeorganizer.php?oid=". $oid . "'>Organizer Home</a></li>
+  
           <li><a href='participants.php?oid=". $oid . "'>Participants</a></li>
           <li><a href='volunteers.php?oid=". $oid . "'>Volunteers</a></li>     
           <li><a href='addevent.php?oid=". $oid . "'>Request event</a></li>
@@ -217,6 +222,7 @@
   WHERE accept=1 and organizer.OrganizerID= $oid and EventStatus = 'Ongoing') as tab2
   on tab1.oid=tab2.oid";
  $result = $conn->query($query);
+ $accepted = 0;
  if ($result->num_rows > 0) {
      
      $row = mysqli_fetch_assoc($result);

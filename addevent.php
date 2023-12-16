@@ -79,7 +79,7 @@
           
           <li class='menu-active'><a href='welcomeorganizer.php?oid=". $oid . "'>Organizer Home</a></li> 
           <li class='menu-active'><a href='sponsers.php?oid=". $oid . "'>Sponsers</a></li>  
-          <li class='menu-active'><a href='addevent.php?oid=". $oid . "'>Add Event</a></li>
+         
           <li><a href='viewslot.php?oid=". $oid . "'>Available slot</a></li>
 		  <li><a href='logout2.php'>Logout</a></li>
         </ul>

@@ -138,7 +138,7 @@
        FROM events JOIN assist on events.EventID=assist.EventID
                    JOIN volunteers_ on assist.VolunteerID=volunteers_.VolunteerID
                     JOIN events_status on events.EventID=events_status.EventID
-       WHERE OrganizerID = 1 and EventStatus = 'Ongoing'";
+       WHERE OrganizerID = $oid and EventStatus = 'Ongoing'";
        $res = mysqli_query($conn,$que);
        while($row = mysqli_fetch_assoc($res))
        {

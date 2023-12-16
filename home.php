@@ -207,9 +207,16 @@ $date = date('Y-m-d');
     //Output Form Entries from the Database
     $sql = "SELECT OrganizerName,rat,eid,EventName,ShortDescription,EventFileBanner,EventDate
     FROM
-    (SELECT avg(Rating) as rat,organizer.OrganizerID as oid
+    ((SELECT avg(Rating) as rat,organizer.OrganizerID as oid
     FROM feedback_ JOIN  events on feedback_.EventID=events.EventID
-                   JOIN  organizer on events.OrganizerID=organizer.OrganizerID) as tab1
+                   JOIN  organizer on events.OrganizerID=organizer.OrganizerID) 
+UNION
+
+(SELECT 0 as rat,OrganizerID as oid
+    FROM organizer
+     where OrganizerID not in (select organizer.OrganizerID as oid
+    FROM feedback_ JOIN  events on feedback_.EventID=events.EventID
+                   JOIN  organizer on events.OrganizerID=organizer.OrganizerID) ) ) as tab1
                    JOIN
     (((SELECT organizer.OrganizerID as oid,OrganizerName,events.EventID as eid,EventName,ShortDescription,EventFileBanner,EventDate
         FROM events join request_ on events.EventID=request_.EventID 
@@ -250,10 +257,12 @@ $date = date('Y-m-d');
                        <h1 class="title">'. $row["EventName"] .'</h1>
                       
                        <h5 class="definition">'. $row["OrganizerName"] .'  ';
-                   if($row['rat'] != null) {   
+                   if($row['rat'] != null ) {   
+                    if($row['rat'] != 0){
                        for ($i = 1; $i <= 5; $i++) {
                         echo "<span class='star " . (($i <= $row['rat']) ? 'filled' : '') . "'>&#9733;</span>";
-                    }   
+                    }  
+                  } 
                   }    
                     echo '</h5><h7>'.$row["ShortDescription"].'  </h7><a href="details.php?eid='. $row['eid'] .'&rat='.$row['rat'].'">View Details</a>
                     
