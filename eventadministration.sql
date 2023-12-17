@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 16, 2023 at 05:45 PM
+-- Generation Time: Dec 17, 2023 at 07:08 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -71,22 +71,24 @@ CREATE TABLE `events` (
   `EventBudget` varchar(50) NOT NULL,
   `EventFileBanner` varchar(100) DEFAULT NULL,
   `ShortDescription` varchar(100) DEFAULT NULL,
-  `OrganizerID` int(11) DEFAULT NULL
+  `OrganizerID` int(11) DEFAULT NULL,
+  `fee` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `events`
 --
 
-INSERT INTO `events` (`EventID`, `EventName`, `EventDescription`, `EventGuest`, `EventBudget`, `EventFileBanner`, `ShortDescription`, `OrganizerID`) VALUES
-(1, 'C CLINIC', 'UIU Computer Club is going to arrange a two days workshop named “C-Clinic”.\r\nThis program is arranged for those students who took SPL or APL course in this trimester.\r\nAs our mid exam is almost knocking at the door, it is needed to revise all the contents of running course.\r\nIt will be like an “Adda” about C language. You can bring all your questions, we will try to solve together . 😉', 'tarek sir', '100000000', '23456415_2013767945528243_1989576446997817108_o.jpg', 'for varsity student', 4),
-(101, 'Computronix Academy', 'UIU APP FORUM Presents Computronix Academy – a haven for budding minds interested in exploring the fields of Computer Science & Engineering (CSE) and Data Science (DS).\r\n', '', '10000', 'computronix academy.jpg', 'FOR UIU STUDENT', 4),
-(102, 'Google Developer Groups(GDGs)', 'Google DevFest is a global tech event presented by 𝐆𝐨𝐨𝐠𝐥𝐞 𝐃𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐫 𝐆𝐫𝐨𝐮𝐩𝐬 (GDGs), bringing together developers, tech enthusiasts, and experts for a day of presentations\r\nand networking.\r\n\r\nIt serves as a platform for knowledge sharing and collaboration among developers and tech professionals.', '', '50000', 'devfest.jpg', '', 4),
-(103, 'AI conversation 101', '', '', '50000', 'AI conversation', 'A workshop GPT and ChatGPT Technology', 4),
-(104, 'Nationwide Coding Boot-camp on 𝐁𝐥𝐨𝐜𝐤𝐜𝐡𝐚𝐢𝐧', 'A blockchain is a distributed database or ledger shared among a computer network\'s nodes. They are best known for their crucial role in cryptocurrency systems for maintaining a secure and decentralized record of transactions, but they are not limited to cryptocurrency uses. Blockchains can be used to make data in any industry immutable—the term used to describe the inability to be altered.  Because there is no way to change a block, the only trust needed is at the point where a user or program e', '', '10000', 'blockchain.jpg', '', 5),
-(754, 'DataSoft Systems Bangladesh Limited ', 'Open to All UIU Students:\r\nExplore the innovative domain of IIoT – No entry fees are required! 💫\r\nMeet Our Experts:\r\n- Md. Mashuk E-lahi: IoT Engineer\r\n- Emrajul Islam (Naim): Sr. Project Manager\r\n- Mohammed Riyad: SVP, Marketing\r\n- Sami Al Islam: Chief of HR & Administration\r\n- Zakir Hasan Choudhury: Project Manager\r\nSave the date and join us for this insightful seminar!', 'faculties', '00', '402446028_359110250116021_3549580577394590494_n.jpg', '🌟 Join DataSoft Systems Bangladesh Limited Exclusive Industrial IoT Seminar!', 6),
-(4589, '“UNDERSTANDING PHOTOGRAPHY AS A LANGUAGE”', 'Day-long workshop on\r\nINTRODUCTION TO\r\nSTREET PHOTOGRAPHY', 'none', '30000', '393827944_627526706224140_6411872843724107398_n.jpg', 'Day-long workshop on\r\nINTRODUCTION TO\r\nSTREET PHOTOGRAPHY', 3),
-(1231434, 'Coke Studio Bangla Fanfare', 'Coke Studio Bangla Fanfare, headed to UIU for a spectacular talent search on 4th November instead of 31st October & 1st November, is looking for new voices to contribute to the musical experience in \"Coke Studio বাংলা Season 3.\"', 'None', '45000', 'CulturedBangla.jpg', 'Prepare to perform for the world and take part in this amazing musical event at UIU! ', 2);
+INSERT INTO `events` (`EventID`, `EventName`, `EventDescription`, `EventGuest`, `EventBudget`, `EventFileBanner`, `ShortDescription`, `OrganizerID`, `fee`) VALUES
+(1, 'C CLINIC', 'UIU Computer Club is going to arrange a two days workshop named “C-Clinic”.\r\nThis program is arranged for those students who took SPL or APL course in this trimester.\r\nAs our mid exam is almost knocking at the door, it is needed to revise all the contents of running course.\r\nIt will be like an “Adda” about C language. You can bring all your questions, we will try to solve together . 😉', 'tarek sir', '100000000', '23456415_2013767945528243_1989576446997817108_o.jpg', 'for varsity student', 4, 500),
+(101, 'Computronix Academy', 'UIU APP FORUM Presents Computronix Academy – a haven for budding minds interested in exploring the fields of Computer Science & Engineering (CSE) and Data Science (DS).\r\n', '', '10000', 'computronix academy.jpg', 'FOR UIU STUDENT', 4, 500),
+(102, 'Google Developer Groups(GDGs)', 'Google DevFest is a global tech event presented by 𝐆𝐨𝐨𝐠𝐥𝐞 𝐃𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐫 𝐆𝐫𝐨𝐮𝐩𝐬 (GDGs), bringing together developers, tech enthusiasts, and experts for a day of presentations\r\nand networking.\r\n\r\nIt serves as a platform for knowledge sharing and collaboration among developers and tech professionals.', '', '50000', 'devfest.jpg', '', 4, 500),
+(103, 'AI conversation 101', '', '', '50000', 'AI conversation', 'A workshop GPT and ChatGPT Technology', 4, 500),
+(104, 'Nationwide Coding Boot-camp on 𝐁𝐥𝐨𝐜𝐤𝐜𝐡𝐚𝐢𝐧', 'A blockchain is a distributed database or ledger shared among a computer network\'s nodes. They are best known for their crucial role in cryptocurrency systems for maintaining a secure and decentralized record of transactions, but they are not limited to cryptocurrency uses. Blockchains can be used to make data in any industry immutable—the term used to describe the inability to be altered.  Because there is no way to change a block, the only trust needed is at the point where a user or program e', '', '10000', 'blockchain.jpg', '', 5, 500),
+(754, 'DataSoft Systems Bangladesh Limited ', 'Open to All UIU Students:\r\nExplore the innovative domain of IIoT – No entry fees are required! 💫\r\nMeet Our Experts:\r\n- Md. Mashuk E-lahi: IoT Engineer\r\n- Emrajul Islam (Naim): Sr. Project Manager\r\n- Mohammed Riyad: SVP, Marketing\r\n- Sami Al Islam: Chief of HR & Administration\r\n- Zakir Hasan Choudhury: Project Manager\r\nSave the date and join us for this insightful seminar!', 'faculties', '00', '402446028_359110250116021_3549580577394590494_n.jpg', '🌟 Join DataSoft Systems Bangladesh Limited Exclusive Industrial IoT Seminar!', 6, 500),
+(1429, 'ইউ আই ইউ বসন্ত উৎসব ১৪২৯', 'বসন্ত আসেই যেন আমাদের হৃদয়ে অকারণ খুশির দোলা দিতে। যেদিকে চোখ যায়, যেন রঙের রায়ট। এদিকে চোখ গেল তো গোধূলিরঙা পলাশ, আরেক দিকে রক্তলাল কৃষ্ণচূড়া।\r\n\r\nইউ আই ইউ কালচারাল ক্লাব ইউ আই ইউ এর সকলের জন্য নিয়ে এলো ইউ আই ইউ বসন্ত উৎসব ১৪২৯\r\n\r\nইউ আই ইউ এর সকলে আমন্ত্রিত।', 'none', '50000', '329887928_933425787845601_3277945942830904895_n.jpeg', 'ইউ আই ইউ এর সকলে আমন্ত্রিত।', 2, 200),
+(4589, '“UNDERSTANDING PHOTOGRAPHY AS A LANGUAGE”', 'Day-long workshop on\r\nINTRODUCTION TO\r\nSTREET PHOTOGRAPHY', 'none', '30000', '393827944_627526706224140_6411872843724107398_n.jpg', 'Day-long workshop on\r\nINTRODUCTION TO\r\nSTREET PHOTOGRAPHY', 3, 500),
+(1231434, 'Coke Studio Bangla Fanfare', 'Coke Studio Bangla Fanfare, headed to UIU for a spectacular talent search on 4th November instead of 31st October & 1st November, is looking for new voices to contribute to the musical experience in \"Coke Studio বাংলা Season 3.\"', 'None', '45000', 'CulturedBangla.jpg', 'Prepare to perform for the world and take part in this amazing musical event at UIU! ', 2, 500);
 
 -- --------------------------------------------------------
 
@@ -104,6 +106,7 @@ CREATE TABLE `events_eventtype` (
 --
 
 INSERT INTO `events_eventtype` (`EventType`, `EventID`) VALUES
+('cultural', 1429),
 ('educational', 1),
 ('educational', 754),
 ('Music', 1231434),
@@ -127,11 +130,12 @@ CREATE TABLE `events_status` (
 
 INSERT INTO `events_status` (`EventStatus`, `EventID`) VALUES
 ('Ongoing', 1),
-('Ongoing', 103),
+('Ongoing', 754),
+('Ongoing', 1429),
+('Ongoing', 4589),
 ('Ongoing', 1231434),
 ('Previous', 101),
 ('Previous', 102),
-('Previous', 103),
 ('Previous', 104);
 
 -- --------------------------------------------------------
@@ -172,10 +176,13 @@ CREATE TABLE `event_sponsers` (
 INSERT INTO `event_sponsers` (`EventID`, `SponsorID`) VALUES
 (1, 202),
 (1, 203),
+(102, 208),
+(102, 211),
 (104, 201),
 (104, 203),
 (754, 209),
 (754, 210),
+(1429, 201),
 (4589, 207),
 (4589, 208),
 (4589, 209),
@@ -308,6 +315,7 @@ CREATE TABLE `participants` (
 --
 
 INSERT INTO `participants` (`ParticipantID`, `ParticipantFirstName`, `ParticipantlastName`, `ParticipantEmail`, `ParticipantContactNumber`, `ParticipantRole`, `ParticipantBloodGroup`, `pass`) VALUES
+(1, 'fghfg', 'fghfg', 'redoy.khan898@gmail.com', '01911360990', 'student', 'fgh', 'rtyfrh'),
 (2, 'Hridoy', 'Ahmed', 'hridoyahmed@gmail.com', '01745675504', 'Student', 'O+', '1234'),
 (3, 'Redwan', 'Ahmed', 'ridwanahmed@gmail.com', '01703359876', 'Student', 'B+', '1234'),
 (4, 'Mustakim', 'Keya', 'mustakimkeya@gmail.com', '01703456789', 'Student', 'A+', '1234'),
@@ -409,7 +417,9 @@ CREATE TABLE `registration_` (
 
 INSERT INTO `registration_` (`EventID`, `ParticipantID`) VALUES
 (1, 2),
+(1, 5),
 (1, 7),
+(1, 10),
 (1, 11),
 (1, 68),
 (101, 2),
@@ -427,6 +437,12 @@ INSERT INTO `registration_` (`EventID`, `ParticipantID`) VALUES
 (101, 14),
 (101, 15),
 (101, 16),
+(102, 2),
+(102, 7),
+(102, 9),
+(102, 10),
+(102, 11),
+(102, 12),
 (104, 3),
 (104, 4),
 (104, 5),
@@ -441,6 +457,9 @@ INSERT INTO `registration_` (`EventID`, `ParticipantID`) VALUES
 (104, 14),
 (104, 15),
 (104, 16),
+(754, 1),
+(1429, 1),
+(4589, 11),
 (1231434, 2);
 
 -- --------------------------------------------------------
@@ -461,12 +480,13 @@ CREATE TABLE `request_` (
 
 INSERT INTO `request_` (`EventID`, `accept`, `SlotID`) VALUES
 (1, 1, 9),
-(101, 1, 16),
+(101, 1, 21),
 (102, 1, 16),
 (103, 1, 17),
 (104, 1, 18),
-(754, NULL, 7),
-(4589, NULL, 6),
+(754, 1, 7),
+(1429, 1, 13),
+(4589, 1, 6),
 (1231434, 1, 14);
 
 -- --------------------------------------------------------
@@ -493,19 +513,20 @@ INSERT INTO `slot` (`StartTime`, `EndTime`, `SlotID`, `EventDate`, `VenueID`, `a
 ('15:00:00', '17:00:00', 2, '2024-01-10', 10, 0),
 ('11:11:00', '12:30:00', 3, '2024-01-15', 9, 1),
 ('11:11:00', '12:30:00', 4, '2024-01-15', 9, 1),
-('14:30:00', '17:30:00', 6, '2024-02-01', 4, 1),
-('11:11:00', '12:30:00', 7, '2024-02-10', 6, 1),
+('14:30:00', '17:30:00', 6, '2024-02-01', 4, 0),
+('11:11:00', '12:30:00', 7, '2024-02-10', 6, 0),
 ('14:15:00', '16:30:00', 8, '2024-02-15', 1, 1),
 ('11:30:00', '12:30:00', 9, '2023-12-25', 1, 0),
 ('09:00:00', '16:00:00', 10, '2024-02-20', 8, 1),
 ('14:15:00', '16:30:00', 11, '2024-02-15', 1, 1),
 ('11:11:00', '12:30:00', 12, '2024-02-15', 6, 1),
-('09:00:00', '12:30:00', 13, '2024-01-20', 3, 1),
+('09:00:00', '12:30:00', 13, '2024-01-20', 3, 0),
 ('14:40:00', '15:40:00', 14, '2023-12-29', 3, 0),
 ('14:00:00', '16:30:00', 15, '2023-12-05', 2, 0),
 ('11:30:00', '12:30:00', 16, '2023-12-25', 1, 0),
 ('10:30:00', '16:30:00', 17, '2023-12-02', 1, 0),
 ('14:00:00', '16:30:00', 18, '2023-11-24', 9, 0),
+('20:00:00', '22:00:00', 21, '2023-12-06', 9, 0),
 ('10:30:00', '12:30:00', 3124, '2024-03-01', 10, 1);
 
 -- --------------------------------------------------------

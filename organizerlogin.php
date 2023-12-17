@@ -1,11 +1,4 @@
-<?php
-	session_start();
-if(isset($_SESSION['username']))
-{
-	header("location:welcomeorganizer.php");
-}
 
-?>
 <?php
       $servername = "localhost";
       $username = "root";

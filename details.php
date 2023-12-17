@@ -10,7 +10,7 @@ $flag = 0;
 
 //checking if connection is working or not
 //Output Form Entries from the Database
-$query = "SELECT events.EventID,EventName,EventDescription,EventGuest,EventFileBanner,EventDate,VenueName,StartTime,EndTime,OrganizerName,OrganizerEmail,OrganizerContactNumber,ShortDescription,OrganizerDescription,OrganizerFileLogo,VenueFileimg,VenueLocation FROM events join request_ on events.EventID=request_.EventID join slot on slot.SlotID=request_.SlotID join venue_ on slot.VenueID=venue_.VenueID
+$query = "SELECT events.EventID,EventName,fee,EventDescription,EventGuest,EventFileBanner,EventDate,VenueName,StartTime,EndTime,OrganizerName,OrganizerEmail,OrganizerContactNumber,ShortDescription,OrganizerDescription,OrganizerFileLogo,VenueFileimg,VenueLocation FROM events join request_ on events.EventID=request_.EventID join slot on slot.SlotID=request_.SlotID join venue_ on slot.VenueID=venue_.VenueID
 JOIN organizer on events.OrganizerID=organizer.OrganizerID  where events.EventID=$eid";
 $result = $conn->query($query);
 if ($result->num_rows > 0) {
@@ -33,11 +33,12 @@ if ($result->num_rows > 0) {
    $odesc=$row['OrganizerDescription'];
    $ofile=$row['OrganizerFileLogo'];
    $vfile=$row['VenueFileimg'];
+   $fee=$row['fee'];
  }
  else
  {
    $flag = 1;
-   $query = "SELECT events.EventID,EventName,EventDescription,EventGuest,EventFileBanner,ShortDescription,EventDate,OutsideAddress,StartTime,EndTime,OrganizerName,OrganizerEmail,OrganizerContactNumber,OrganizerDescription,OrganizerFileLogo FROM events join outsiderequest on events.EventID=outsiderequest.EventID 
+   $query = "SELECT events.EventID,fee,EventName,EventDescription,EventGuest,EventFileBanner,ShortDescription,EventDate,OutsideAddress,StartTime,EndTime,OrganizerName,OrganizerEmail,OrganizerContactNumber,OrganizerDescription,OrganizerFileLogo FROM events join outsiderequest on events.EventID=outsiderequest.EventID 
    JOIN organizer on events.OrganizerID=organizer.OrganizerID  where events.EventID=$eid";
    $result = $conn->query($query);
    if ($result->num_rows > 0) {
@@ -58,6 +59,7 @@ if ($result->num_rows > 0) {
    $oemail=$row['OrganizerEmail'];
    $odesc=$row['OrganizerDescription'];
    $ofile=$row['OrganizerFileLogo'];
+   $fee=$row['fee'];
 
  }
 }
@@ -182,6 +184,7 @@ https://www.tooplate.com/view/2119-gymso-fitness
           
         } ?> 
                            <?php          echo'<p data-aos="fade-up" data-aos-delay="500">Event Date: '. date('j F, y',strtotime($edate)).'</p>
+                                         <p data-aos="fade-up" data-aos-delay="500">Registration Fee: '. $fee.'</p>
                                     <a href="#" class="btn custom-btn bg-color mt-3" data-aos="fade-up" data-aos-delay="300" data-toggle="modal" data-target="#membershipForm">Registration</a>
                                    
                               </div>
@@ -386,12 +389,13 @@ echo '<img src="./image/'. $vfile .'" width="450px" height="350px" >';
         <input class="form-control" type="email" name="email" id="email" placeholder="Enter your email" required>
       
         <input class="form-control" type="text" name="role" id="role" placeholder="Enter your role"  required>
-
-                <button type="submit" class="form-control" id="submit-button" name="submit">Submit Button</button>
+       
+                    
+                <button type="submit" class="form-control" id="submit-button" name="submit">Register</button>
 
                 
             </form>
-          </div>
+                    </div>
 
           <div class="modal-footer"></div>
 
@@ -489,17 +493,29 @@ if(isset($_POST['submit']))
       $participants = $row['participants'];
    }
      if($limit>$participants){
+
      
+      $sql = "SELECT * FROM `registration_` WHERE EventID = $eid and ParticipantID = $id";
+      //fire query
+      $result = mysqli_query($conn, $sql);
+      if(mysqli_num_rows($result) > 0)
+      {
+        echo "<script>alert('You are already registered')</script>";
+      
+          echo "<script>location.href='details.php?eid=". $eid . "&rat=". $rat . "'</script>";
+      }
+     else
+     {
+    
+      echo "<script>location.href='payment.php?fee=". $fee . "&id=". $id . "&eid=". $eid . "&rat=". $rat . "'</script>";
     $sql = "INSERT INTO `participants` (`ParticipantID`, `ParticipantFirstName`, `ParticipantlastName`, `ParticipantEmail`, `ParticipantContactNumber`,`ParticipantBloodGroup`,`ParticipantRole`,`pass`) VALUES ('$id', '$fname', '$lname', '$email','$number','$bg','$role','$pass'); ";
         
     $res = mysqli_query($conn,$sql);
     $sql2 = " INSERT INTO registration_ (`EventID`,`ParticipantID`) VALUES ('$eid','$id');";
     $done = mysqli_query($conn,$sql2);
-    if($done){
+    
     echo "<script>alert('Registration Successfull')</script>";
- 
-    }
-  
+     }
      }
 
      else{
@@ -553,17 +569,29 @@ if(isset($_POST['submit']))
         $participants = $row['participants'];
      }
        if($limit>$participants){ 
+
        
+        $sql = "SELECT * FROM `registration_` WHERE EventID = $eid and ParticipantID = $id";
+        //fire query
+        $result = mysqli_query($conn, $sql);
+        if(mysqli_num_rows($result) > 0)
+        {
+          echo "<script>alert('You are already registered')</script>";
+        
+            echo "<script>location.href='details.php?eid=". $eid . "&rat=". $rat . "'</script>";
+        }
+       else
+       {
+      
+        echo "<script>location.href='payment.php?fee=". $fee . "&id=". $id . "&eid=". $eid . "&rat=". $rat . "'</script>";
       $sql = "INSERT INTO `participants` (`ParticipantID`, `ParticipantFirstName`, `ParticipantlastName`, `ParticipantEmail`, `ParticipantContactNumber`,`ParticipantBloodGroup`,`ParticipantRole`,`pass`) VALUES ('$id', '$fname', '$lname', '$email','$number','$bg','$role','$pass'); ";
           
       $res = mysqli_query($conn,$sql);
       $sql2 = " INSERT INTO registration_ (`EventID`,`ParticipantID`) VALUES ('$eid','$id');";
       $done = mysqli_query($conn,$sql2);
-      if($done){
+      
       echo "<script>alert('Registration Successfull')</script>";
-
-      }
-    
+       }
        }
   
        else{

@@ -164,6 +164,14 @@
                    <div > <label for="sponsers">Sponsers Per Line<span>&#42;</span></label></div>
                 <div class="col-md-5" style="margin-left: 70px;"><textarea name="sponsers" rows="5" cols="50" id="sponsers" placeholder="Event Sponsers" ></textarea></div> 
                    <br> 
+                   <div class="row">
+                   <div class="col-md-1"><label for="capacity">Registration Fee<span>&#42;</span></label></div>
+                    <div class="col-md-5"><input type="text" class="form-control" id="fee" placeholder="Event Registration fee" name="fee" required ></div> 
+                    
+                    
+                    
+                </div>
+                <br>
                    <?php echo"
                 <div class='row'>
                    <div class='col-md-1'><label for='sid'>Slot ID<span>&#42;</span></label></div>
@@ -235,6 +243,7 @@ if(isset($_POST['submit']))
    
     $eguest= $_POST['eguest'];
     $ebudget= $_POST['ebudget'];
+    $fee= $_POST['fee'];
 
 
     $filename = $_FILES["uploadfile"]["name"];
@@ -248,7 +257,7 @@ if(isset($_POST['submit']))
 	
 	
   
-    $sql = mysqli_query($conn,"INSERT INTO `events` (`EventID`, `EventName`, `OrganizerID`, `EventDescription`,`EventFileBanner`,`EventGuest`,`EventBudget`,`ShortDescription`) VALUES ('$eid', '$ename', '$oid','$edesc','$filename','$eguest','$ebudget','$esdesc')") or die("Query Failed".mysqli_error($conn));
+    $sql = mysqli_query($conn,"INSERT INTO `events` (`EventID`, `EventName`, `OrganizerID`, `EventDescription`,`EventFileBanner`,`EventGuest`,`EventBudget`,`ShortDescription`,`fee`) VALUES ('$eid', '$ename', '$oid','$edesc','$filename','$eguest','$ebudget','$esdesc','$fee')") or die("Query Failed".mysqli_error($conn));
     $sql2 = mysqli_query($conn,"INSERT INTO `request_` (`EventID`, `SlotID`) VALUES ('$eid', '$slotid')") or die("Query Failed".mysqli_error($conn));
 
     

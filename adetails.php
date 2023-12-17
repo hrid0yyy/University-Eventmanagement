@@ -30,6 +30,7 @@ if ($result->num_rows > 0) {
    $oemail=$row['OrganizerEmail'];
    $ebudget=$row['EventBudget'];
    $eguest=$row['EventGuest'];
+   $fee=$row['fee'];
  }
  else
  {
@@ -55,7 +56,7 @@ if ($result->num_rows > 0) {
    $ebudget=$row['EventBudget'];
    $eguest=$row['EventGuest'];
 
-
+   $fee=$row['fee'];
  }
 }
 
@@ -147,7 +148,7 @@ https://www.tooplate.com/view/2119-gymso-fitness
     
           
         } ?> 
-                           <?php          echo'<p style="color: white;" data-aos="fade-up" data-aos-delay="500">Address: '. $eaddress.'. Event Date: '. date('j F, y',strtotime($edate)).'. Start Time: '. date('h:i:s a ', strtotime($estime)) .' End TIme: '. date('h:i:s a ', strtotime($eetime)) .'</p>
+                           <?php          echo'<p data-aos="fade-up" style="color: red;" data-aos-delay="500">Registration Fee: '. $fee.'</p>  <p style="color: white;" data-aos="fade-up" data-aos-delay="500">Address: '. $eaddress.'. Event Date: '. date('j F, y',strtotime($edate)).'. Start Time: '. date('h:i:s a ', strtotime($estime)) .' End TIme: '. date('h:i:s a ', strtotime($eetime)) .'</p>
                 
                            
                                    
