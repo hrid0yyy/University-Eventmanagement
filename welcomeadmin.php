@@ -7,6 +7,17 @@
 <?php
   $conn = mysqli_connect('localhost','root','','eventadministration') or die($conn);
   
+
+  if(isset($_GET['delete']))
+  {
+    
+    $time = $_GET['delete'];
+    $sql = "Delete from notice WHERE time = '$time';";
+    
+    $res = mysqli_query($conn,$sql);
+   
+    
+  }
 ?>
 <!doctype html>
 <html>
@@ -191,7 +202,7 @@
     <th style="width:10%;">Organizer Name</th>
     <th style="width:40%;">Notice</th>
     <th style="width:40%;">Reply</th>
-    
+    <th style="width:40%;">Action</th>
   </tr>
 <?php
   $que = "SELECT OrganizerName,notice,reply,time,OrganizerEmail
@@ -215,7 +226,8 @@
    else{
    echo "<td>". $row['reply'] . "</td>";
    }
-    echo"</tr>";
+    echo"<td> <button class='delete btn btn-sm btn-primary' id=". date('Y/m/d-h:i:s', strtotime($row['time'])).">Delete</button></td>
+    </tr>";
 
 
     
@@ -258,7 +270,27 @@ function myFunction() {
 
 
 </script>
+<script>
+    deletes = document.getElementsByClassName('delete');
+      Array.from(deletes).forEach((element)=>{
+      element.addEventListener("click",(e)=>{
+    time = e.target.id;
+    console.log(time);
+    
+    if(confirm("Press yes to delete!"))
+    {
+      console.log("yes");
+      window.location=`/university/welcomeadmin.php?delete=${time}`;
+    }
+    else
+    {
+      console.log("No");
+    }
+    
+      })
 
+      })
+</script>
 	
   <script src='lib/jquery/jquery.min.js'></script>
   <script src='lib/jquery/jquery-migrate.min.js'></script>
