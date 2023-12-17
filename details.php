@@ -507,7 +507,7 @@ if(isset($_POST['submit']))
      else
      {
     
-      echo "<script>location.href='payment.php?fee=". $fee . "&id=". $id . "&eid=". $eid . "&rat=". $rat . "'</script>";
+      echo "<script>location.href='payment.php?fee=". $fee . "&id=". $id . "&eid=". $eid . "&rat=". $rat . "&fname=". $fname . "&lname=". $lname . "&email=". $email . "'</script>";
     $sql = "INSERT INTO `participants` (`ParticipantID`, `ParticipantFirstName`, `ParticipantlastName`, `ParticipantEmail`, `ParticipantContactNumber`,`ParticipantBloodGroup`,`ParticipantRole`,`pass`) VALUES ('$id', '$fname', '$lname', '$email','$number','$bg','$role','$pass'); ";
         
     $res = mysqli_query($conn,$sql);
@@ -583,7 +583,9 @@ if(isset($_POST['submit']))
        else
        {
       
-        echo "<script>location.href='payment.php?fee=". $fee . "&id=". $id . "&eid=". $eid . "&rat=". $rat . "'</script>";
+        echo "<script>location.href='payment.php?fee=". $fee . "&id=". $id . "&eid=". $eid . "&rat=". $rat . "&fname=". $fname . "&lname=". $lname . "&email=". $email . "'</script>";
+
+
       $sql = "INSERT INTO `participants` (`ParticipantID`, `ParticipantFirstName`, `ParticipantlastName`, `ParticipantEmail`, `ParticipantContactNumber`,`ParticipantBloodGroup`,`ParticipantRole`,`pass`) VALUES ('$id', '$fname', '$lname', '$email','$number','$bg','$role','$pass'); ";
           
       $res = mysqli_query($conn,$sql);

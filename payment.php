@@ -5,6 +5,9 @@ $fee = $_GET['fee'];
 $id = $_GET['id'];
 $eid = $_GET['eid'];
 $rat = $_GET['rat'];
+$fname = $_GET['fname'];
+$lname = $_GET['lname'];
+$email = $_GET['email'];
 
 
 
@@ -25,8 +28,8 @@ $post_data['emi_max_inst_option'] = "9";
 $post_data['emi_selected_inst'] = "9";
 
 # CUSTOMER INFORMATION
-$post_data['cus_name'] = "Test Customer";
-$post_data['cus_email'] = "test@test.com";
+$post_data['cus_name'] = $fname." ".$lname;
+$post_data['cus_email'] = $email;
 $post_data['cus_add1'] = "Dhaka";
 $post_data['cus_add2'] = "Dhaka";
 $post_data['cus_city'] = "Dhaka";
