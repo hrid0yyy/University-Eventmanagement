@@ -15,7 +15,7 @@ include 'functions.php';
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Create Slot
+<title>Add Slot
 </title>
 <meta content='width=device-width, initial-scale=1.0' name='viewport'>
 <meta content='' name='keywords'>
